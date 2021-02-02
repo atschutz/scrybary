@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Scrybary</string>
+    <string name="counter">counter</string>
+    <string name="library">library</string>
+    <string name="dice">dice</string>
+    <string name="back">back</string>
+</resources>
