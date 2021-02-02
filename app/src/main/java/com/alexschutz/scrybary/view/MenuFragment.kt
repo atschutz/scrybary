@@ -11,16 +11,18 @@ import com.alexschutz.scrybary.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
 
+    // View binding boiler plate
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
+        // Inflate and bind
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
-
         val view = binding.root
 
+        // Set button functionality
         binding.btnLibrary.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_libraryFragment)
         }

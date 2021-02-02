@@ -5,14 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.databinding.FragmentCounterBinding
 
 class CounterFragment : Fragment() {
 
+    private var _binding: FragmentCounterBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(true)
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_counter, container, false)
+                              savedInstanceState: Bundle?): View {
+
+        _binding = FragmentCounterBinding.inflate(inflater, container, false)
+
+        val view = binding.root
+
+        binding.btnBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+
+        return view
     }
 }
