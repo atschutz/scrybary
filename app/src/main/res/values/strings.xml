@@ -4,4 +4,8 @@
     <string name="library">library</string>
     <string name="dice">dice</string>
     <string name="back">back</string>
+    <string name="roll">roll</string>
+    <string name="refresh">refresh</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
 </resources>
