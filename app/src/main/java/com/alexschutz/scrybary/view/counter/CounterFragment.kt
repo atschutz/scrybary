@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view
+package com.alexschutz.scrybary.view.counter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -19,8 +19,18 @@ class CounterFragment : Fragment() {
 
         val view = binding.root
 
-        binding.btnBack.setOnClickListener {
-            activity?.onBackPressed()
+        with(binding) {
+
+            btnBack.setOnClickListener {
+                activity?.onBackPressed()
+            }
+
+            btnRefresh.setOnClickListener {
+                topBtnContainer.refresh()
+                bottomBtnContainer.refresh()
+                topLifeCounter.refresh()
+                bottomLifeCounter.refresh()
+            }
         }
 
         return view

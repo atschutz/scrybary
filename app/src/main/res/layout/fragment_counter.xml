@@ -4,19 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <include
+    <com.alexschutz.scrybary.view.counter.CounterButtonContainer
         android:id="@+id/top_btn_container"
-        layout="@layout/counter_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:rotation="180"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <include
+    <com.alexschutz.scrybary.view.counter.CounterButtonContainer
         android:id="@+id/bottom_btn_container"
-        layout="@layout/counter_button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent" />
+
+    <com.alexschutz.scrybary.view.counter.LifeCounter
+        android:id="@+id/top_life_counter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:rotation="180"
+        app:layout_constraintTop_toBottomOf="@+id/top_btn_container"
+        app:layout_constraintBottom_toTopOf="@+id/divider_line" />
+
+    <com.alexschutz.scrybary.view.counter.LifeCounter
+        android:id="@+id/bottom_life_counter"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_btn_container"
+        app:layout_constraintTop_toBottomOf="@+id/divider_line" />
 
     <LinearLayout
         android:id="@+id/divider_line"

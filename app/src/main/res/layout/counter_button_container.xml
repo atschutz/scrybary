@@ -5,19 +5,22 @@
     android:orientation="horizontal"
     android:baselineAligned="false">
 
-    <com.alexschutz.scrybary.view.CounterButton
+    <com.alexschutz.scrybary.view.counter.CounterButton
+        android:id="@+id/start_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="4dp" />
 
-    <com.alexschutz.scrybary.view.CounterButton
+    <com.alexschutz.scrybary.view.counter.CounterButton
+        android:id="@+id/middle_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:layout_margin="4dp" />
 
-    <com.alexschutz.scrybary.view.CounterButton
+    <com.alexschutz.scrybary.view.counter.CounterButton
+        android:id="@+id/end_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

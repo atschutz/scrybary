@@ -31,7 +31,7 @@
 
     <fragment
         android:id="@+id/counterFragment"
-        android:name="com.alexschutz.scrybary.view.CounterFragment"
+        android:name="com.alexschutz.scrybary.view.counter.CounterFragment"
         android:label="CounterFragment">
 
     </fragment>
