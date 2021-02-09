@@ -5,6 +5,9 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface CardsApi {
-    @GET("cards/search")
-    fun getCards(query: String): Single<List<Card>>
+    @GET("named")
+    fun getCard(@Query("fuzzy") name: String): Single<Card>
+
+    @GET("search")
+    fun getCardList(@Query("q") query: String): Single<CardListJson>
 }

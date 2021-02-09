@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/menu_navigation"
     app:startDestination="@id/menuFragment">
 
@@ -27,6 +26,10 @@
         android:name="com.alexschutz.scrybary.view.library.LibraryFragment"
         android:label="LibraryFragment">
 
+        <action
+            android:id="@+id/action_libraryFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+
     </fragment>
 
     <fragment
@@ -40,6 +43,13 @@
         android:id="@+id/diceFragment"
         android:name="com.alexschutz.scrybary.view.dice.DiceFragment"
         android:label="DiceFragment">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.alexschutz.scrybary.view.library.DetailFragment"
+        android:label="DetailFragment">
 
     </fragment>
 </navigation>

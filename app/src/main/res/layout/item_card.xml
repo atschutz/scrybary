@@ -1,17 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="card"
             type="com.alexschutz.scrybary.model.Card" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/tv_card_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(card.id)}"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tv_card_name"
@@ -28,7 +38,7 @@
             android:id="@+id/tv_cmc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(card.cmc)}"
+            android:text="@{card.cmc}"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -51,7 +61,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_cmc" >
+            app:layout_constraintTop_toBottomOf="@id/tv_cmc">
 
             <TextView
                 android:id="@+id/tv_power"
@@ -87,10 +97,10 @@
         </LinearLayout>
 
         <LinearLayout
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?colorOnSecondary"/>
+            android:background="?colorOnSecondary"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

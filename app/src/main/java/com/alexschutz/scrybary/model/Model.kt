@@ -1,5 +1,6 @@
 package com.alexschutz.scrybary.model
 
+import com.google.gson.JsonArray
 import com.google.gson.annotations.SerializedName
 
 data class Card(
@@ -10,8 +11,8 @@ data class Card(
     @SerializedName("name")
     val name: String,
 
-    @SerializedName("cmc")
-    val cmc: Double,
+    @SerializedName("mana_cost")
+    val cmc: String,
 
     @SerializedName("type_line")
     val type: String,
@@ -21,4 +22,9 @@ data class Card(
 
     @SerializedName("toughness")
     val toughness: String?
+)
+
+data class CardListJson(
+    @SerializedName("data")
+    val data: JsonArray
 )

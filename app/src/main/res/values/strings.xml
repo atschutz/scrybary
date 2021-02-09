@@ -9,4 +9,5 @@
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="slash">/</string>
+    <string name="enter_card_name_here">enter card name here…</string>
 </resources>
