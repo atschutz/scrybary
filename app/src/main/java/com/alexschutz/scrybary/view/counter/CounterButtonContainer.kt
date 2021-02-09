@@ -11,7 +11,7 @@ class CounterButtonContainer(context: Context, attrs: AttributeSet): LinearLayou
         inflate(context, R.layout.counter_button_container, this)
     }
 
-    public fun refresh() {
+    fun refresh() {
         findViewById<CounterButton>(R.id.start_counter).refresh()
         findViewById<CounterButton>(R.id.middle_counter).refresh()
         findViewById<CounterButton>(R.id.end_counter).refresh()

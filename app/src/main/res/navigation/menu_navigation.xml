@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.alexschutz.scrybary.view.LibraryFragment"
+        android:name="com.alexschutz.scrybary.view.library.LibraryFragment"
         android:label="LibraryFragment">
 
     </fragment>
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/diceFragment"
-        android:name="com.alexschutz.scrybary.view.DiceFragment"
+        android:name="com.alexschutz.scrybary.view.dice.DiceFragment"
         android:label="DiceFragment">
 
     </fragment>

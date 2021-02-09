@@ -1,21 +1,21 @@
-package com.alexschutz.scrybary.view
+package com.alexschutz.scrybary.view.library
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.alexschutz.scrybary.databinding.FragmentDiceBinding
+import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
 
-class DiceFragment : Fragment() {
+class LibraryFragment : Fragment() {
 
-    private var _binding: FragmentDiceBinding? = null
+    private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentDiceBinding.inflate(inflater, container, false)
+        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
         val view = binding.root
 
