@@ -1,82 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout>
 
-    <com.alexschutz.scrybary.view.counter.CounterButtonContainer
-        android:id="@+id/top_btn_container"
+    <data>
+
+        <variable
+            name="listener"
+            type="com.alexschutz.scrybary.view.BackButtonListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:rotation="180"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <com.alexschutz.scrybary.view.counter.CounterButtonContainer
-        android:id="@+id/bottom_btn_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.alexschutz.scrybary.view.counter.CounterButtonContainer
+            android:id="@+id/top_btn_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rotation="180"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.alexschutz.scrybary.view.counter.LifeCounter
-        android:id="@+id/top_life_counter"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:rotation="180"
-        app:layout_constraintTop_toBottomOf="@+id/top_btn_container"
-        app:layout_constraintBottom_toTopOf="@+id/divider_line" />
+        <com.alexschutz.scrybary.view.counter.CounterButtonContainer
+            android:id="@+id/bottom_btn_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.alexschutz.scrybary.view.counter.LifeCounter
-        android:id="@+id/bottom_life_counter"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_btn_container"
-        app:layout_constraintTop_toBottomOf="@+id/divider_line" />
+        <com.alexschutz.scrybary.view.counter.LifeCounter
+            android:id="@+id/top_life_counter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:rotation="180"
+            app:layout_constraintBottom_toTopOf="@+id/divider_line"
+            app:layout_constraintTop_toBottomOf="@+id/top_btn_container" />
 
-    <LinearLayout
-        android:id="@+id/divider_line"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?colorOnSecondary"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <com.alexschutz.scrybary.view.counter.LifeCounter
+            android:id="@+id/bottom_life_counter"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_btn_container"
+            app:layout_constraintTop_toBottomOf="@+id/divider_line" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/divider_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?colorOnSecondary"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btn_back"
+        <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@drawable/circle"
-            android:contentDescription="@string/back"
-            app:srcCompat="@drawable/ic_arrow_back" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageButton
-            android:id="@+id/btn_roll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@drawable/circle"
-            android:contentDescription="@string/roll"
-            app:srcCompat="@drawable/ic_roll" />
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/back"
+                android:onClick="@{listener::onBackPressed}"
+                app:srcCompat="@drawable/ic_arrow_back" />
 
-        <ImageButton
-            android:id="@+id/btn_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/circle"
-            android:contentDescription="@string/refresh"
-            app:srcCompat="@drawable/ic_refresh" />
+            <ImageButton
+                android:id="@+id/btn_roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/roll"
+                app:srcCompat="@drawable/ic_roll" />
 
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageButton
+                android:id="@+id/btn_refresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle"
+                android:contentDescription="@string/refresh"
+                app:srcCompat="@drawable/ic_refresh" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

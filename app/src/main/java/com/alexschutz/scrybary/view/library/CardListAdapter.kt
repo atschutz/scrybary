@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.view.library
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
@@ -10,7 +11,7 @@ import com.alexschutz.scrybary.databinding.ItemCardBinding
 import com.alexschutz.scrybary.model.Card
 
 class CardListAdapter(private val cardList: ArrayList<Card>) :
-    RecyclerView.Adapter<CardListAdapter.CardViewHolder>() {
+    RecyclerView.Adapter<CardListAdapter.CardViewHolder>(), CardClickListener {
 
     class CardViewHolder(var view: ItemCardBinding) : RecyclerView.ViewHolder(view.root)
 
@@ -33,15 +34,16 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.view.card = cardList[position]
-
-        holder.itemView.setOnClickListener {
-            Toast.makeText(
-                holder.view.tvCardName.context,
-                "You clicked ${holder.view.tvCardName.text}",
-                Toast.LENGTH_LONG
-            ).show()
-        }
+        holder.view.listener = this
     }
 
     override fun getItemCount(): Int = cardList.size
+
+    override fun onCardClicked(v: View) {
+        Toast.makeText(
+            v.context,
+            "You clicked $v",
+            Toast.LENGTH_LONG
+        ).show()
+    }
 }

@@ -5,6 +5,9 @@ import android.widget.TextView
 
 interface Counter {
 
+    // TODO make this a class that CounterButton and LifeCounter extend.
+    // TODO bind on click
+
     var value: Int
     val number: TextView
 

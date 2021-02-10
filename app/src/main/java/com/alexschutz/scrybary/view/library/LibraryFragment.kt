@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import androidx.fragment.app.Fragment
+import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
+import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
 
-class LibraryFragment : Fragment() {
+class LibraryFragment : BackButtonFragment() {
 
     private var _binding: FragmentLibraryBinding? = null
     private val binding get() = _binding!!
@@ -28,10 +29,6 @@ class LibraryFragment : Fragment() {
 
         val view = binding.root
 
-        binding.btnBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
-
         return view
     }
 
@@ -40,38 +37,32 @@ class LibraryFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(LibraryViewModel::class.java)
 
+        binding.listener = this
+        binding.viewModel = viewModel
+
         binding.cardList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = cardListAdapter
         }
 
-        binding.btnSearch.setOnClickListener {
-            fetchAndObserveViewModel()
+        binding.tvSearch.doAfterTextChanged {
+            viewModel.search.value = binding.tvSearch.text.toString()
         }
 
         binding.tvSearch.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                fetchAndObserveViewModel()
+                v.hideKeyboard()
                 true
             } else {
                 false
             }
         }
-    }
-
-    private fun fetchAndObserveViewModel() {
-
-        val text = binding.tvSearch.text.toString()
-
-        viewModel.fetchFromRemote(text)
 
         viewModel.cards.observe(viewLifecycleOwner, { cards ->
             cards?.let {
                 cardListAdapter.updateCardList(cards)
             }
         })
-
-        view?.hideKeyboard()
     }
 
     private fun View.hideKeyboard() {

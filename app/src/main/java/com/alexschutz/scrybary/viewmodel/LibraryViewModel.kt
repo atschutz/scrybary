@@ -19,12 +19,13 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
 
+    val search = MutableLiveData<String>()
     val cards = MutableLiveData<List<Card>>()
 
-    fun fetchFromRemote(query: String) {
+    fun fetchFromRemote() {
 
         disposable.add(
-            cardService.getCardList(query)
+            cardService.getCardList(search.value ?: "")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object: DisposableSingleObserver<CardListJson>() {

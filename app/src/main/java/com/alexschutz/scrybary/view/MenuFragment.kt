@@ -18,6 +18,8 @@ class MenuFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
+        // TODO move on click logic out of fragment to adhere to MVVM architecture.
+
         // Inflate and bind
         _binding = FragmentMenuBinding.inflate(inflater, container, false)
         val view = binding.root

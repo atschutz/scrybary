@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.alexschutz.scrybary.databinding.FragmentDetailBinding
+import com.alexschutz.scrybary.view.BackButtonFragment
 
-class DetailFragment : Fragment() {
+class DetailFragment : BackButtonFragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -19,9 +19,7 @@ class DetailFragment : Fragment() {
 
         val view = binding.root
 
-        binding.btnBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
+        binding.listener = this
 
         return view
     }
