@@ -24,6 +24,17 @@ data class Card(
     val toughness: String?
 )
 
+data class CardDetail(
+    @SerializedName("oracle_text")
+    val oracleText: String?,
+
+    @SerializedName("rulings_uri")
+    val rulingsUri: String,
+
+    @SerializedName("image_uris")
+    val ImageUris: JsonArray
+)
+
 data class CardListJson(
     @SerializedName("data")
     val data: JsonArray

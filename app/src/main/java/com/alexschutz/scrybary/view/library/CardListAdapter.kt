@@ -3,15 +3,17 @@ package com.alexschutz.scrybary.view.library
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.ItemCardBinding
 import com.alexschutz.scrybary.model.Card
+import androidx.navigation.Navigation
 
 class CardListAdapter(private val cardList: ArrayList<Card>) :
     RecyclerView.Adapter<CardListAdapter.CardViewHolder>(), CardClickListener {
+
+    lateinit var cardId: String
 
     class CardViewHolder(var view: ItemCardBinding) : RecyclerView.ViewHolder(view.root)
 
@@ -33,17 +35,18 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
+
         holder.view.card = cardList[position]
         holder.view.listener = this
+
+        cardId = cardList[position].id
     }
 
     override fun getItemCount(): Int = cardList.size
 
     override fun onCardClicked(v: View) {
-        Toast.makeText(
-            v.context,
-            "You clicked $v",
-            Toast.LENGTH_LONG
-        ).show()
+
+        val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(cardId)
+        Navigation.findNavController(v).navigate(action)
     }
 }

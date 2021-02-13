@@ -16,8 +16,8 @@ class CardsApiService {
         .build()
         .create(CardsApi::class.java)
 
-    fun getCard(name: String): Single<Card> {
-        return api.getCard(name)
+    fun getCard(id: String): Single<Card> {
+        return api.getCard(id)
     }
 
     fun getCardList(query: String): Single<CardListJson> {

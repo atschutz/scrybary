@@ -48,8 +48,13 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.alexschutz.scrybary.view.library.DetailFragment"
+        android:name="com.alexschutz.scrybary.view.detail.DetailFragment"
         android:label="DetailFragment">
+
+        <argument
+            android:name="cardId"
+            android:defaultValue="none"
+            app:argType="string" />
 
     </fragment>
 </navigation>
