@@ -4,9 +4,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.alexschutz.scrybary.model.Card
 
 class DetailFragmentStateAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
-
+    var card: Card? = null
     var fragments = listOf(
         ImageFragment(),
         InfoFragment(),

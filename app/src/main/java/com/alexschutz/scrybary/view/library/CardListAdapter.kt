@@ -13,7 +13,7 @@ import androidx.navigation.Navigation
 class CardListAdapter(private val cardList: ArrayList<Card>) :
     RecyclerView.Adapter<CardListAdapter.CardViewHolder>(), CardClickListener {
 
-    lateinit var cardId: String
+    lateinit var card: Card
 
     class CardViewHolder(var view: ItemCardBinding) : RecyclerView.ViewHolder(view.root)
 
@@ -39,14 +39,14 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
         holder.view.card = cardList[position]
         holder.view.listener = this
 
-        cardId = cardList[position].id
+        card = cardList[position]
     }
 
     override fun getItemCount(): Int = cardList.size
 
     override fun onCardClicked(v: View) {
 
-        val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(cardId)
+        val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(card)
         Navigation.findNavController(v).navigate(action)
     }
 }

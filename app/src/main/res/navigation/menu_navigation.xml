@@ -52,9 +52,8 @@
         android:label="DetailFragment">
 
         <argument
-            android:name="cardId"
-            android:defaultValue="none"
-            app:argType="string" />
+            android:name="card"
+            app:argType="com.alexschutz.scrybary.model.Card" />
 
     </fragment>
 </navigation>
