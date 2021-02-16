@@ -32,6 +32,8 @@ class InfoFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO bind viewmodel to XML so field setting doesn't have to be done in here.
+
         viewModel =
             ViewModelProvider(parentFragment as ViewModelStoreOwner).get(DetailViewModel::class.java)
 

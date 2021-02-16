@@ -44,7 +44,7 @@ data class CardDetail(
     val rulingsUri: String,
 
     @SerializedName("image_uris")
-    val ImageUris: JsonObject,
+    val imageUris: JsonObject,
 )
 
 data class CardRuling(
@@ -59,7 +59,7 @@ data class CardRuling(
 )
 
 data class CardImage(
-    @SerializedName("Normal")
+    @SerializedName("normal")
     val imageUri: String
 )
 

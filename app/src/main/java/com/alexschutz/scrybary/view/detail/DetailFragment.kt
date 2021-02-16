@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentDetailBinding
@@ -29,8 +30,6 @@ class DetailFragment : BackButtonFragment() {
         binding.vpDetail.adapter =
             DetailFragmentStateAdapter(this.childFragmentManager, this.lifecycle)
 
-
-
         val tabIcons = listOf(R.drawable.ic_card, R.drawable.ic_info, R.drawable.ic_rulings)
 
         TabLayoutMediator(binding.tlDetail, binding.vpDetail) { tab, position ->
@@ -49,8 +48,10 @@ class DetailFragment : BackButtonFragment() {
             viewModel.card.value = DetailFragmentArgs.fromBundle(it).card
         }
 
-        (binding.vpDetail.adapter as DetailFragmentStateAdapter).card = viewModel.card.value
-
         viewModel.fetchCardDetail()
+
+        viewModel.card.observe(viewLifecycleOwner, Observer { card ->
+            (binding.vpDetail.adapter as DetailFragmentStateAdapter).card = card
+        })
     }
 }

@@ -11,11 +11,20 @@ import com.alexschutz.scrybary.model.Card
 import androidx.navigation.Navigation
 
 class CardListAdapter(private val cardList: ArrayList<Card>) :
-    RecyclerView.Adapter<CardListAdapter.CardViewHolder>(), CardClickListener {
+    RecyclerView.Adapter<CardListAdapter.CardViewHolder>() {
 
-    lateinit var card: Card
+    class CardViewHolder(var view: ItemCardBinding, var cards: ArrayList<Card>) : RecyclerView.ViewHolder(view.root), CardClickListener {
 
-    class CardViewHolder(var view: ItemCardBinding) : RecyclerView.ViewHolder(view.root)
+        init {
+            view.listener = this
+        }
+
+        override fun onCardClicked(v: View) {
+
+            val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(cards[adapterPosition])
+            Navigation.findNavController(v).navigate(action)
+        }
+    }
 
     fun updateCardList(newCardList: List<Card>) {
 
@@ -31,22 +40,15 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
         val view =
             DataBindingUtil.inflate<ItemCardBinding>(inflater, R.layout.item_card, parent, false)
 
-        return CardViewHolder(view)
+        return CardViewHolder(view, cardList)
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
 
         holder.view.card = cardList[position]
-        holder.view.listener = this
-
-        card = cardList[position]
     }
 
     override fun getItemCount(): Int = cardList.size
 
-    override fun onCardClicked(v: View) {
 
-        val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(card)
-        Navigation.findNavController(v).navigate(action)
-    }
 }
