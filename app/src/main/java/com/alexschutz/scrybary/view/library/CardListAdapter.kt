@@ -48,7 +48,7 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
         holder.view.card = cardList[position]
     }
 
-    override fun getItemCount(): Int = cardList.size
+    override fun getItemCount() = cardList.size
 
 
 }

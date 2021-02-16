@@ -49,8 +49,9 @@ class DetailFragment : BackButtonFragment() {
         }
 
         viewModel.fetchCardDetail()
+        viewModel.fetchCardRulings()
 
-        viewModel.card.observe(viewLifecycleOwner, Observer { card ->
+        viewModel.card.observe(viewLifecycleOwner, { card ->
             (binding.vpDetail.adapter as DetailFragmentStateAdapter).card = card
         })
     }

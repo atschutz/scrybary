@@ -11,4 +11,7 @@ interface CardsApi {
 
     @GET("search")
     fun getCardList(@Query("q") query: String): Single<CardListJson>
+
+    @GET("{id}/rulings")
+    fun getCardRulings(@Path("id") id: String): Single<RulingListJson>
 }

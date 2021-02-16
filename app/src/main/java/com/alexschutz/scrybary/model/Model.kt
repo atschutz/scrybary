@@ -47,7 +47,17 @@ data class CardDetail(
     val imageUris: JsonObject,
 )
 
-data class CardRuling(
+data class CardImage(
+    @SerializedName("normal")
+    val imageUri: String
+)
+
+data class CardListJson(
+    @SerializedName("data")
+    val data: JsonArray
+)
+
+data class Ruling(
     @SerializedName("source")
     val source: String,
 
@@ -58,12 +68,7 @@ data class CardRuling(
     val comment: String
 )
 
-data class CardImage(
-    @SerializedName("normal")
-    val imageUri: String
-)
-
-data class CardListJson(
+data class RulingListJson(
     @SerializedName("data")
     val data: JsonArray
 )

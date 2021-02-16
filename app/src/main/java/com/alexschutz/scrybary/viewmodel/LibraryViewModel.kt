@@ -33,11 +33,7 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
                     override fun onSuccess(cardListJson: CardListJson) {
 
                         val gson = GsonBuilder().create()
-                        val cardList = gson.fromJson(cardListJson.data, Array<Card>::class.java).toList()
-
-                        cards.value = cardList
-
-                        Toast.makeText(getApplication(), "It worked", Toast.LENGTH_SHORT).show()
+                        cards.value = gson.fromJson(cardListJson.data, Array<Card>::class.java).toList()
                     }
 
                     override fun onError(e: Throwable) {

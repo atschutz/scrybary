@@ -35,7 +35,7 @@ class ImageFragment : Fragment() {
         viewModel =
             ViewModelProvider(parentFragment as ViewModelStoreOwner).get(DetailViewModel::class.java)
 
-        viewModel.cardImageUri.observe(viewLifecycleOwner, Observer { uri ->
+        viewModel.cardImageUri.observe(viewLifecycleOwner, { uri ->
             binding.imageUri = uri
         })
     }
