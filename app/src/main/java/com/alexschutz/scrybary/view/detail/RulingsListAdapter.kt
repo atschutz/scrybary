@@ -8,7 +8,7 @@ import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.ItemRulingBinding
 import com.alexschutz.scrybary.model.Ruling
 
-class RulingsListAdapter(private val rulingsList: ArrayList<Ruling>): RecyclerView.Adapter<RulingsListAdapter.RulingViewHolder>() {
+class RulingsListAdapter(private val rulingsList: ArrayList<Ruling>) : RecyclerView.Adapter<RulingsListAdapter.RulingViewHolder>() {
 
     class RulingViewHolder(var view: ItemRulingBinding) : RecyclerView.ViewHolder(view.root)
 

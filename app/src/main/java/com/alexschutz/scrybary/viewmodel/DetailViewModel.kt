@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary.viewmodel
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -11,6 +10,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailViewModel(application: Application): AndroidViewModel(application) {
 
@@ -22,7 +23,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
     val card = MutableLiveData<Card>()
     val cardDetail = MutableLiveData<CardDetail>()
     val cardImageUri = MutableLiveData<String>()
-
+    val legalities = MutableLiveData<ArrayList<Legality>>()
     val rulings = MutableLiveData<List<Ruling>>()
 
     fun fetchCardDetail() {
@@ -41,12 +42,26 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
                         // Assign cardDetail to returned detail.
                         cardDetail.value = detail
 
-                        // Get single image URI from Json field imageUris in CardDetail.
                         val gson = GsonBuilder().create()
-                        val imageGson = gson.fromJson(detail.imageUris, CardImage::class.java)
 
-                        // Assign URI to cardImageUri string.
+                        // Get single image URI from Json field imageUris in CardDetail.
+                        val imageGson = gson.fromJson(detail.imageUris, CardImage::class.java)
                         cardImageUri.value = imageGson.imageUri
+
+                        // Since Scryfall keeps its legalities in a json with a property representing
+                        // each format, and we want to future proof, we have to parse the json into
+                        // a map, and then convert it into a list of Legality objects.
+                        val legalityList = arrayListOf<Legality>()
+                        for ((key, value) in gson.fromJson(detail.legalities, Map::class.java)) {
+
+                            // Format fields to look nice.
+                            val format = key.toString().capitalize(Locale.getDefault())
+                            val legality = value.toString().replace("_", " ").toUpperCase(Locale.getDefault())
+
+                            legalityList.add(Legality(format, legality))
+                        }
+
+                        legalities.value = legalityList
                     }
 
                     override fun onError(e: Throwable) {

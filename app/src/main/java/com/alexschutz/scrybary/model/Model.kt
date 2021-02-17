@@ -73,3 +73,13 @@ data class RulingListJson(
     val data: JsonArray
 )
 
+data class LegalityListJson(
+    @SerializedName("legalities")
+    val legalities: JsonObject
+)
+
+data class Legality(
+    val format: String,
+    val state: String
+)
+

@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- legality colors -->
+    <color name="legal_green">#008800</color>
+    <color name="not_legal_grey">#666666</color>
+    <color name="restricted_blue">#4080D0</color>
+    <color name="banned_red">#FF5050</color>
+
 </resources>

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.databinding.FragmentRulingsBinding
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
@@ -19,6 +20,7 @@ class RulingsFragment : Fragment() {
 
     private lateinit var viewModel: DetailViewModel
     private val rulingsListAdapter = RulingsListAdapter(arrayListOf())
+    private val legalityListAdapter = LegalityListAdapter(arrayListOf())
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -41,9 +43,20 @@ class RulingsFragment : Fragment() {
             adapter = rulingsListAdapter
         }
 
+        binding.legalityList.apply {
+            layoutManager = GridLayoutManager(context, 2)
+            adapter = legalityListAdapter
+        }
+
         viewModel.rulings.observe(viewLifecycleOwner, { rulings ->
             rulings?.let {
                 rulingsListAdapter.updateRulingsList(rulings)
+            }
+        })
+
+        viewModel.legalities.observe(viewLifecycleOwner, { legalities ->
+            legalities?.let {
+                legalityListAdapter.updateLegalityList(legalities)
             }
         })
     }
