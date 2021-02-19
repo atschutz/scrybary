@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary
 
-import android.annotation.SuppressLint
-import android.util.Log
+
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -27,10 +26,9 @@ fun TextView.setBackgroundForLegality(text: String) {
     }
 }
 
-// Utility function for function above.
-fun TextView.getDrawable(id: Int) = ResourcesCompat.getDrawable(resources, id, null)
-
 @BindingAdapter("android:legalityBackground")
 fun setLegalityBackground(view: TextView, text: String) {
     view.setBackgroundForLegality(text)
 }
+
+fun TextView.getDrawable(id: Int) = ResourcesCompat.getDrawable(resources, id, null)

@@ -7,9 +7,6 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import java.util.*
 
-// Used as default card for parcelable so we never have to have a nullable floating around
-val defaultCard = Card("invalid", "invalid", "invalid", "invalid", "invalid", "invalid")
-
 @Parcelize
 data class Card(
 
