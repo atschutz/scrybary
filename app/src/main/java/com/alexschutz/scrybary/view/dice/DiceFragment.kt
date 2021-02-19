@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.lifecycle.MutableLiveData
 import com.alexschutz.scrybary.RollTotal
 import com.alexschutz.scrybary.databinding.FragmentDiceBinding
 import com.alexschutz.scrybary.roll
@@ -50,7 +49,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
         }
 
         return binding.root
-    }   
+    }
 
     override fun onRollClicked(v: View) {
         binding.p1Roll = roll(numberOfDice, diceSides)
