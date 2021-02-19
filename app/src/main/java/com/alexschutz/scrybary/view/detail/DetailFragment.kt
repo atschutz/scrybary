@@ -5,26 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentDetailBinding
-import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
 import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : BackButtonFragment() {
 
-    private var _binding: FragmentDetailBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDetailBinding
 
     private lateinit var viewModel: DetailViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         binding.listener = this
         binding.vpDetail.adapter =

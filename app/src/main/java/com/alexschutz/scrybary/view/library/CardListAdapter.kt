@@ -9,6 +9,7 @@ import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.ItemCardBinding
 import com.alexschutz.scrybary.model.Card
 import androidx.navigation.Navigation
+import com.alexschutz.scrybary.hideKeyboard
 
 class CardListAdapter(private val cardList: ArrayList<Card>) :
     RecyclerView.Adapter<CardListAdapter.CardViewHolder>() {
@@ -20,6 +21,8 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
         }
 
         override fun onCardClicked(v: View) {
+
+            v.hideKeyboard()
 
             val action = LibraryFragmentDirections.actionLibraryFragmentToDetailFragment(cards[adapterPosition])
             Navigation.findNavController(v).navigate(action)

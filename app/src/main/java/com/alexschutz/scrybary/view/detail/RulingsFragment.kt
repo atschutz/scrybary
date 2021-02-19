@@ -15,8 +15,7 @@ import com.alexschutz.scrybary.viewmodel.DetailViewModel
 
 class RulingsFragment : Fragment() {
 
-    private var _binding: FragmentRulingsBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentRulingsBinding
 
     private lateinit var viewModel: DetailViewModel
     private val rulingsListAdapter = RulingsListAdapter(arrayListOf())
@@ -25,9 +24,7 @@ class RulingsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentRulingsBinding.inflate(inflater, container, false)
-
-        Log.d("rulingsfragment", "rulingsfragment created")
+        binding = FragmentRulingsBinding.inflate(inflater, container, false)
 
         return binding.root
     }

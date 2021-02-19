@@ -39,6 +39,8 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
                     override fun onSuccess(detail: CardDetail) {
 
+                        // TODO app does not show image of flip card.
+
                         // Assign cardDetail to returned detail.
                         cardDetail.value = detail
 
@@ -46,7 +48,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
                         // Get single image URI from Json field imageUris in CardDetail.
                         val imageGson = gson.fromJson(detail.imageUris, CardImage::class.java)
-                        cardImageUri.value = imageGson.imageUri
+                        cardImageUri.value = imageGson?.imageUri ?: ""
 
                         // Since Scryfall keeps its legalities in a json with a property representing
                         // each format, and we want to future proof, we have to parse the json into

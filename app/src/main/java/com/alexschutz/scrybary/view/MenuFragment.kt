@@ -12,17 +12,15 @@ import com.alexschutz.scrybary.databinding.FragmentMenuBinding
 class MenuFragment : Fragment() {
 
     // View binding boiler plate
-    private var _binding: FragmentMenuBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentMenuBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        // TODO move on click logic out of fragment to adhere to MVVM architecture.
+        // TODO view bind on click listeners.
 
         // Inflate and bind
-        _binding = FragmentMenuBinding.inflate(inflater, container, false)
-        val view = binding.root
+        binding = FragmentMenuBinding.inflate(inflater, container, false)
 
         // Set button functionality
         binding.btnLibrary.setOnClickListener {
@@ -35,6 +33,6 @@ class MenuFragment : Fragment() {
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_diceFragment)
         }
 
-        return view
+        return binding.root
     }
 }

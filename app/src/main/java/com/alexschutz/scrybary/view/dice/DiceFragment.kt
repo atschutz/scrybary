@@ -12,8 +12,7 @@ import com.alexschutz.scrybary.view.BackButtonFragment
 
 class DiceFragment : BackButtonFragment(), RollClickListener {
 
-    private var _binding: FragmentDiceBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentDiceBinding
 
     private var numberOfPlayers = 0
     private var numberOfDice = 0
@@ -22,7 +21,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentDiceBinding.inflate(inflater, container, false)
+        binding = FragmentDiceBinding.inflate(inflater, container, false)
 
         binding.backListener = this
         binding.rollListener = this
@@ -40,9 +39,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
         }
         // The first 5 types of die have an amount of sides that increment up by 2, starting at 4.
         // So we add 2 to the index then multiply by 2. The 6th type arbitrarily has 20 sides.
-        // d4 -> 0th index = 0 + 2 * 2 = 4
-        // d6 -> 1st index = 1 + 2 * 2 = 6
-        // d8 -> 2nd index = 2 + 2 * 2 = 8 etc.
+        // d4 -> 0th index = (0 + 2) * 2 = 4 etc.
         binding.rgSides.setOnCheckedChangeListener { group, checkedId ->
             val index = group.indexOfChild(view?.findViewById<RadioButton>(checkedId))
             diceSides = if (index < 5) { (index + 2) * 2 } else { 20 }

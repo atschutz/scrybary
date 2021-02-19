@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
+import com.alexschutz.scrybary.hideKeyboard
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
 
 class LibraryFragment : BackButtonFragment() {
 
-    private var _binding: FragmentLibraryBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentLibraryBinding
 
     private lateinit var viewModel: LibraryViewModel
     private val cardListAdapter = CardListAdapter(arrayListOf())
@@ -25,11 +24,9 @@ class LibraryFragment : BackButtonFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentLibraryBinding.inflate(inflater, container, false)
+        binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
-        val view = binding.root
-
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
