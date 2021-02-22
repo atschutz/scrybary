@@ -18,14 +18,18 @@
             android:id="@+id/top_btn_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:rotation="180"
+            app:layout_constraintBottom_toTopOf="@id/top_life_counter"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.alexschutz.scrybary.view.counter.CounterButtonContainer
             android:id="@+id/bottom_btn_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:layout_marginBottom="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottom_life_counter" />
 
         <com.alexschutz.scrybary.view.counter.LifeCounter
             android:id="@+id/top_life_counter"
@@ -65,7 +69,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
                 android:background="@drawable/circle"
                 android:contentDescription="@string/back"
                 android:onClick="@{listener::onBackPressed}"
@@ -76,7 +79,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:layout_marginRight="32dp"
                 android:background="@drawable/circle"
                 android:contentDescription="@string/roll"
                 app:srcCompat="@drawable/ic_roll" />

@@ -43,7 +43,7 @@
             android:id="@+id/tv_cmc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{card.cmc}"
+            android:symbolText="@{card.cmc}"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"

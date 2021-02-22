@@ -44,7 +44,7 @@
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/roll"
-            android:onClick="@{rollListener.onRollClicked}"
+            android:onClick="@{rollListener::onRollClicked}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_roll" />
@@ -93,7 +93,7 @@
             android:id="@+id/dice_footer"
             android:layout_width="match_parent"
             android:layout_height="266dp"
-            android:background="@drawable/dice_footer"
+            android:background="@drawable/header_footer"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent" />
 
