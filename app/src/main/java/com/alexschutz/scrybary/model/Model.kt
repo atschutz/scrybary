@@ -45,7 +45,7 @@ data class CardDetail(
 )
 
 data class CardImage(
-    @SerializedName("normal")
+    @SerializedName("border_crop")
     val imageUri: String
 )
 

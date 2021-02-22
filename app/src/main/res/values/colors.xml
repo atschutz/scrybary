@@ -14,4 +14,8 @@
     <color name="restricted_blue">#4080D0</color>
     <color name="banned_red">#FF5050</color>
 
+    <!-- app colors -->
+    <color name="background_grey">#252525</color>
+    <color name="deselected_purple">#3A2852</color>
+
 </resources>

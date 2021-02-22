@@ -10,4 +10,10 @@
     <string name="plus">+</string>
     <string name="slash">/</string>
     <string name="enter_card_name_here">enter card name here…</string>
+    <string name="dice_1">1</string>
+    <string name="dice_2">2</string>
+    <string name="dice_3">3</string>
+    <string name="dice_4">4</string>
+    <string name="dice_5">5</string>
+    <string name="dice_6">6</string>
 </resources>

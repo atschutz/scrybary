@@ -39,7 +39,8 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
                     override fun onSuccess(detail: CardDetail) {
 
-                        // TODO app does not show image of flip card.
+                        // TODO app does not get info from API because info is stored in card_faces.
+                        // TODO get card face list, if size > 0, get info from card face.
 
                         // Assign cardDetail to returned detail.
                         cardDetail.value = detail

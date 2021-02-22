@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -21,7 +22,7 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,9 +30,7 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_margin="8dp"
             android:background="@null"
             android:contentDescription="@string/back"
             android:onClick="@{backListener::onBackPressed}"
@@ -40,9 +39,11 @@
             app:srcCompat="@drawable/ic_arrow_back" />
 
         <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:background="?colorPrimaryVariant"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/roll"
             android:onClick="@{rollListener.onRollClicked}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -88,130 +89,201 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_p2_total" />
 
-        <RadioGroup
-            android:id="@+id/rg_players"
+        <LinearLayout
+            android:id="@+id/dice_footer"
+            android:layout_width="match_parent"
+            android:layout_height="266dp"
+            android:background="@drawable/dice_footer"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/tv_p2_rolls">
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_1_player"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/rg_players"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="One Player"
-                android:textColor="@color/white" />
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_2_player"
-                android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/rb_1_player"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/ic_dice_1player"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent" />
+
+                <RadioButton
+                    android:id="@+id/rb_2_player"
+                    android:layout_width="78dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/ic_dice_2player"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rg_count"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Two Players"
-                android:textColor="@color/white" />
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/rg_players">
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_1_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_1"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/rg_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/rg_players">
+                <RadioButton
+                    android:id="@+id/rb_2_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/dice_2"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/rb_1_die"
-                android:layout_width="wrap_content"
+                <RadioButton
+                    android:id="@+id/rb_3_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_3"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_4_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_4"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_5_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_5"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_6_die"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_6"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/rg_sides"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="@color/white" />
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_count">
 
-            <RadioButton
-                android:id="@+id/rb_2_die"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2"
-                android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_d4"
+                    android:layout_width="45dp"
+                    android:layout_height="39dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/ic_dice_d4"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center" />
 
-            <RadioButton
-                android:id="@+id/rb_3_die"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3"
-                android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_d6"
+                    android:layout_width="41dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/ic_dice_d6"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:checked="true"
+                    android:gravity="center" />
 
-            <RadioButton
-                android:id="@+id/rb_4_die"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4"
-                android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_d8"
+                    android:layout_width="40dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/ic_dice_d8"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center" />
 
-            <RadioButton
-                android:id="@+id/rb_5_die"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5"
-                android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_d10"
+                    android:layout_width="42dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/ic_dice_d10"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center" />
 
-            <RadioButton
-                android:id="@+id/rb_6_die"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6"
-                android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_d12"
+                    android:layout_width="41dp"
+                    android:layout_height="43dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="@drawable/ic_dice_d12"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_d20"
+                    android:layout_width="41dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/ic_dice_d20"
+                    android:backgroundTint="@drawable/dice_rb_color_selector"
+                    android:button="@android:color/transparent"
+                    android:gravity="center" />
 
-        <RadioGroup
-            android:id="@+id/rg_sides"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/rg_count">
-
-            <RadioButton
-                android:id="@+id/rb_d4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d4"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/rb_d6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d6"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/rb_d8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d8"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/rb_d10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d10"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/rb_d12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d12"
-                android:textColor="@color/white" />
-
-            <RadioButton
-                android:id="@+id/rb_d20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="d20"
-                android:textColor="@color/white" />
-
-        </RadioGroup>
-
+            </RadioGroup>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

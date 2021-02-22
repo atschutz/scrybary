@@ -14,9 +14,9 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
 
     private lateinit var binding: FragmentDiceBinding
 
-    private var numberOfPlayers = 0
-    private var numberOfDice = 0
-    private var diceSides = 0
+    private var numberOfPlayers = 2
+    private var numberOfDice = 2
+    private var diceSides = 6
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
