@@ -17,7 +17,7 @@ data class Card(
     val name: String,
 
     @SerializedName("mana_cost")
-    val cmc: String,
+    val cmc: String?,
 
     @SerializedName("type_line")
     val type: String,
@@ -68,11 +68,6 @@ data class Ruling(
 data class RulingListJson(
     @SerializedName("data")
     val data: JsonArray
-)
-
-data class LegalityListJson(
-    @SerializedName("legalities")
-    val legalities: JsonObject
 )
 
 data class Legality(

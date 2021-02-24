@@ -14,6 +14,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : BackButtonFragment() {
 
+    // TODO add 4th fragment for back face info. Hide if no back face.
+
     private lateinit var binding: FragmentDetailBinding
 
     private lateinit var viewModel: DetailViewModel

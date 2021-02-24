@@ -10,6 +10,9 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import java.util.*
+
+val CMC_HEIGHT = 20
 
 fun ImageView.loadImageFromUri(uri: String?) {
     Glide.with(this).load(uri).into(this)
@@ -38,23 +41,44 @@ fun setLegalityBackground(view: TextView, text: String) {
 fun TextView.getDrawable(id: Int) = ResourcesCompat.getDrawable(resources, id, null)
 
 @BindingAdapter("android:symbolText")
-fun symbolText(view: TextView, text: String) {
+fun symbolText(view: TextView, text: String?) {
     view.replaceCMCs(text)
 }
 
-fun TextView.replaceCMCs(text: String) {
-    val ss = SpannableString(text)
-    if (text.contains("{B}")) {
-        val startSpan = text.indexOf("{B}")
-        val res = ResourcesCompat.getDrawable(resources, R.drawable.rect_banned, null)
-        res?.setBounds(0, 0, dpToPx(20), dpToPx(20))
-        if (res != null) {
-            val imageSpan = ImageSpan(res, ImageSpan.ALIGN_BASELINE)
-            ss.setSpan(imageSpan, startSpan, startSpan + 3, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
-            setText(text.replaceFirst("{B}", "  "))
+fun TextView.replaceCMCs(text: String?) {
+
+    val str = SpannableString(text ?: "")
+    var start = 0
+
+    while (start + 1 < str.length) {
+
+        if (str[start] != '{') start++
+        else {
+            var end = start + 1
+
+            while (end <= str.length && str[end] != '}') end++
+            if (end == str.length) return
+
+            ResourcesCompat.getDrawable(
+                resources,
+                symbols[(str.slice(start..end)).toString()] ?: R.drawable.ic_dice_d20,
+                null)?.let {
+                    it.setBounds(
+                        0,
+                        0,
+                        dpToPx(it.intrinsicWidth*CMC_HEIGHT/it.intrinsicHeight),
+                        dpToPx(CMC_HEIGHT))
+
+                    str.setSpan(
+                        ImageSpan(it, ImageSpan.ALIGN_BOTTOM),
+                        start,
+                        end + 1,
+                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
+            }
+            start = end + 1
         }
     }
-    append(ss)
+    setText(str)
 }
 
 private fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
