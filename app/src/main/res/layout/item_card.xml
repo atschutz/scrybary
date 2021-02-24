@@ -16,8 +16,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_margin="8dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
         android:onClick="@{listener::onCardClicked}">
 
         <TextView
@@ -30,12 +30,15 @@
 
         <TextView
             android:id="@+id/tv_card_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="start"
             android:text="@{card.name}"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_type_line"
+            app:layout_constraintEnd_toStartOf="@id/tv_cmc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,69 +46,78 @@
             android:id="@+id/tv_cmc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:symbolText="@{card.cmc}"
             android:textColor="@color/white"
-            android:textSize="20sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tv_type_line"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@id/tv_card_name"
+            app:layout_constraintTop_toTopOf="@id/tv_card_name" />
 
         <TextView
             android:id="@+id/tv_type_line"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:gravity="start"
+            android:maxLines="2"
             android:text="@{card.type}"
-            android:textColor="?colorOnSecondary"
+            android:textColor="@color/white"
             android:textSize="12sp"
-            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/divider_line"
+            app:layout_constraintEnd_toStartOf="@id/ll_power_toughness"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_card_name" />
 
         <LinearLayout
+            android:id="@+id/ll_power_toughness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="end"
             android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/divider_line"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_cmc">
+            app:layout_constraintStart_toEndOf="@id/tv_type_line"
+            app:layout_constraintTop_toBottomOf="@id/tv_card_name">
 
             <TextView
                 android:id="@+id/tv_power"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{card.power}"
-                android:textColor="?colorOnSecondary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_slash"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/slash"
-                android:textColor="?colorOnSecondary"
+                android:textColor="@color/white"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_cmc" />
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/tv_toughness"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{card.toughness}"
-                android:textColor="?colorOnSecondary"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_cmc" />
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/divider_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="4dp"
             android:background="?colorOnSecondary"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_type_line" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

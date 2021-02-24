@@ -1,12 +1,10 @@
 package com.alexschutz.scrybary.view.library
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
@@ -14,7 +12,7 @@ import com.alexschutz.scrybary.hideKeyboard
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
 
-class LibraryFragment : BackButtonFragment() {
+class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
     private lateinit var binding: FragmentLibraryBinding
 
@@ -34,21 +32,17 @@ class LibraryFragment : BackButtonFragment() {
 
         viewModel = ViewModelProvider(this).get(LibraryViewModel::class.java)
 
-        binding.listener = this
-        binding.viewModel = viewModel
+        binding.backListener = this
+        binding.searchListener = this
 
         binding.cardList.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = cardListAdapter
         }
 
-        binding.tvSearch.doAfterTextChanged {
-            viewModel.search.value = binding.tvSearch.text.toString()
-        }
-
         binding.tvSearch.setOnEditorActionListener { v, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                v.hideKeyboard()
+                onSearchClicked(view)
                 true
             } else {
                 false
@@ -60,5 +54,13 @@ class LibraryFragment : BackButtonFragment() {
                 cardListAdapter.updateCardList(cards)
             }
         })
+    }
+
+    override fun onSearchClicked(v: View) {
+
+        viewModel.search.value = binding.tvSearch.text.toString()
+        viewModel.fetchFromRemote()
+
+        v.hideKeyboard()
     }
 }

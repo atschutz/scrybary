@@ -1,4 +1,7 @@
 package com.alexschutz.scrybary.view.library
 
-class SearchClickListener {
+import android.view.View
+
+interface SearchClickListener {
+    fun onSearchClicked(v: View)
 }

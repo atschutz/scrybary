@@ -10,9 +10,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import java.util.*
 
-val CMC_HEIGHT = 20
+const val CMC_HEIGHT = 16
 
 fun ImageView.loadImageFromUri(uri: String?) {
     Glide.with(this).load(uri).into(this)

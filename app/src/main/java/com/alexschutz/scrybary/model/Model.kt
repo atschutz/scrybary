@@ -5,6 +5,7 @@ import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 import java.util.*
 
 @Parcelize
@@ -26,7 +27,10 @@ data class Card(
     val power: String?,
 
     @SerializedName("toughness")
-    val toughness: String?
+    val toughness: String?,
+
+    @SerializedName("card_faces")
+    val faces: @RawValue JsonArray?
 ) : Parcelable
 
 data class CardDetail(
