@@ -44,6 +44,9 @@ data class CardDetail(
     @SerializedName("rulings_uri")
     val rulingsUri: String,
 
+    @SerializedName("flavor_text")
+    val flavor: String?,
+
     @SerializedName("image_uris")
     val imageUris: JsonObject,
 )
