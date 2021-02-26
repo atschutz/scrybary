@@ -8,7 +8,7 @@
     <string name="refresh">refresh</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
-    <string name="slash"> / </string>
+    <string name="slash">\u0020/\u0020</string>
     <string name="enter_card_name_here">enter card name here…</string>
     <string name="dice_1">1</string>
     <string name="dice_2">2</string>

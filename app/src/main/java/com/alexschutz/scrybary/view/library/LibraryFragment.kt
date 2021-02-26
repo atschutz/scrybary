@@ -40,7 +40,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             adapter = cardListAdapter
         }
 
-        binding.tvSearch.setOnEditorActionListener { v, actionId, _ ->
+        binding.tvSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 onSearchClicked(view)
                 true
