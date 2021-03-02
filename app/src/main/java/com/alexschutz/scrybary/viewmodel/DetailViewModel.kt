@@ -20,7 +20,13 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
     val card = MutableLiveData<Card>()
     val cardDetail = MutableLiveData<CardDetail>()
-    val cardImageUri = MutableLiveData<String>()
+
+    val cardFront = MutableLiveData<CardFace>()
+    val cardBack = MutableLiveData<CardFace>()
+
+    val cardFrontImageUri = MutableLiveData<String>()
+    val cardBackImageUri = MutableLiveData<String>()
+
     val legalities = MutableLiveData<ArrayList<Legality>>()
     val rulings = MutableLiveData<List<Ruling>>()
 
@@ -39,20 +45,14 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
                             // TODO app does not get transform card info from API because info is stored in card_faces.
                             // TODO get card face list, if property exists, get info from card face.
 
-                            // Assign cardDetail to returned detail.
-                            cardDetail.value = detail
-
-                            val gson = GsonBuilder().create()
-
-                            // Get single image URI from Json field imageUris in CardDetail.
-                            val imageGson = gson.fromJson(detail.imageUris, CardImage::class.java)
-                            cardImageUri.value = imageGson?.imageUri ?: ""
+                            // Assign values to front and back card faces.
+                            configureCardFaces(it, detail)
 
                             // Since Scryfall keeps its legalities in a json with a property representing
                             // each format, and we want to future proof, we have to parse the json into
                             // a map, and then convert it into a list of Legality objects.
                             val legalityList = arrayListOf<Legality>()
-                            for ((key, value) in gson.fromJson(detail.legalities, Map::class.java)) {
+                            for ((key, value) in GsonBuilder().create().fromJson(detail.legalities, Map::class.java)) {
 
                                 // Format fields to look nice.
                                 val format = key.toString().capitalize(Locale.getDefault())
@@ -61,6 +61,8 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
                                 legalityList.add(Legality(format, legality))
                             }
                             legalities.value = legalityList
+
+                            fetchCardRulings()
                         }
 
                         override fun onError(e: Throwable) {
@@ -95,6 +97,48 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
                     })
             )
+        }
+    }
+
+    fun configureCardFaces(card: Card, detail: CardDetail) {
+
+        cardFront.value = null
+        cardBack.value = null
+
+        val gson = GsonBuilder().create()
+
+        if (detail.faces == null) {
+
+            // If we don't have faces, it means the card does not transform.this
+            // This means we can assign the card face members from the CardItem and CardDetails.
+            cardFront.value = CardFace(
+               card.name,
+               card.cmc,
+               card.type,
+               card.power,
+               card.toughness,
+               card.loyalty,
+               detail.oracleText,
+               detail.flavor,
+               detail.imageUris
+            )
+
+            // Get single image URI from Json field imageUris in CardDetail.
+            cardFrontImageUri.value =
+                gson.fromJson(detail.imageUris, CardImage::class.java)?.imageUri ?: ""
+        } else {
+
+            // Convert faces Json array to CardFace array then assign them to front and back.
+            val faces = gson.fromJson(detail.faces, Array<CardFace>::class.java).toList()
+            cardFront.value = faces[0]
+            cardBack.value = faces[1]
+
+            // Set front and back image URIs
+            cardFrontImageUri.value =
+                gson.fromJson(cardFront.value?.imageUris, CardImage::class.java)?.imageUri ?: ""
+
+            cardBackImageUri.value =
+                gson.fromJson(cardBack.value?.imageUris, CardImage::class.java)?.imageUri ?: ""
         }
     }
 }

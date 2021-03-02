@@ -4,16 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alexschutz.scrybary.R
-import com.alexschutz.scrybary.databinding.FragmentDetailBinding
 import com.alexschutz.scrybary.databinding.FragmentDetailsFullBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
-import com.google.android.material.tabs.TabLayoutMediator
 
 class DetailFragment : BackButtonFragment()  {
 
@@ -44,18 +40,37 @@ class DetailFragment : BackButtonFragment()  {
         }
 
         viewModel.fetchCardDetail()
-        viewModel.fetchCardRulings()
 
-        viewModel.card.observe(viewLifecycleOwner, { card ->
-            binding.card = card
+        viewModel.cardFront.observe(viewLifecycleOwner, { front ->
+            with (binding) {
+                this.front = front
+
+                if (front?.power != null || front?.toughness != null)
+                    tvSlash.visibility = View.VISIBLE
+                else tvSlash.visibility = View.GONE
+            }
         })
 
-        viewModel.cardDetail.observe(viewLifecycleOwner, { detail ->
-            binding.detail = detail
+        viewModel.cardBack.observe(viewLifecycleOwner, { back ->
+            with (binding) {
+                this.back = back
+
+                clBack.visibility = if (back == null) View.GONE else View.VISIBLE
+
+                if (back?.power != null || back?.toughness != null)
+                    tvBackSlash.visibility = View.VISIBLE
+                else tvBackSlash.visibility = View.GONE
+            }
+
+
         })
 
-        viewModel.cardImageUri.observe(viewLifecycleOwner, { uri ->
-            binding.imageUri = uri
+        viewModel.cardFrontImageUri.observe(viewLifecycleOwner, { uri ->
+            binding.frontImageUri = uri
+        })
+
+        viewModel.cardBackImageUri.observe(viewLifecycleOwner, { uri ->
+            binding.backImageUri = uri
         })
 
         binding.rulingsList.apply {
@@ -79,12 +94,5 @@ class DetailFragment : BackButtonFragment()  {
                 legalityListAdapter.updateLegalityList(legalities)
             }
         })
-
-        // Show slash if card has power or toughness. Otherwise hide.
-        with (binding) {
-            if (card?.power != null || card?.toughness != null)
-                tvSlash.visibility = View.VISIBLE
-            else tvSlash.visibility = View.GONE
-        }
     }
 }

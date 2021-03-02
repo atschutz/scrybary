@@ -65,12 +65,12 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/divider_line"
-            app:layout_constraintEnd_toStartOf="@id/ll_power_toughness"
+            app:layout_constraintEnd_toStartOf="@id/ll_power_toughness_loyalty"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_card_name" />
 
         <LinearLayout
-            android:id="@+id/ll_power_toughness"
+            android:id="@+id/ll_power_toughness_loyalty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end"

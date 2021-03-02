@@ -29,8 +29,9 @@ data class Card(
     @SerializedName("toughness")
     val toughness: String?,
 
-    @SerializedName("card_faces")
-    val faces: @RawValue JsonArray?
+    @SerializedName("loyalty")
+    val loyalty: String?,
+
 ) : Parcelable
 
 data class CardDetail(
@@ -49,36 +50,71 @@ data class CardDetail(
 
     @SerializedName("image_uris")
     val imageUris: JsonObject,
+
+    @SerializedName("card_faces")
+    val faces: @RawValue JsonArray?
+)
+
+// TODO see if there's a way to work with card faces that
+//  doesn't involve reassigning all these values.
+data class CardFace(
+
+    @SerializedName("name")
+    val name: String?,
+
+    @SerializedName("mana_cost")
+    val cmc: String?,
+
+    @SerializedName("type_line")
+    val type: String?,
+
+    @SerializedName("power")
+    val power: String?,
+
+    @SerializedName("toughness")
+    val toughness: String?,
+
+    @SerializedName("loyalty")
+    val loyalty: String?,
+
+    @SerializedName("oracle_text")
+    val oracleText: String?,
+
+    @SerializedName("flavor_text")
+    val flavor: String?,
+
+    @SerializedName("image_uris")
+    val imageUris: JsonObject?,
 )
 
 data class CardImage(
     @SerializedName("border_crop")
-    val imageUri: String
+    val imageUri: String?
 )
 
 data class CardListJson(
     @SerializedName("data")
-    val data: JsonArray
+    val data: JsonArray?
 )
 
 data class Ruling(
     @SerializedName("source")
-    val source: String,
+    val source: String?,
 
     @SerializedName("published_at")
-    val publishDate: Date,
+    val publishDate: Date?,
 
     @SerializedName("comment")
-    val comment: String
+    val comment: String?
 )
 
 data class RulingListJson(
     @SerializedName("data")
-    val data: JsonArray
+    val data: JsonArray?
 )
 
 data class Legality(
-    val format: String,
-    val state: String
+    val format: String?,
+    val state: String?
 )
 

@@ -4,18 +4,24 @@
     <data>
 
         <variable
-            name="card"
-            type="com.alexschutz.scrybary.model.Card" />
+            name="front"
+            type="com.alexschutz.scrybary.model.CardFace" />
 
         <variable
-            name="detail"
-            type="com.alexschutz.scrybary.model.CardDetail" />
+            name="back"
+            type="com.alexschutz.scrybary.model.CardFace" />
 
         <variable
-            name="imageUri"
+            name="frontImageUri"
+            type="String" />
+
+        <variable
+            name="backImageUri"
             type="String" />
 
     </data>
+
+    <!-- TODO separate this into smaller XML files and use include -->
 
     <androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -45,17 +51,19 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:contentDescription="@{imageUri}"
-                        android:imageUri="@{imageUri}"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:contentDescription="@{frontImageUri}"
+                        android:imageUri="@{frontImageUri}"
                         app:layout_constraintEnd_toStartOf="@id/cl_text_box"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/cl_text_box" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_text_box"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_card_image"
                         app:layout_constraintTop_toTopOf="parent">
@@ -64,7 +72,7 @@
                             android:id="@+id/tv_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@{card.name}"
+                            android:text="@{front.name}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -77,7 +85,7 @@
                             android:id="@+id/tv_type_line"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@{card.type}"
+                            android:text="@{front.type}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toTopOf="@id/tv_mana_cost"
@@ -89,7 +97,7 @@
                             android:id="@+id/tv_mana_cost"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:symbolText="@{card.cmc}"
+                            android:symbolText="@{front.cmc}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toTopOf="@id/tv_oracle"
@@ -102,7 +110,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4sp"
-                            android:text="@{detail.oracleText}"
+                            android:symbolText="@{front.oracleText}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toTopOf="@id/tv_flavor"
@@ -114,17 +122,17 @@
                             android:id="@+id/tv_flavor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="@{detail.flavor}"
+                            android:text="@{front.flavor}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             android:textStyle="italic"
-                            app:layout_constraintBottom_toTopOf="@id/ll_power_toughness"
+                            app:layout_constraintBottom_toTopOf="@id/ll_power_toughness_loyalty"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_oracle" />
 
                         <LinearLayout
-                            android:id="@+id/ll_power_toughness"
+                            android:id="@+id/ll_power_toughness_loyalty"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
@@ -137,7 +145,7 @@
                                 android:id="@+id/tv_power"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{card.power}"
+                                android:text="@{front.power}"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -150,13 +158,22 @@
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold"
-                                android:visibility="gone"/>
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_toughness"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@{card.toughness}"
+                                android:text="@{front.toughness}"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_loyalty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{front.loyalty}"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -170,7 +187,7 @@
                     android:id="@+id/cl_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -184,7 +201,7 @@
                         android:layout_marginBottom="8dp"
                         android:background="?colorOnSecondary"
                         android:orientation="horizontal"
-                        app:layout_constraintBottom_toTopOf="@id/iv_back_card_image"
+                        app:layout_constraintBottom_toTopOf="@id/cl_back_text_box"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -192,27 +209,31 @@
                     <ImageView
                         android:id="@+id/iv_back_card_image"
                         android:layout_width="0dp"
-                        android:layout_height="270dp"
-                        android:src="@drawable/button_rectangle"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@{backImageUri}"
+                        android:imageUri="@{backImageUri}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/cl_back_text_box"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@id/cl_back_text_box" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_back_text_box"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
+                        android:paddingStart="2dp"
+                        android:paddingEnd="2dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/iv_back_card_image"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/divider_line">
 
                         <TextView
                             android:id="@+id/tv_back_name"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="Tarmogoyf"
+                            android:text="@{back.name}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -226,7 +247,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="Creature — Lhurgoyf"
+                            android:text="@{back.type}"
 
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -240,7 +261,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="{1}{G}"
+                            android:symbolText="@{back.cmc}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_oracle"
@@ -254,7 +275,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4sp"
                             android:gravity="end"
-                            android:text="Tarmogoyf’s power is equal to the number of card types among cards in all graveyards and its toughness is equal to that number plus 1."
+                            android:symbolText="@{back.oracleText}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_flavor"
@@ -267,9 +288,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:gravity="end"
-                            android:text="What doesn’t grow, dies. And what dies grows the tarmogoyf."
+                            android:text="@{back.flavor}"
                             android:textColor="@color/white"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="italic"
                             app:layout_constraintBottom_toTopOf="@id/ll_back_power_toughness"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -291,7 +312,7 @@
                                 android:id="@+id/tv_back_power"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="*"
+                                android:text="@{back.power}"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -303,13 +324,23 @@
                                 android:text="@string/slash"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_back_toughness"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="1+*"
+                                android:text="@{back.toughness}"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_back_loyalty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@{back.loyalty}"
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
