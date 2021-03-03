@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.model
 
 import android.os.Parcelable
+import android.text.SpannableString
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
@@ -32,7 +33,8 @@ data class Card(
     @SerializedName("loyalty")
     val loyalty: String?,
 
-) : Parcelable
+    var spannableCmc: @RawValue SpannableString?
+    ) : Parcelable
 
 data class CardDetail(
 

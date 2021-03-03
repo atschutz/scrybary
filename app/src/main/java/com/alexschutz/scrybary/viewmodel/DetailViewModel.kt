@@ -19,7 +19,6 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
     private val disposable = CompositeDisposable()
 
     val card = MutableLiveData<Card>()
-    val cardDetail = MutableLiveData<CardDetail>()
 
     val cardFront = MutableLiveData<CardFace>()
     val cardBack = MutableLiveData<CardFace>()
@@ -30,7 +29,11 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
     val legalities = MutableLiveData<ArrayList<Legality>>()
     val rulings = MutableLiveData<List<Ruling>>()
 
+    val loading = MutableLiveData<Boolean>()
+
     fun fetchCardDetail() {
+
+        loading.value = true
 
         // If card's value isn't null, set search to the id. otherwise set search to empty string.
         card.value?.let{
@@ -98,6 +101,8 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
                     })
             )
         }
+
+        loading.value = false
     }
 
     fun configureCardFaces(card: Card, detail: CardDetail) {

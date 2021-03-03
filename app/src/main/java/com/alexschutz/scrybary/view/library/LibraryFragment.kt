@@ -1,18 +1,25 @@
 package com.alexschutz.scrybary.view.library
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
-import com.alexschutz.scrybary.hideKeyboard
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
 
 class LibraryFragment : BackButtonFragment(), SearchClickListener {
+
+    // TODO fix big margin under text when P/T or loyalty or flavor text is missing.
 
     private lateinit var binding: FragmentLibraryBinding
 
@@ -52,6 +59,13 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
         viewModel.cards.observe(viewLifecycleOwner, { cards ->
             cards?.let {
                 cardListAdapter.updateCardList(cards)
+            }
+        })
+
+        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
+            isLoading?.let {
+                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
+                binding.cardList.visibility =  if (it) View.GONE else View.VISIBLE
             }
         })
     }

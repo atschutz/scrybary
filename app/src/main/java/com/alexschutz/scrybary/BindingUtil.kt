@@ -1,11 +1,13 @@
 package com.alexschutz.scrybary
 
 
+import android.content.Context
 import android.content.res.Resources
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
@@ -80,4 +82,4 @@ fun TextView.replaceCMCs(text: String?) {
     setText(str)
 }
 
-private fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
+fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()

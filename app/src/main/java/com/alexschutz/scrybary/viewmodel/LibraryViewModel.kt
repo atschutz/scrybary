@@ -19,13 +19,12 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
 
-    private val search = MutableLiveData<String>()
-    private val cards = MutableLiveData<List<Card>>()
+    val search = MutableLiveData<String>()
+    val cards = MutableLiveData<List<Card>>()
 
-    private val loading = MutableLiveData<Boolean>()
+    val loading = MutableLiveData<Boolean>()
 
     fun fetchFromRemote() {
-
         loading.value = true
 
         disposable.add(
@@ -45,8 +44,11 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         Toast.makeText(getApplication(), "It did not work: $e", Toast.LENGTH_LONG).show()
+
+                        loading.value = false
                     }
                 })
         )
     }
 }
+

@@ -94,5 +94,12 @@ class DetailFragment : BackButtonFragment()  {
                 legalityListAdapter.updateLegalityList(legalities)
             }
         })
+
+        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
+            isLoading?.let {
+                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
+                binding.nestedScrollView.visibility =  if (it) View.GONE else View.VISIBLE
+            }
+        })
     }
 }
