@@ -32,9 +32,7 @@ data class Card(
 
     @SerializedName("loyalty")
     val loyalty: String?,
-
-    var spannableCmc: @RawValue SpannableString?
-    ) : Parcelable
+) : Parcelable
 
 data class CardDetail(
 
@@ -42,19 +40,19 @@ data class CardDetail(
     val oracleText: String?,
 
     @SerializedName("legalities")
-    val legalities: JsonObject,
+    val legalities: JsonObject?,
 
     @SerializedName("rulings_uri")
-    val rulingsUri: String,
+    val rulingsUri: String?,
 
     @SerializedName("flavor_text")
     val flavor: String?,
 
     @SerializedName("image_uris")
-    val imageUris: JsonObject,
+    val imageUris: JsonObject?,
 
     @SerializedName("card_faces")
-    val faces: @RawValue JsonArray?
+    val faces: JsonArray?
 )
 
 // TODO see if there's a way to work with card faces that

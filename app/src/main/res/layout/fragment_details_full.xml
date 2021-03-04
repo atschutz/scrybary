@@ -23,7 +23,6 @@
     </data>
 
     <!-- TODO separate this into smaller XML files and use include -->
-    <!-- TODO fix centering issue -->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,7 +68,6 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="2dp"
                         android:paddingEnd="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/iv_card_image"
                         app:layout_constraintTop_toTopOf="parent">
@@ -103,6 +101,7 @@
                             android:id="@+id/tv_mana_cost"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="4sp"
                             android:symbolText="@{front.cmc}"
                             android:textColor="@color/white"
                             android:textSize="18sp"
@@ -115,7 +114,7 @@
                             android:id="@+id/tv_oracle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4sp"
+                            android:layout_marginTop="4sp"
                             android:symbolText="@{front.oracleText}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -128,6 +127,7 @@
                             android:id="@+id/tv_flavor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4sp"
                             android:text="@{front.flavor}"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -141,8 +141,8 @@
                             android:id="@+id/ll_power_toughness_loyalty"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="4sp"
                             android:orientation="horizontal"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/tv_flavor">

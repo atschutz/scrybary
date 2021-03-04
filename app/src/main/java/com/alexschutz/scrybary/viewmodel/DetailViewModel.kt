@@ -45,9 +45,6 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
                         override fun onSuccess(detail: CardDetail) {
 
-                            // TODO app does not get transform card info from API because info is stored in card_faces.
-                            // TODO get card face list, if property exists, get info from card face.
-
                             // Assign values to front and back card faces.
                             configureCardFaces(it, detail)
 
@@ -114,7 +111,7 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
         if (detail.faces == null) {
 
-            // If we don't have faces, it means the card does not transform.this
+            // If we don't have faces, it means the card does not transform.
             // This means we can assign the card face members from the CardItem and CardDetails.
             cardFront.value = CardFace(
                card.name,

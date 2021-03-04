@@ -16,4 +16,7 @@
     <string name="dice_4">4</string>
     <string name="dice_5">5</string>
     <string name="dice_6">6</string>
+    <string name="player_one_total">player one total</string>
+    <string name="player_two_total">player two total</string>
+    <string name="dice">dice</string>
 </resources>

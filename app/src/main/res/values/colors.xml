@@ -16,6 +16,11 @@
 
     <!-- app colors -->
     <color name="background_grey">#252525</color>
+    <color name="dimmed_grey">#424242</color>
     <color name="deselected_purple">#3A2852</color>
+
+    <!-- dice colors-->
+    <color name="dice_dark">#424242</color>
+    <color name="dice_light">#C4C4C4</color>
 
 </resources>

@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.view.children
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,8 +15,6 @@ import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
 
 class DetailFragment : BackButtonFragment()  {
-
-    // TODO add 4th fragment for back face info. Hide if no back face.
 
     private lateinit var binding: FragmentDetailsFullBinding
 
@@ -61,8 +62,6 @@ class DetailFragment : BackButtonFragment()  {
                     tvBackSlash.visibility = View.VISIBLE
                 else tvBackSlash.visibility = View.GONE
             }
-
-
         })
 
         viewModel.cardFrontImageUri.observe(viewLifecycleOwner, { uri ->

@@ -14,7 +14,6 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
-    // TODO implement loading bar
 
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
