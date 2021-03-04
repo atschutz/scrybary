@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginBottom
+import androidx.core.view.updateLayoutParams
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.RollTotal
 import com.alexschutz.scrybary.databinding.FragmentDiceBinding
@@ -163,6 +165,10 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
             }
 
             diceView.rotation = (-30..30).random().toFloat()
+
+            val params = diceView.layoutParams as ViewGroup.MarginLayoutParams
+            params.setMargins(params.leftMargin, (-100..50).random(), params.rightMargin, params.bottomMargin)
+            diceView.layoutParams = params
         }
     }
 }

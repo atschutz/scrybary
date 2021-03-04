@@ -24,7 +24,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:clipChildren="false">
 
         <ImageButton
             android:id="@+id/btn_back"
@@ -114,6 +115,7 @@
             android:id="@+id/p1_dice_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clipChildren="false"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/p2_dice_container"
@@ -125,6 +127,7 @@
             android:id="@+id/p2_dice_container"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:clipChildren="false"
             android:gravity="center"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/dice_footer"
