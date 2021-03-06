@@ -10,11 +10,19 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 
 const val CMC_HEIGHT = 16
 
 fun ImageView.loadImageFromUri(uri: String?) {
-    Glide.with(this).load(uri).into(this)
+
+    Glide
+        .with(this)
+        .load(uri)
+        .placeholder(R.drawable.card_placeholder)
+        .transition(DrawableTransitionOptions.withCrossFade(500))
+        .into(this)
 }
 
 @BindingAdapter("android:imageUri")

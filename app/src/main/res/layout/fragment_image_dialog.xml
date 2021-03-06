@@ -15,10 +15,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/card_image_is_loading"
+            android:src="@drawable/card_placeholder" />
+
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_images"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:onClick="@{backListener::onBackPressed}" />
 
         <ImageButton
             android:id="@+id/btn_back"

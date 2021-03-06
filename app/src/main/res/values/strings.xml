@@ -18,4 +18,5 @@
     <string name="dice_6">6</string>
     <string name="player_one_total">player one total</string>
     <string name="player_two_total">player two total</string>
+    <string name="card_image_is_loading">Card image is loading!</string>
 </resources>
