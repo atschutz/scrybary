@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import java.util.*
 import kotlin.collections.ArrayList
 
-class DetailViewModel(application: Application): AndroidViewModel(application) {
+class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
@@ -23,8 +23,11 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
     val cardFront = MutableLiveData<CardFace>()
     val cardBack = MutableLiveData<CardFace>()
 
+    // TODO merge these.
     val cardFrontImageUri = MutableLiveData<String>()
     val cardBackImageUri = MutableLiveData<String>()
+
+    val printUri = MutableLiveData<String>()
 
     val legalities = MutableLiveData<ArrayList<Legality>>()
     val rulings = MutableLiveData<List<Ruling>>()
@@ -36,27 +39,32 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
         loading.value = true
 
         // If card's value isn't null, set search to the id. otherwise set search to empty string.
-        card.value?.let{
+        card.value?.let {
             disposable.add(
                 cardService.getCardDetail(it.id)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(object: DisposableSingleObserver<CardDetail>() {
+                    .subscribeWith(object : DisposableSingleObserver<CardDetail>() {
 
                         override fun onSuccess(detail: CardDetail) {
 
                             // Assign values to front and back card faces.
                             configureCardFaces(it, detail)
 
+                            // Get printing Uri to pass to CardImage.
+                            printUri.value = detail.printUri
+
                             // Since Scryfall keeps its legalities in a json with a property representing
                             // each format, and we want to future proof, we have to parse the json into
                             // a map, and then convert it into a list of Legality objects.
                             val legalityList = arrayListOf<Legality>()
-                            for ((key, value) in GsonBuilder().create().fromJson(detail.legalities, Map::class.java)) {
+                            for ((key, value) in GsonBuilder().create()
+                                .fromJson(detail.legalities, Map::class.java)) {
 
                                 // Format fields to look nice.
                                 val format = key.toString().capitalize(Locale.getDefault())
-                                val legality = value.toString().replace("_", " ").toUpperCase(Locale.getDefault())
+                                val legality = value.toString().replace("_", " ")
+                                    .toUpperCase(Locale.getDefault())
 
                                 legalityList.add(Legality(format, legality))
                             }
@@ -77,12 +85,12 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
 
     fun fetchCardRulings() {
 
-        card.value?.let{
+        card.value?.let {
             disposable.add(
                 cardService.getCardRulings(it.id)
                     .subscribeOn(Schedulers.newThread())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeWith(object: DisposableSingleObserver<RulingListJson>() {
+                    .subscribeWith(object : DisposableSingleObserver<RulingListJson>() {
 
                         override fun onSuccess(rulingList: RulingListJson) {
 
@@ -114,15 +122,15 @@ class DetailViewModel(application: Application): AndroidViewModel(application) {
             // If we don't have faces, it means the card does not transform.
             // This means we can assign the card face members from the CardItem and CardDetails.
             cardFront.value = CardFace(
-               card.name,
-               card.cmc,
-               card.type,
-               card.power,
-               card.toughness,
-               card.loyalty,
-               detail.oracleText,
-               detail.flavor,
-               detail.imageUris
+                card.name,
+                card.cmc,
+                card.type,
+                card.power,
+                card.toughness,
+                card.loyalty,
+                detail.oracleText,
+                detail.flavor,
+                detail.imageUris
             )
 
             // Get single image URI from Json field imageUris in CardDetail.

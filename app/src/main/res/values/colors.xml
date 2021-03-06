@@ -9,15 +9,23 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- legality colors -->
-    <color name="legal_green">#008800</color>
+    <color name="legal_green">#529C46</color>
     <color name="not_legal_grey">#666666</color>
     <color name="restricted_blue">#4080D0</color>
     <color name="banned_red">#FF5050</color>
 
     <!-- app colors -->
-    <color name="background_grey">#252525</color>
+    <!-- TODO Merge same/similar colors and add to themes. -->
+
     <color name="dimmed_grey">#424242</color>
     <color name="deselected_purple">#3A2852</color>
+
+    <color name="light_purple">#9884B2</color>
+    <color name="mid_purple">#7959A1</color>
+    <color name="dark_purple">#5A3787</color>
+
+    <color name="primary_grey">#252525</color>
+    <color name="primary_white">#FFFFFF</color>
 
     <!-- dice colors-->
     <color name="dice_dark">#424242</color>

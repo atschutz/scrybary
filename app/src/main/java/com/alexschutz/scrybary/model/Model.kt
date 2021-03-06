@@ -1,12 +1,10 @@
 package com.alexschutz.scrybary.model
 
 import android.os.Parcelable
-import android.text.SpannableString
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-import kotlinx.parcelize.RawValue
 import java.util.*
 
 @Parcelize
@@ -51,12 +49,16 @@ data class CardDetail(
     @SerializedName("image_uris")
     val imageUris: JsonObject?,
 
+    @SerializedName("prints_search_uri")
+    val printUri: String?,
+
     @SerializedName("card_faces")
     val faces: JsonArray?
 )
 
 // TODO see if there's a way to work with card faces that
 //  doesn't involve reassigning all these values.
+//  Can probably merge Card, CardFace, and CardDetail.
 data class CardFace(
 
     @SerializedName("name")
@@ -90,6 +92,14 @@ data class CardFace(
 data class CardImage(
     @SerializedName("border_crop")
     val imageUri: String?
+)
+
+data class ImageJson(
+    @SerializedName("image_uris")
+    val imageUris: JsonObject?,
+
+    @SerializedName("card_faces")
+    val faces: JsonArray?
 )
 
 data class CardListJson(

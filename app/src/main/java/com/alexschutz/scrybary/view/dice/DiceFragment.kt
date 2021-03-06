@@ -89,44 +89,16 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                 }
 
             // White the winning player's total, grey the loser's. If it's a tie, white both.
-            when {
-                p1Roll?.sum ?: 0 > p2Roll?.sum ?: 0 -> {
-                    tvP1Total.setTextColor(ContextCompat.getColor(
-                            tvP1Total.context,
-                            R.color.white
-                        )
-                    )
-                    tvP2Total.setTextColor(ContextCompat.getColor(
-                            tvP2Total.context,
-                            R.color.dimmed_grey
-                        )
-                    )
-                }
-                p1Roll?.sum ?: 0 < p2Roll?.sum ?: 0 -> {
-                    tvP1Total.setTextColor(ContextCompat.getColor(
-                            tvP1Total.context,
-                            R.color.dimmed_grey
-                        )
-                    )
-                    tvP2Total.setTextColor(ContextCompat.getColor(
-                            tvP2Total.context,
-                            R.color.white
-                        )
-                    )
-                }
-                else -> {
-                    tvP1Total.setTextColor(ContextCompat.getColor(
-                            tvP1Total.context,
-                            R.color.white
-                        )
-                    )
-                    tvP2Total.setTextColor(ContextCompat.getColor(
-                            tvP2Total.context,
-                            R.color.white
-                        )
-                    )
-                }
-            }
+            tvP1Total.setTextColor(ContextCompat.getColor(
+                    tvP1Total.context,
+                    if (p1Roll?.sum ?: 0 < p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
+                )
+            )
+            tvP2Total.setTextColor(ContextCompat.getColor(
+                    tvP2Total.context,
+                    if (p1Roll?.sum ?: 0 > p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
+                )
+            )
         }
     }
 
@@ -152,6 +124,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                         )
                     )
             }
+
             // Get dice text and set color based on player.
             diceView.findViewById<TextView>(R.id.tv_dice_total)?.let {
                 it.setTextColor(

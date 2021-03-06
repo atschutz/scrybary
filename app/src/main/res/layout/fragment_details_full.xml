@@ -366,12 +366,14 @@
                     android:id="@+id/legality_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="4dp" />
+                    android:layout_marginBottom="4dp"
+                    android:overScrollMode="never" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rulings_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never" />
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.core.view.children
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.databinding.FragmentDetailsFullBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
+import com.alexschutz.scrybary.view.detail.cardimage.ImageDialogFragment
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
 
 class DetailFragment : BackButtonFragment()  {
@@ -58,9 +56,9 @@ class DetailFragment : BackButtonFragment()  {
 
                 clBack.visibility = if (back == null) View.GONE else View.VISIBLE
 
-                if (back?.power != null || back?.toughness != null)
-                    tvBackSlash.visibility = View.VISIBLE
-                else tvBackSlash.visibility = View.GONE
+                tvBackSlash.visibility =
+                    if (back?.power != null || back?.toughness != null) View.VISIBLE
+                    else View.GONE
             }
         })
 
@@ -98,6 +96,16 @@ class DetailFragment : BackButtonFragment()  {
             isLoading?.let {
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
                 binding.nestedScrollView.visibility =  if (it) View.GONE else View.VISIBLE
+            }
+        })
+
+        // TODO view bind :^)
+        viewModel.printUri.observe(viewLifecycleOwner, { id ->
+            binding.ivCardImage.setOnClickListener {
+                ImageDialogFragment(id, true).show(childFragmentManager, "dialog")
+            }
+            binding.ivBackCardImage.setOnClickListener {
+                ImageDialogFragment(id, false).show(childFragmentManager, "dialog")
             }
         })
     }

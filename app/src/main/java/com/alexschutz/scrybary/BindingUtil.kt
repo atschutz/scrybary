@@ -1,16 +1,14 @@
 package com.alexschutz.scrybary
 
-
-import android.content.Context
 import android.content.res.Resources
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 
 const val CMC_HEIGHT = 16

@@ -21,4 +21,6 @@ class CardsApiService {
     fun getCardList(query: String): Single<CardListJson> = api.getCardList(query)
 
     fun getCardRulings(id: String): Single<RulingListJson> = api.getCardRulings(id)
+
+    fun getPrintings(url: String): Single<CardListJson> = api.getPrintings(url)
 }
