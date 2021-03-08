@@ -11,13 +11,19 @@
 
         <action
             android:id="@+id/action_menuFragment_to_diceFragment"
-            app:destination="@id/diceFragment" />
+            app:destination="@id/diceFragment"
+            app:enterAnim="@anim/swipe_left_enter"
+            app:exitAnim="@anim/swipe_left_exit" />
         <action
             android:id="@+id/action_menuFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/swipe_left_enter"
+            app:exitAnim="@anim/swipe_left_exit" />
         <action
             android:id="@+id/action_menuFragment_to_counterFragment"
-            app:destination="@id/counterFragment" />
+            app:destination="@id/counterFragment"
+            app:enterAnim="@anim/swipe_left_enter"
+            app:exitAnim="@anim/swipe_left_exit" />
 
     </fragment>
 
@@ -28,7 +34,15 @@
 
         <action
             android:id="@+id/action_libraryFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@anim/swipe_left_enter"
+            app:exitAnim="@anim/swipe_left_exit" />
+
+        <action
+            android:id="@+id/action_libraryFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
 
     </fragment>
 
@@ -37,12 +51,24 @@
         android:name="com.alexschutz.scrybary.view.counter.CounterFragment"
         android:label="CounterFragment">
 
+        <action
+            android:id="@+id/action_counterFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
+
     </fragment>
 
     <fragment
         android:id="@+id/diceFragment"
         android:name="com.alexschutz.scrybary.view.dice.DiceFragment"
         android:label="DiceFragment">
+
+        <action
+            android:id="@+id/action_diceFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
 
     </fragment>
 
@@ -54,6 +80,12 @@
         <argument
             android:name="card"
             app:argType="com.alexschutz.scrybary.model.Card" />
+
+        <action
+            android:id="@+id/action_detailFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit"/>
 
     </fragment>
 </navigation>

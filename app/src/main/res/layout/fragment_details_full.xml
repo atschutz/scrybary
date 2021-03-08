@@ -20,6 +20,10 @@
             name="backImageUri"
             type="String" />
 
+        <variable
+            name="backListener"
+            type="com.alexschutz.scrybary.view.BackButtonListener" />
+
     </data>
 
     <!-- TODO separate this into smaller XML files and use include -->
@@ -38,13 +42,24 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:orientation="vertical">
+
+                <!--Placeholder for back button -->
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:background="@null"
+                    android:contentDescription="@string/back"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/ic_arrow_back" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_front"
@@ -383,5 +398,16 @@
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
+
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/back_button_circle"
+            android:contentDescription="@string/back"
+            android:onClick="@{backListener::onBackPressed}"
+            app:srcCompat="@drawable/ic_arrow_back" />
+
     </RelativeLayout>
 </layout>

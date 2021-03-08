@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentDetailsFullBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.view.detail.cardimage.ImageDialogFragment
@@ -25,6 +27,8 @@ class DetailFragment : BackButtonFragment()  {
                               savedInstanceState: Bundle?): View {
 
         binding = FragmentDetailsFullBinding.inflate(inflater, container, false)
+
+        binding.backListener = this
 
         return binding.root
     }
@@ -94,8 +98,9 @@ class DetailFragment : BackButtonFragment()  {
 
         viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
             isLoading?.let {
-                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
                 binding.nestedScrollView.visibility =  if (it) View.GONE else View.VISIBLE
+                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
+
             }
         })
 
@@ -108,5 +113,10 @@ class DetailFragment : BackButtonFragment()  {
                 ImageDialogFragment(id, false).show(childFragmentManager, "dialog")
             }
         })
+    }
+
+    override fun onBackPressed(v: View) {
+        super.onBackPressed(v)
+        Navigation.findNavController(v).navigate(R.id.action_detailFragment_to_libraryFragment)
     }
 }

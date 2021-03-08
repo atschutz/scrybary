@@ -48,7 +48,8 @@ class CardListAdapter(private val cardList: ArrayList<Card>) :
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         with (holder.view) {
-           card = cardList[position]
+
+            card = cardList[position]
             if (card?.power != null ||card?.toughness != null)
                 tvSlash.visibility = View.VISIBLE
             else tvSlash.visibility = View.GONE

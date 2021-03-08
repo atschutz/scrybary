@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/counter_button_circle"
                 android:contentDescription="@string/back"
                 android:onClick="@{listener::onBackPressed}"
                 app:srcCompat="@drawable/ic_arrow_back" />
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
-                android:background="@drawable/circle"
+                android:background="@drawable/counter_button_circle"
                 android:contentDescription="@string/roll"
                 app:srcCompat="@drawable/ic_roll" />
 
@@ -87,7 +87,7 @@
                 android:id="@+id/btn_refresh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/circle"
+                android:background="@drawable/counter_button_circle"
                 android:contentDescription="@string/refresh"
                 app:srcCompat="@drawable/ic_refresh" />
 

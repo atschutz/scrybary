@@ -28,6 +28,8 @@
     <color name="primary_grey">#252525</color>
     <color name="primary_white">#FFFFFF</color>
 
+    <color name="primary_grey_transparent">#BF252525</color>
+
     <!-- dice colors-->
     <color name="dice_dark">#424242</color>
     <color name="dice_light">#C4C4C4</color>

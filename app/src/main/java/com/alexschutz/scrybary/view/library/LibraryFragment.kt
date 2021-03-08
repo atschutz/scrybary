@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
@@ -64,8 +65,8 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
         viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
             isLoading?.let {
-                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
                 binding.cardList.visibility =  if (it) View.GONE else View.VISIBLE
+                binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
             }
         })
     }
@@ -76,5 +77,10 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
         viewModel.fetchFromRemote()
 
         v.hideKeyboard()
+    }
+
+    override fun onBackPressed(v: View) {
+        super.onBackPressed(v)
+        Navigation.findNavController(v).navigate(R.id.action_libraryFragment_to_menuFragment)
     }
 }

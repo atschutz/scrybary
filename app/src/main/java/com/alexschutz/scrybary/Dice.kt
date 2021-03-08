@@ -11,7 +11,7 @@ fun roll(number: Int, sides: Int): RollTotal {
     return total
 }
 
-public data class RollTotal(
+data class RollTotal(
     val rolls: ArrayList<Int> = arrayListOf(),
     var sum: Int = 0
 )

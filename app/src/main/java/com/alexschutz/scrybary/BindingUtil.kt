@@ -34,7 +34,7 @@ fun loadImage(view: ImageView, uri: String?) {
 fun TextView.setBackgroundForLegality(text: String) {
     background = when (text) {
         "LEGAL" -> getDrawable(R.drawable.rect_legal)
-        "RESTRICTED" -> getDrawable(R.drawable.rect_restricted)
+        "RESTR." -> getDrawable(R.drawable.rect_restricted)
         "BANNED" -> getDrawable(R.drawable.rect_banned)
         else -> getDrawable(R.drawable.rect_not_legal)
     }

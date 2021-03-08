@@ -5,15 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginBottom
-import androidx.core.view.updateLayoutParams
+import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.RollTotal
 import com.alexschutz.scrybary.databinding.FragmentDiceBinding
 import com.alexschutz.scrybary.roll
 import com.alexschutz.scrybary.view.BackButtonFragment
+
 
 class DiceFragment : BackButtonFragment(), RollClickListener {
 
@@ -24,7 +26,8 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
     private var diceSides = 6
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -49,12 +52,10 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
         // d4 -> 0th index = (0 + 2) * 2 = 4 etc.
         binding.rgSides.setOnCheckedChangeListener { group, checkedId ->
             val index = group.indexOfChild(view?.findViewById<RadioButton>(checkedId))
-            diceSides = if (index < 5) {
-                (index + 2) * 2
-            } else {
-                20
-            }
+            diceSides = if (index < 5) { (index + 2) * 2 } else { 20 }
         }
+
+        binding.tvRollHint.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shrink_grow))
 
         return binding.root
     }
@@ -62,6 +63,10 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
     override fun onRollClicked(v: View) {
 
         with(binding) {
+            // Hide the roll hint
+            tvRollHint.animation = null
+            tvRollHint.visibility = View.GONE
+
             // Player 1 always rolls. Do roll and make visible.
             p1Roll = roll(numberOfDice, diceSides)
             p1TotalContainer.visibility = View.VISIBLE
@@ -89,12 +94,14 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                 }
 
             // White the winning player's total, grey the loser's. If it's a tie, white both.
-            tvP1Total.setTextColor(ContextCompat.getColor(
+            tvP1Total.setTextColor(
+                ContextCompat.getColor(
                     tvP1Total.context,
                     if (p1Roll?.sum ?: 0 < p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
                 )
             )
-            tvP2Total.setTextColor(ContextCompat.getColor(
+            tvP2Total.setTextColor(
+                ContextCompat.getColor(
                     tvP2Total.context,
                     if (p1Roll?.sum ?: 0 > p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
                 )
@@ -140,8 +147,18 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
             diceView.rotation = (-30..30).random().toFloat()
 
             val params = diceView.layoutParams as ViewGroup.MarginLayoutParams
-            params.setMargins(params.leftMargin, (-100..50).random(), params.rightMargin, params.bottomMargin)
+            params.setMargins(
+                params.leftMargin,
+                (-100..50).random(),
+                params.rightMargin,
+                params.bottomMargin
+            )
             diceView.layoutParams = params
         }
+    }
+
+    override fun onBackPressed(v: View) {
+        super.onBackPressed(v)
+        Navigation.findNavController(v).navigate(R.id.action_diceFragment_to_menuFragment)
     }
 }

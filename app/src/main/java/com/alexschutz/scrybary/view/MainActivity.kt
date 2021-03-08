@@ -1,10 +1,12 @@
 package com.alexschutz.scrybary.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.alexschutz.scrybary.R
+
 
 class MainActivity : AppCompatActivity() {
 

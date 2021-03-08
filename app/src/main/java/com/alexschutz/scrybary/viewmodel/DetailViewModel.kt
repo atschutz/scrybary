@@ -63,8 +63,10 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
 
                                 // Format fields to look nice.
                                 val format = key.toString().capitalize(Locale.getDefault())
-                                val legality = value.toString().replace("_", " ")
+                                var legality = value.toString().replace("_", " ")
                                     .toUpperCase(Locale.getDefault())
+
+                                legality = if (legality == "RESTRICTED") "RESTR." else legality
 
                                 legalityList.add(Legality(format, legality))
                             }
@@ -77,6 +79,8 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
 
                             e.printStackTrace()
                             Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show()
+
+                            loading.value = false
                         }
                     })
             )
@@ -96,18 +100,19 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
 
                             rulings.value = GsonBuilder().create()
                                 .fromJson(rulingList.data, Array<Ruling>::class.java).toList()
+
+                            loading.value = false
                         }
 
                         override fun onError(e: Throwable) {
                             e.printStackTrace()
                             Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show()
-                        }
 
+                            loading.value = false
+                        }
                     })
             )
         }
-
-        loading.value = false
     }
 
     fun configureCardFaces(card: Card, detail: CardDetail) {
