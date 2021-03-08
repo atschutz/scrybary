@@ -1,6 +1,8 @@
 package com.alexschutz.scrybary.view.dice
 
 import android.content.res.ColorStateList
+import android.hardware.Sensor
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,17 +11,25 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.navigation.Navigation
+import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.RollTotal
+import com.alexschutz.scrybary.ShakeListener
 import com.alexschutz.scrybary.databinding.FragmentDiceBinding
 import com.alexschutz.scrybary.roll
 import com.alexschutz.scrybary.view.BackButtonFragment
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 
-class DiceFragment : BackButtonFragment(), RollClickListener {
+class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
 
     private lateinit var binding: FragmentDiceBinding
+
+    private var sensorManager: SensorManager? = null
 
     private var numberOfPlayers = 2
     private var numberOfDice = 2
@@ -57,10 +67,44 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
 
         binding.tvRollHint.startAnimation(AnimationUtils.loadAnimation(context, R.anim.shrink_grow))
 
+        // Register shake listener.
+        sensorManager = getSystemService(requireContext(), SensorManager::class.java)
+            toggleShakeSensor(true)
+
         return binding.root
     }
 
-    override fun onRollClicked(v: View) {
+    override fun onBackPressed(v: View) {
+        super.onBackPressed(v)
+        Navigation.findNavController(v).navigate(R.id.action_diceFragment_to_menuFragment)
+    }
+
+    override fun shakeDetected() {
+        toggleShakeSensor(false)
+        doRollAndUpdateView()
+
+        // Put a delay on turning the shake listener back on to prevent multiple rolls in one shake.
+        Timer().schedule(500) {
+            toggleShakeSensor(true)
+        }
+    }
+
+    override fun onRollClicked(v: View) { doRollAndUpdateView() }
+
+    private fun toggleShakeSensor(isActive: Boolean) {
+
+        if (isActive) {
+            sensorManager?.registerListener(
+                this,
+                sensorManager?.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL
+            )
+        } else {
+            sensorManager?.unregisterListener(this)
+        }
+    }
+
+    private fun doRollAndUpdateView() {
 
         with(binding) {
             // Hide the roll hint
@@ -106,9 +150,11 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                     if (p1Roll?.sum ?: 0 > p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
                 )
             )
+
+            tvP1Total.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+            tvP2Total.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
         }
     }
-
 
     // TODO add colors and dynamic sizing.
     private fun drawDice(rolls: ArrayList<Int>, container: LinearLayout, player: Int) {
@@ -144,6 +190,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                 it.text = roll.toString()
             }
 
+            // Randomize rotation and position of dice.
             diceView.rotation = (-30..30).random().toFloat()
 
             val params = diceView.layoutParams as ViewGroup.MarginLayoutParams
@@ -154,11 +201,13 @@ class DiceFragment : BackButtonFragment(), RollClickListener {
                 params.bottomMargin
             )
             diceView.layoutParams = params
-        }
-    }
 
-    override fun onBackPressed(v: View) {
-        super.onBackPressed(v)
-        Navigation.findNavController(v).navigate(R.id.action_diceFragment_to_menuFragment)
+            // Animate dice roll.
+            val anim = AnimationUtils.loadAnimation(context, R.anim.dice_roll)
+            anim.startTime = 0
+            anim.startOffset = (0..rolls.size*40).random().toLong()
+            diceView.visibility = View.VISIBLE
+            diceView.startAnimation(anim)
+        }
     }
 }

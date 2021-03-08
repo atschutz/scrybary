@@ -13,17 +13,14 @@ import kotlin.random.Random
 
 class CounterFragment : BackButtonFragment() {
 
-    private var _binding: FragmentCounterBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentCounterBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        _binding = FragmentCounterBinding.inflate(inflater, container, false)
+        binding = FragmentCounterBinding.inflate(inflater, container, false)
 
         binding.listener = this
-
-        val view = binding.root
 
         with(binding) {
             btnRefresh.setOnClickListener {
@@ -39,7 +36,7 @@ class CounterFragment : BackButtonFragment() {
             }
         }
 
-        return view
+        return binding.root
     }
 
     override fun onBackPressed(v: View) {

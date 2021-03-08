@@ -19,5 +19,5 @@
     <string name="player_one_total">player one total</string>
     <string name="player_two_total">player two total</string>
     <string name="card_image_is_loading">Card image is loading!</string>
-    <string name="click_to_roll">click to roll →</string>
+    <string name="click_to_roll">shake or click to roll →</string>
 </resources>

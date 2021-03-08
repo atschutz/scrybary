@@ -2,14 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp">
+    android:padding="5dp"
+    android:visibility="gone">
 
     <ImageView
         android:id="@+id/iv_dice_bg"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:contentDescription="@string/dice"
         android:layout_centerInParent="true"
+        android:contentDescription="@string/dice"
         android:src="@drawable/d6" />
 
     <TextView
@@ -18,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:textColor="#E5E5E5"
-        android:textStyle="bold"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
