@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +18,7 @@ import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
+import kotlin.concurrent.thread
 
 class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
@@ -60,6 +62,9 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
         viewModel.cards.observe(viewLifecycleOwner, { cards ->
             cards?.let {
                 cardListAdapter.updateCardList(cards)
+
+                // Reset recycler view to top position.
+                binding.cardList.scrollToPosition(0)
             }
         })
 
@@ -69,12 +74,28 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
             }
         })
+
+        viewModel.hasNoResults.observe(viewLifecycleOwner, { hasNoResults ->
+            hasNoResults?.let {
+                binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
+                binding.ivNarrow.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        })
+
+        viewModel.hasError.observe(viewLifecycleOwner, { hasNoResults ->
+            hasNoResults?.let {
+                binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
+                binding.ivError.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        })
     }
 
     override fun onSearchClicked(v: View) {
 
         viewModel.search.value = binding.tvSearch.text.toString()
         viewModel.fetchFromRemote()
+
+        binding.cardList.visibility = View.GONE
 
         v.hideKeyboard()
     }

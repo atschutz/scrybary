@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentDetailsFullBinding
+import com.alexschutz.scrybary.model.CardFace
+import com.alexschutz.scrybary.toggleVisibility
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.view.detail.cardimage.ImageDialogFragment
 import com.alexschutz.scrybary.viewmodel.DetailViewModel
@@ -48,9 +50,14 @@ class DetailFragment : BackButtonFragment()  {
             with (binding) {
                 this.front = front
 
-                if (front?.power != null || front?.toughness != null)
-                    tvSlash.visibility = View.VISIBLE
-                else tvSlash.visibility = View.GONE
+                tvSlash.visibility =
+                    if (front?.power != null || front?.toughness != null) View.VISIBLE
+                    else View.GONE
+
+                tvLoyaltyLabel.visibility =
+                    if(front?.loyalty != null) View.VISIBLE else View.GONE
+
+                toggleCardFrontViews(front)
             }
         })
 
@@ -63,6 +70,11 @@ class DetailFragment : BackButtonFragment()  {
                 tvBackSlash.visibility =
                     if (back?.power != null || back?.toughness != null) View.VISIBLE
                     else View.GONE
+
+                tvBackLoyaltyLabel.visibility =
+                    if(back?.loyalty != null) View.VISIBLE else View.GONE
+
+                toggleCardBackViews(back)
             }
         })
 
@@ -117,6 +129,32 @@ class DetailFragment : BackButtonFragment()  {
 
     override fun onBackPressed(v: View) {
         super.onBackPressed(v)
-        Navigation.findNavController(v).navigate(R.id.action_detailFragment_to_libraryFragment)
+        Navigation.findNavController(v).popBackStack()
+    }
+
+    private fun toggleCardFrontViews(cardFace: CardFace?) {
+        with (binding) {
+            cardFace?.let {
+                tvManaCost.toggleVisibility(it.cmc)
+                tvOracle.toggleVisibility(it.oracleText)
+                tvFlavor.toggleVisibility(it.flavor)
+                tvPower.toggleVisibility(it.power)
+                tvToughness.toggleVisibility(it.toughness)
+                tvLoyalty.toggleVisibility(it.loyalty)
+            }
+        }
+    }
+
+    private fun toggleCardBackViews(cardFace: CardFace?) {
+        with(binding) {
+            cardFace?.let {
+                tvBackManaCost.toggleVisibility(it.cmc)
+                tvBackOracle.toggleVisibility(it.oracleText)
+                tvBackFlavor.toggleVisibility(it.flavor)
+                tvBackPower.toggleVisibility(it.power)
+                tvBackToughness.toggleVisibility(it.toughness)
+                tvBackLoyalty.toggleVisibility(it.loyalty)
+            }
+        }
     }
 }

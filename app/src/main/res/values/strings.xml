@@ -20,4 +20,7 @@
     <string name="player_two_total">player two total</string>
     <string name="card_image_is_loading">Card image is loading!</string>
     <string name="click_to_roll">shake or click to roll →</string>
+    <string name="zero">0</string>
+    <string name="_500_error">500 error</string>
+    <string name="loyalty">loyalty:\u0020</string>
 </resources>

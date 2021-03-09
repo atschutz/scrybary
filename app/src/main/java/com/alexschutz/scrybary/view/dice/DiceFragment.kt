@@ -196,7 +196,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             val params = diceView.layoutParams as ViewGroup.MarginLayoutParams
             params.setMargins(
                 params.leftMargin,
-                (-100..50).random(),
+                (-200/numberOfPlayers..100/numberOfPlayers).random(),
                 params.rightMargin,
                 params.bottomMargin
             )

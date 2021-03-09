@@ -195,6 +195,16 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_loyalty_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loyalty"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
+
+                            <TextView
                                 android:id="@+id/tv_loyalty"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -359,6 +369,16 @@
                                 android:textColor="@color/white"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/tv_back_loyalty_label"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/loyalty"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+                                android:visibility="gone" />
 
                             <TextView
                                 android:id="@+id/tv_back_loyalty"

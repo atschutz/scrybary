@@ -22,9 +22,15 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     val cards = MutableLiveData<List<Card>>()
 
     val loading = MutableLiveData<Boolean>()
+    val hasNoResults = MutableLiveData<Boolean>()
+    val hasError = MutableLiveData<Boolean>()
 
     fun fetchFromRemote() {
+
         loading.value = true
+
+        hasNoResults.value = false
+        hasError.value = false
 
         disposable.add(
             cardService.getCardList(search.value ?: "")
@@ -41,8 +47,11 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
                     }
 
                     override fun onError(e: Throwable) {
+
                         e.printStackTrace()
-                        Toast.makeText(getApplication(), "It did not work: $e", Toast.LENGTH_LONG).show()
+
+                        if (e.message.toString().contains("404")) hasNoResults.value = true
+                        else hasError.value = true
 
                         loading.value = false
                     }
