@@ -51,11 +51,14 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
         }
 
         binding.tvSearch.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                onSearchClicked(view)
-                true
-            } else {
-                false
+
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE,
+                EditorInfo.IME_ACTION_GO,
+                EditorInfo.IME_ACTION_NEXT -> {
+                    onSearchClicked(view)
+                    true
+                } else -> false
             }
         }
 
