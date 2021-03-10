@@ -7,21 +7,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
-import com.alexschutz.scrybary.R
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.alexschutz.scrybary.databinding.FragmentImageDialogBinding
 import com.alexschutz.scrybary.view.BackButtonListener
 import com.alexschutz.scrybary.viewmodel.CardImageViewModel
-import com.google.android.material.tabs.TabLayoutMediator
+
 
 class ImageDialogFragment(val printingsUri: String?, val isFront: Boolean): AppCompatDialogFragment(), BackButtonListener {
 
     private lateinit var binding: FragmentImageDialogBinding
     private lateinit var viewModel: CardImageViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
 
         binding = FragmentImageDialogBinding.inflate(inflater, container, false)
 

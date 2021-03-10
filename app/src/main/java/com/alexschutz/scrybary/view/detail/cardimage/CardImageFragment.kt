@@ -18,13 +18,9 @@ class CardImageFragment(private val url: String?) : Fragment() {
 
         binding.imageUrl = url
 
+        binding.root.setOnClickListener { (parentFragment as ImageDialogFragment).dismiss() }
+
         return binding.root
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
 
     }
 }

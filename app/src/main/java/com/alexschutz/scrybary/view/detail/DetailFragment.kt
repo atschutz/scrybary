@@ -65,7 +65,13 @@ class DetailFragment : BackButtonFragment()  {
             with (binding) {
                 this.back = back
 
-                clBack.visibility = if (back == null) View.GONE else View.VISIBLE
+                if (back == null) {
+                    clBack.visibility = View.GONE
+                    dividerLine.visibility = View.GONE
+                } else {
+                    clBack.visibility = View.VISIBLE
+                    dividerLine.visibility = View.VISIBLE
+                }
 
                 tvBackSlash.visibility =
                     if (back?.power != null || back?.toughness != null) View.VISIBLE

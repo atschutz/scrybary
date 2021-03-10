@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.children
 import androidx.navigation.Navigation
 import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat
 import com.alexschutz.scrybary.R
@@ -110,6 +111,9 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             // Hide the roll hint
             tvRollHint.animation = null
             tvRollHint.visibility = View.GONE
+
+            p1DiceContainer.removeAllViews()
+            p2DiceContainer.removeAllViews()
 
             // Player 1 always rolls. Do roll and make visible.
             p1Roll = roll(numberOfDice, diceSides)

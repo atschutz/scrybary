@@ -32,31 +32,38 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
         hasNoResults.value = false
         hasError.value = false
 
-        disposable.add(
-            cardService.getCardList(search.value ?: "")
-                .subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(object: DisposableSingleObserver<CardListJson>() {
+        if (search.value?.length ?: 0 >= 3) {
 
-                    override fun onSuccess(cardListJson: CardListJson) {
+            disposable.add(
+                cardService.getCardList(search.value ?: "")
+                    .subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeWith(object: DisposableSingleObserver<CardListJson>() {
 
-                        val gson = GsonBuilder().create()
-                        cards.value = gson.fromJson(cardListJson.data, Array<Card>::class.java).toList()
+                        override fun onSuccess(cardListJson: CardListJson) {
 
-                        loading.value = false
-                    }
+                            val gson = GsonBuilder().create()
+                            cards.value = gson.fromJson(cardListJson.data, Array<Card>::class.java).toList()
 
-                    override fun onError(e: Throwable) {
+                            loading.value = false
+                        }
 
-                        e.printStackTrace()
+                        override fun onError(e: Throwable) {
 
-                        if (e.message.toString().contains("404")) hasNoResults.value = true
-                        else hasError.value = true
+                            e.printStackTrace()
 
-                        loading.value = false
-                    }
-                })
-        )
+                            if (e.message.toString().contains("404")) hasNoResults.value = true
+                            else hasError.value = true
+
+                            loading.value = false
+                        }
+                    })
+            )
+        } else {
+
+            loading.value = false
+            hasNoResults.value = true
+        }
     }
 }
 
