@@ -90,6 +90,7 @@
                 android:inputType="text"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
+                android:textColor="@color/primary_off_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_search"
                 app:layout_constraintStart_toEndOf="@id/btn_back"

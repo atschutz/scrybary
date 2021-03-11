@@ -99,7 +99,13 @@ data class ImageJson(
     val imageUris: JsonObject?,
 
     @SerializedName("card_faces")
-    val faces: JsonArray?
+    val faces: JsonArray?,
+
+    @SerializedName("set")
+    val symbol: String?,
+
+    @SerializedName("set_name")
+    val setName: String?
 )
 
 data class CardListJson(
@@ -126,5 +132,11 @@ data class RulingListJson(
 data class Legality(
     val format: String?,
     val state: String?
+)
+
+data class CardSet(
+    val set: String?,
+    val symbol: String?,
+    val imageUri: String?
 )
 

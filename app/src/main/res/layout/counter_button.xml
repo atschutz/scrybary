@@ -27,7 +27,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="4dp"
-        android:text="@string/zero"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"

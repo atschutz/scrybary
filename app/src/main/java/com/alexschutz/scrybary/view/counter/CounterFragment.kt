@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.children
 import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentCounterBinding
@@ -23,6 +25,23 @@ class CounterFragment : BackButtonFragment() {
         binding.listener = this
 
         with(binding) {
+
+            // Quick and dirty way to set all the keys and system preferences.
+            bottomLifeCounter.setButtonsWithKey(getString(R.string.p1_life))
+            topLifeCounter.setButtonsWithKey(getString(R.string.p2_life))
+
+            for (child in bottomBtnContainer.findViewById<LinearLayout>(R.id.ll_button_holder).children) {
+                if (child.id == R.id.start_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p1_box_1))
+                if (child.id == R.id.middle_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p1_box_2))
+                if (child.id == R.id.end_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p1_box_3))
+            }
+
+            for (child in topBtnContainer.findViewById<LinearLayout>(R.id.ll_button_holder).children) {
+                if (child.id == R.id.start_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p2_box_1))
+                if (child.id == R.id.middle_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p2_box_2))
+                if (child.id == R.id.end_counter) (child as CounterButton).setButtonsWithKey(getString(R.string.p2_box_3))
+            }
+
             btnRefresh.setOnClickListener {
                 topBtnContainer.refresh()
                 bottomBtnContainer.refresh()

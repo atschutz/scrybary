@@ -9,17 +9,23 @@ import com.alexschutz.scrybary.R
 
 class CounterButton(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs), Counter {
 
-    override var value = 0
     override lateinit var number: TextView
+    override var key = ""
+
+    private val counterMinus: AppCompatButton
+    private val counterPlus: AppCompatButton
 
     init {
-        
         inflate(context, R.layout.counter_button, this)
 
-        val counterMinus = findViewById<AppCompatButton>(R.id.btn_minus)
-        val counterPlus = findViewById<AppCompatButton>(R.id.btn_plus)
-        number = findViewById(R.id.number)
+        counterMinus = findViewById(R.id.btn_minus)
+        counterPlus = findViewById(R.id.btn_plus)
 
-        setButtons(counterMinus, counterPlus)
+        number = findViewById(R.id.number)
+    }
+
+    fun setButtonsWithKey(keyString: String) {
+        key = keyString
+        setKeyAndButtons(key, counterMinus, counterPlus, null, null)
     }
 }

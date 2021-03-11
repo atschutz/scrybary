@@ -23,4 +23,19 @@
     <string name="zero">0</string>
     <string name="_500_error">500 error</string>
     <string name="loyalty">loyalty:\u0020</string>
+    <string name="plus_5">+5</string>
+    <string name="minus_5">-5</string>
+
+    <!-- keys for counter values -->
+    <string name="p1_life">p1life</string>
+    <string name="p1_box_1">p1box1</string>
+    <string name="p1_box_2">p1box2</string>
+    <string name="p1_box_3">p1box3</string>
+
+    <string name="p2_life">p2life</string>
+    <string name="p2_box_1">p2box1</string>
+    <string name="p2_box_2">p2box2</string>
+    <string name="p2_box_3">p2box3</string>
+    <string name="dash">\u0020—\u0020</string>
+
 </resources>

@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="imageUrl"
-            type="String" />
+            name="cardSet"
+            type="com.alexschutz.scrybary.model.CardSet" />
 
     </data>
 
@@ -15,11 +15,49 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/iv_image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imageUri="@{imageUrl}"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:contentDescription="@{imageUrl}"/>
+            android:contentDescription="@{cardSet.imageUri}"
+            android:imageUri="@{cardSet.imageUri}"
+            android:scaleType="center" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_image"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/set_bg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_set"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardSet.set}"
+                android:textColor="@color/primary_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_dash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dash"
+                android:textColor="@color/primary_white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_symbol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{cardSet.symbol}"
+                android:textColor="@color/primary_white"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
     </RelativeLayout>
 </layout>

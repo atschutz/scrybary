@@ -11,17 +11,28 @@ import com.alexschutz.scrybary.R
 
 class LifeCounter(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs), Counter {
 
-    override var value = 0
     override lateinit var number: TextView
+    override var key = ""
+
+    private val lifeMinus: AppCompatButton
+    private val lifePlus: AppCompatButton
+    private val lifeMinus5: AppCompatButton
+    private val lifePlus5: AppCompatButton
 
     init {
 
         inflate(context, R.layout.life_counter, this)
 
-        val lifeMinus = findViewById<AppCompatButton>(R.id.btn_life_minus)
-        val lifePlus = findViewById<AppCompatButton>(R.id.btn_life_plus)
-        number = findViewById(R.id.life_number)
+        lifeMinus = findViewById(R.id.btn_life_minus)
+        lifePlus = findViewById(R.id.btn_life_plus)
+        lifeMinus5 = findViewById(R.id.btn_minus_5)
+        lifePlus5 = findViewById(R.id.btn_plus_5)
 
-        setButtons(lifeMinus, lifePlus)
+        number = findViewById(R.id.life_number)
+    }
+
+    fun setButtonsWithKey(keyString: String) {
+        key = keyString
+        setKeyAndButtons(key, lifeMinus, lifePlus, lifeMinus5, lifePlus5)
     }
 }

@@ -44,18 +44,18 @@ class ImageDialogFragment(val printingsUri: String?, val isFront: Boolean): AppC
         viewModel.fetchUris()
 
         if (isFront) {
-            viewModel.frontUris.observe(viewLifecycleOwner, { uris ->
+            viewModel.frontSets.observe(viewLifecycleOwner, { cardSets ->
                 val adapter = CardImageStateAdapter(childFragmentManager, lifecycle)
-                for (uri in uris) adapter.fragments.add(CardImageFragment(uri))
+                for (cardSet in cardSets) adapter.fragments.add(CardImageFragment(cardSet))
 
                 adapter.notifyDataSetChanged()
 
                 binding.vpImages.adapter = adapter
             })
         } else {
-            viewModel.backUris.observe(viewLifecycleOwner, { uris ->
+            viewModel.backSets.observe(viewLifecycleOwner, { cardSets ->
                 val adapter = CardImageStateAdapter(childFragmentManager, lifecycle)
-                for (uri in uris) adapter.fragments.add(CardImageFragment(uri))
+                for (cardSet in cardSets) adapter.fragments.add(CardImageFragment(cardSet))
 
                 adapter.notifyDataSetChanged()
 

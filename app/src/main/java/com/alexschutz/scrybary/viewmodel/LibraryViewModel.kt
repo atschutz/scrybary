@@ -12,6 +12,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
 
@@ -22,6 +23,7 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     val cards = MutableLiveData<List<Card>>()
 
     val loading = MutableLiveData<Boolean>()
+
     val hasNoResults = MutableLiveData<Boolean>()
     val hasError = MutableLiveData<Boolean>()
 
@@ -43,14 +45,39 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
                         override fun onSuccess(cardListJson: CardListJson) {
 
                             val gson = GsonBuilder().create()
-                            cards.value = gson.fromJson(cardListJson.data, Array<Card>::class.java).toList()
+                            val list = gson.fromJson(cardListJson.data, Array<Card>::class.java).toMutableList()
 
+                            // Sort list so perfect matches are at the top
+                            if (list.size > 1) list.let {
+
+                                val regex = Regex("[^A-Za-z0-9]")
+
+                                val scrubbedSearch =
+                                    regex.replace(search.value ?: "", "")
+
+                                for (card in list) {
+
+                                    val scrubbedCardName = regex.replace(card.name, "")
+
+                                    if (scrubbedCardName.equals(scrubbedSearch, true)) {
+                                        list.remove(card)
+                                        list.add(0, card)
+
+                                        break
+                                    }
+                                }
+                            }
+
+                            cards.value = list
                             loading.value = false
                         }
 
                         override fun onError(e: Throwable) {
 
                             e.printStackTrace()
+
+                            // Clear card list.
+                            cards.value = listOf()
 
                             if (e.message.toString().contains("404")) hasNoResults.value = true
                             else hasError.value = true

@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:contentDescription="@string/card_image_is_loading"
+            android:scaleType="center"
             android:src="@drawable/card_placeholder" />
 
         <androidx.viewpager2.widget.ViewPager2

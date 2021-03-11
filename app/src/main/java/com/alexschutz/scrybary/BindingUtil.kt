@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.alexschutz.scrybary.view.counter.Counter
+import com.alexschutz.scrybary.view.counter.CounterButtonContainer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -22,6 +24,7 @@ fun ImageView.loadImageFromUri(uri: String?) {
         .load(uri)
         .placeholder(R.drawable.card_placeholder)
         .transition(DrawableTransitionOptions.withCrossFade(500))
+        .fitCenter()
         .into(this)
 }
 

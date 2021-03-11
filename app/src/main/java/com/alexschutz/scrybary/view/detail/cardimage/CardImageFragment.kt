@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.alexschutz.scrybary.databinding.FragmentCardImageBinding
+import com.alexschutz.scrybary.model.CardSet
 
-class CardImageFragment(private val url: String?) : Fragment() {
+class CardImageFragment(private val cardSet: CardSet?) : Fragment() {
 
     private lateinit var binding: FragmentCardImageBinding
 
@@ -16,8 +17,9 @@ class CardImageFragment(private val url: String?) : Fragment() {
 
         binding = FragmentCardImageBinding.inflate(inflater, container, false)
 
-        binding.imageUrl = url
+        binding.cardSet = cardSet
 
+        // Hide popup on click.
         binding.root.setOnClickListener { (parentFragment as ImageDialogFragment).dismiss() }
 
         return binding.root
