@@ -77,6 +77,10 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             isLoading?.let {
                 binding.cardList.visibility =  if (it) View.GONE else View.VISIBLE
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
+
+                // Once we start loading, hide the logo and never show it again until fragment is
+                // reloaded.
+                binding.ivLogo.visibility = View.GONE
             }
         })
 

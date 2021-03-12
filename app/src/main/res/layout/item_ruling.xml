@@ -20,7 +20,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
-            android:background="?colorOnSecondary"
+            android:background="@color/dimmed_grey"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@id/tv_date"
             app:layout_constraintEnd_toEndOf="parent"

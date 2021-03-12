@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_flip"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_heads"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_heads_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/heads_background"
+            android:src="@drawable/coin_bg"
+            app:tint="@color/dice_dark" />
+
+        <ImageView
+            android:id="@+id/iv_heads_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/heads_image"
+            android:padding="20dp"
+            android:src="@drawable/head"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_heads_bg"
+            app:layout_constraintEnd_toEndOf="@+id/iv_heads_bg"
+            app:layout_constraintStart_toStartOf="@id/iv_heads_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_heads_bg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_tails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_tails_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/tails_background"
+            android:src="@drawable/coin_bg"
+            app:tint="@color/dice_dark" />
+
+        <ImageView
+            android:id="@+id/iv_tails_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:contentDescription="@string/tails_image"
+            android:padding="20dp"
+            android:src="@drawable/tail"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_tails_bg"
+            app:layout_constraintEnd_toEndOf="@+id/iv_tails_bg"
+            app:layout_constraintStart_toStartOf="@id/iv_tails_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_tails_bg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

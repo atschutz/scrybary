@@ -1,28 +1,28 @@
 <resources>
-    <string name="app_name">manadork</string>
-    <string name="counter">counter</string>
-    <string name="library">library</string>
-    <string name="dice">dice</string>
-    <string name="back">back</string>
-    <string name="roll">roll</string>
-    <string name="refresh">refresh</string>
+    <string name="app_name">Manadork</string>
+    <string name="counter">Counter</string>
+    <string name="library">Library</string>
+    <string name="dice">Dice</string>
+    <string name="back">Back</string>
+    <string name="roll">Roll</string>
+    <string name="refresh">Refresh</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="slash">\u0020/\u0020</string>
-    <string name="enter_card_name_here">enter card name here…</string>
+    <string name="enter_card_name_here">Enter card name here…</string>
     <string name="dice_1">1</string>
     <string name="dice_2">2</string>
     <string name="dice_3">3</string>
     <string name="dice_4">4</string>
     <string name="dice_5">5</string>
     <string name="dice_6">6</string>
-    <string name="player_one_total">player one total</string>
-    <string name="player_two_total">player two total</string>
+    <string name="player_one_total">Player one total</string>
+    <string name="player_two_total">Player two total</string>
     <string name="card_image_is_loading">Card image is loading!</string>
-    <string name="click_to_roll">shake or click to roll →</string>
+    <string name="click_to_roll">Shake or click to roll →</string>
     <string name="zero">0</string>
     <string name="_500_error">500 error</string>
-    <string name="loyalty">loyalty:\u0020</string>
+    <string name="loyalty">Loyalty:\u0020</string>
     <string name="plus_5">+5</string>
     <string name="minus_5">-5</string>
 
@@ -37,5 +37,14 @@
     <string name="p2_box_2">p2box2</string>
     <string name="p2_box_3">p2box3</string>
     <string name="dash">\u0020—\u0020</string>
+    <string name="dice_7">7</string>
+    <string name="dice_8">8</string>
+    <string name="dice_10">10</string>
+    <string name="dice_9">9</string>
+    <string name="heads_background">Heads background</string>
+    <string name="heads_image">Heads image</string>
+    <string name="tails_background">Tails background</string>
+    <string name="tails_image">Tails image</string>
+    <string name="flip">Flip</string>
 
 </resources>

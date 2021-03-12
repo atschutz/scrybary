@@ -1,9 +1,10 @@
 package com.alexschutz.scrybary.view.counter
 
 import android.content.Context
+import android.provider.Settings.Global.getString
 import android.widget.Button
 import android.widget.TextView
-import kotlinx.coroutines.newSingleThreadContext
+import com.alexschutz.scrybary.R
 
 interface Counter {
 
@@ -46,7 +47,14 @@ interface Counter {
     }
 
     fun refresh() {
-        updatePrefs(0)
+
+        // Set value to 20 if it's a life counter, 0 otherwise.
+        updatePrefs(
+            if (key == number.context.getString(R.string.p1_life)
+                || key == number.context.getString(R.string.p2_life)) 20
+            else 0
+        )
+
         number.text = number.context
             .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
             .getInt(key, 0)

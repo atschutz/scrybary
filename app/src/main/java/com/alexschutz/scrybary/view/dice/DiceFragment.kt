@@ -7,20 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.view.children
 import androidx.navigation.Navigation
-import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat
-import com.alexschutz.scrybary.R
-import com.alexschutz.scrybary.RollTotal
-import com.alexschutz.scrybary.ShakeListener
+import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentDiceBinding
-import com.alexschutz.scrybary.roll
 import com.alexschutz.scrybary.view.BackButtonFragment
+import com.google.android.flexbox.FlexboxLayout
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.schedule
@@ -107,6 +102,19 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
 
     private fun doRollAndUpdateView() {
 
+        val id = when (diceSides) {
+            // Assign respective layout ID.
+            4 -> R.layout.d4_layout
+            6 -> R.layout.d6_layout
+            8 -> R.layout.d8_layout
+            10 -> R.layout.d10_layout
+            12 -> R.layout.d12_layout
+            20 -> R.layout.d20_layout
+
+            // This should never get reached.
+            else -> R.layout.d6_layout
+        }
+
         with(binding) {
             // Hide the roll hint
             tvRollHint.animation = null
@@ -119,7 +127,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             p1Roll = roll(numberOfDice, diceSides)
             p1TotalContainer.visibility = View.VISIBLE
 
-            drawDice(p1Roll?.rolls ?: arrayListOf(), p1DiceContainer, 1)
+            drawDice(p1Roll?.rolls ?: arrayListOf(), p1DiceContainer, 1, id)
 
             // If we have more than one player, make player 2 total visible and roll.
             // Else, hide player 2 total and set values to 0
@@ -130,7 +138,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
                     p2DiceContainer.visibility = View.VISIBLE
 
                     val rollTotal = roll(numberOfDice, diceSides)
-                    drawDice(rollTotal.rolls, p2DiceContainer, 2)
+                    drawDice(rollTotal.rolls, p2DiceContainer, 2, id)
 
                     rollTotal
                 } else {
@@ -157,18 +165,20 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
 
             tvP1Total.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
             tvP2Total.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in))
+
+            view?.invalidate()
         }
     }
 
-    // TODO add colors and dynamic sizing.
-    private fun drawDice(rolls: ArrayList<Int>, container: LinearLayout, player: Int) {
+    // TODO add dynamic sizing.
+    private fun drawDice(rolls: ArrayList<Int>, container: FlexboxLayout, player: Int, layoutId: Int) {
 
         container.removeAllViews()
 
         for (roll in rolls) {
 
             // Inflate dice view and add to container layout.
-            val diceView = View.inflate(context, R.layout.layout_die, null)
+            val diceView = View.inflate(context, layoutId, null)
             container.addView(diceView, container.childCount - 1)
 
             // Get dice background and set color based on player.
@@ -190,7 +200,7 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
                         if (player == 1) R.color.dice_light else R.color.dice_dark
                     )
                 )
-                // Set text to roll number.
+                // Set text to roll number.st
                 it.text = roll.toString()
             }
 
@@ -200,8 +210,8 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             val params = diceView.layoutParams as ViewGroup.MarginLayoutParams
             params.setMargins(
                 params.leftMargin,
-                (-200/numberOfPlayers..100/numberOfPlayers).random(),
-                params.rightMargin,
+                (-10..10).random(),
+                dpToPx(10),
                 params.bottomMargin
             )
             diceView.layoutParams = params

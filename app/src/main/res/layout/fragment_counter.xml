@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
-            name="listener"
+            name="backListener"
             type="com.alexschutz.scrybary.view.BackButtonListener" />
+
+        <variable
+            name="flipListener"
+            type="com.alexschutz.scrybary.view.counter.FlipClickListener" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -50,7 +54,7 @@
             android:id="@+id/divider_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?colorOnSecondary"
+            android:background="@color/dimmed_grey"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -71,17 +75,18 @@
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/counter_button_circle"
                 android:contentDescription="@string/back"
-                android:onClick="@{listener::onBackPressed}"
+                android:onClick="@{backListener::onBackPressed}"
                 app:srcCompat="@drawable/ic_arrow_back" />
 
             <ImageButton
-                android:id="@+id/btn_roll"
+                android:id="@+id/btn_flip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/counter_button_circle"
-                android:contentDescription="@string/roll"
-                app:srcCompat="@drawable/ic_roll" />
+                android:contentDescription="@string/flip"
+                app:srcCompat="@drawable/ic_coin"
+                android:onClick="@{flipListener::onFlipClicked}"/>
 
             <ImageButton
                 android:id="@+id/btn_refresh"
@@ -92,5 +97,10 @@
                 app:srcCompat="@drawable/ic_refresh" />
 
         </LinearLayout>
+
+        <include
+            android:id="@+id/layout_coin"
+            layout="@layout/coin_layout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

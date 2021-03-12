@@ -122,26 +122,30 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_roll" />
 
-        <LinearLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/p1_dice_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:clipChildren="false"
             android:gravity="center"
             android:orientation="horizontal"
+            app:flexWrap="wrap"
+            app:justifyContent="center"
             app:layout_constraintBottom_toTopOf="@id/p2_dice_container"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/p1_total_container" />
 
-        <LinearLayout
+        <com.google.android.flexbox.FlexboxLayout
             android:id="@+id/p2_dice_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:clipChildren="false"
             android:gravity="center"
             android:orientation="horizontal"
+            app:flexWrap="wrap"
+            app:justifyContent="center"
             app:layout_constraintBottom_toTopOf="@id/dice_footer"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -159,6 +163,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,9 +204,9 @@
 
                 <RadioButton
                     android:id="@+id/rb_1_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/dice_1"
@@ -211,9 +216,9 @@
 
                 <RadioButton
                     android:id="@+id/rb_2_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:checked="true"
                     android:gravity="center"
@@ -224,9 +229,9 @@
 
                 <RadioButton
                     android:id="@+id/rb_3_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/dice_3"
@@ -236,9 +241,9 @@
 
                 <RadioButton
                     android:id="@+id/rb_4_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/dice_4"
@@ -248,9 +253,9 @@
 
                 <RadioButton
                     android:id="@+id/rb_5_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/dice_5"
@@ -260,11 +265,60 @@
 
                 <RadioButton
                     android:id="@+id/rb_6_die"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:button="@android:color/transparent"
                     android:gravity="center"
                     android:text="@string/dice_6"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_7_die"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_7"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_8_die"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_8"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_9_die"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_9"
+                    android:textColor="@drawable/dice_rb_color_selector"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/rb_10_die"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:button="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="@string/dice_10"
                     android:textColor="@drawable/dice_rb_color_selector"
                     android:textSize="24sp"
                     android:textStyle="bold" />

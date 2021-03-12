@@ -35,7 +35,14 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.p2_box_3)
             )
 
-            for (key in keys ) if (!preferences.contains(key)) putInt(key, 0)
+            // Life totals default to 20, everything else defaults to 0.
+            for (key in keys )
+                if (!preferences.contains(key))
+                    putInt(
+                        key,
+                        if (key == getString(R.string.p1_life) || key == getString(R.string.p2_life)) 20
+                        else 0
+                    )
 
             apply()
         }
