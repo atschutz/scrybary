@@ -35,7 +35,7 @@
             android:gravity="start"
             android:text="@{card.name}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_card_name_normal"
+            android:textSize="@dimen/text_card_name_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/tv_type_line"
             app:layout_constraintEnd_toStartOf="@id/tv_cmc"
@@ -63,7 +63,7 @@
             android:maxLines="2"
             android:text="@{card.type}"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_generic_size_normal"
+            android:textSize="@dimen/text_generic_size_large"
             app:layout_constraintBottom_toTopOf="@id/divider_line"
             app:layout_constraintEnd_toStartOf="@id/ll_power_toughness_loyalty"
             app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{card.power}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_generic_size_normal" />
+                android:textSize="@dimen/text_generic_size_large" />
 
             <TextView
                 android:id="@+id/tv_slash"
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/slash"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_generic_size_normal"
+                android:textSize="@dimen/text_generic_size_large"
                 android:visibility="gone" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{card.toughness}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_generic_size_normal" />
+                android:textSize="@dimen/text_generic_size_large" />
 
         </LinearLayout>
 

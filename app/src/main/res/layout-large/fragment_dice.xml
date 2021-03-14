@@ -31,7 +31,7 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:background="@null"
             android:contentDescription="@string/back"
             android:onClick="@{backListener::onBackPressed}"
@@ -56,7 +56,7 @@
                 android:layout_gravity="center"
                 android:text="@string/player_one_total"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_title_size_normal" />
+                android:textSize="@dimen/text_title_size_large" />
 
             <TextView
                 android:id="@+id/tv_p1_total"
@@ -65,7 +65,7 @@
                 android:layout_gravity="center"
                 android:text="@{String.valueOf(p1Roll.sum)}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_dice_total_normal"
+                android:textSize="@dimen/text_dice_total_large"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -87,7 +87,7 @@
                 android:layout_gravity="center"
                 android:text="@string/player_two_total"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_title_size_normal" />
+                android:textSize="@dimen/text_title_size_large" />
 
             <TextView
                 android:id="@+id/tv_p2_total"
@@ -96,7 +96,7 @@
                 android:layout_gravity="center"
                 android:text="@{String.valueOf(p2Roll.sum)}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_dice_total_normal"
+                android:textSize="@dimen/text_dice_total_large"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -105,10 +105,10 @@
             android:id="@+id/tv_roll_hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
+            android:layout_marginEnd="4dp"
             android:text="@string/click_to_roll"
             android:textColor="@color/primary_white"
-            android:textSize="@dimen/text_generic_size_normal"
+            android:textSize="@dimen/text_generic_size_large"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btn_roll"
             app:layout_constraintEnd_toStartOf="@id/btn_roll"
@@ -118,7 +118,7 @@
             android:id="@+id/btn_roll"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_margin="8dp"
+            android:layout_margin="12dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/roll"
             android:onClick="@{rollListener::onRollClicked}"
@@ -184,6 +184,7 @@
                     android:id="@+id/rb_1_player"
                     android:layout_width="44dp"
                     android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
                     android:background="@drawable/ic_dice_1player"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent" />
@@ -215,7 +216,7 @@
                     android:gravity="center"
                     android:text="@string/dice_1"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -228,7 +229,7 @@
                     android:gravity="center"
                     android:text="@string/dice_2"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -240,7 +241,7 @@
                     android:gravity="center"
                     android:text="@string/dice_3"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -252,7 +253,7 @@
                     android:gravity="center"
                     android:text="@string/dice_4"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -264,7 +265,7 @@
                     android:gravity="center"
                     android:text="@string/dice_5"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -276,7 +277,7 @@
                     android:gravity="center"
                     android:text="@string/dice_6"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -288,7 +289,7 @@
                     android:gravity="center"
                     android:text="@string/dice_7"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -300,7 +301,7 @@
                     android:gravity="center"
                     android:text="@string/dice_8"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -312,7 +313,7 @@
                     android:gravity="center"
                     android:text="@string/dice_9"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
                 <RadioButton
@@ -324,7 +325,7 @@
                     android:gravity="center"
                     android:text="@string/dice_10"
                     android:textColor="@drawable/dice_rb_color_selector"
-                    android:textSize="@dimen/text_dice_rb_normal"
+                    android:textSize="@dimen/text_dice_rb_large"
                     android:textStyle="bold" />
 
             </RadioGroup>
@@ -342,7 +343,8 @@
                     android:id="@+id/rb_d4"
                     android:layout_width="45dp"
                     android:layout_height="39dp"
-                    android:layout_marginEnd="12dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="24dp"
                     android:background="@drawable/ic_dice_d4"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent"
@@ -352,7 +354,7 @@
                     android:id="@+id/rb_d6"
                     android:layout_width="41dp"
                     android:layout_height="46dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/ic_dice_d6"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent"
@@ -363,7 +365,7 @@
                     android:id="@+id/rb_d8"
                     android:layout_width="40dp"
                     android:layout_height="45dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/ic_dice_d8"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent"
@@ -373,7 +375,7 @@
                     android:id="@+id/rb_d10"
                     android:layout_width="42dp"
                     android:layout_height="45dp"
-                    android:layout_marginEnd="14dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/ic_dice_d10"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent"
@@ -383,7 +385,7 @@
                     android:id="@+id/rb_d12"
                     android:layout_width="41dp"
                     android:layout_height="43dp"
-                    android:layout_marginEnd="14dp"
+                    android:layout_marginEnd="32dp"
                     android:background="@drawable/ic_dice_d12"
                     android:backgroundTint="@drawable/dice_rb_color_selector"
                     android:button="@android:color/transparent"

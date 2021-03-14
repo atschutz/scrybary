@@ -97,7 +97,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{front.name}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_title_size_normal"
+                            android:textSize="@dimen/text_title_size_large"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toTopOf="@id/tv_type_line"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:text="@{front.type}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_mana_cost"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -120,10 +120,10 @@
                             android:id="@+id/tv_mana_cost"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="4sp"
                             android:symbolText="@{front.cmc}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_title_size_normal"
+                            android:textSize="@dimen/text_title_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_oracle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -133,10 +133,10 @@
                             android:id="@+id/tv_oracle"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
+                            android:layout_marginTop="4sp"
                             android:symbolText="@{front.oracleText}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_flavor"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -146,10 +146,10 @@
                             android:id="@+id/tv_flavor"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginBottom="4sp"
                             android:text="@{front.flavor}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             android:textStyle="italic"
                             app:layout_constraintBottom_toTopOf="@id/ll_power_toughness_loyalty"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -160,7 +160,7 @@
                             android:id="@+id/ll_power_toughness_loyalty"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="4dp"
+                            android:layout_marginBottom="4sp"
                             android:orientation="horizontal"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -172,7 +172,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{front.power}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -181,7 +181,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/slash"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold"
                                 android:visibility="gone" />
 
@@ -191,7 +191,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{front.toughness}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -200,7 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/loyalty"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold"
                                 android:visibility="gone" />
 
@@ -210,7 +210,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{front.loyalty}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                         </LinearLayout>
@@ -265,7 +265,7 @@
                             android:gravity="end"
                             android:text="@{back.name}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_title_size_normal"
+                            android:textSize="@dimen/text_title_size_large"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_type_line"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -280,7 +280,7 @@
                             android:text="@{back.type}"
 
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_mana_cost"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -293,7 +293,7 @@
                             android:gravity="end"
                             android:symbolText="@{back.cmc}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_title_size_normal"
+                            android:textSize="@dimen/text_title_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_oracle"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -306,7 +306,7 @@
                             android:gravity="end"
                             android:symbolText="@{back.oracleText}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             app:layout_constraintBottom_toTopOf="@id/tv_back_flavor"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -319,7 +319,7 @@
                             android:gravity="end"
                             android:text="@{back.flavor}"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/text_generic_size_normal"
+                            android:textSize="@dimen/text_generic_size_large"
                             android:textStyle="italic"
                             app:layout_constraintBottom_toTopOf="@id/ll_back_power_toughness"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -342,7 +342,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{back.power}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -351,7 +351,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/slash"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold"
                                 android:visibility="gone" />
 
@@ -361,7 +361,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{back.toughness}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -370,7 +370,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/loyalty"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold"
                                 android:visibility="gone" />
 
@@ -380,7 +380,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@{back.loyalty}"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/text_title_size_normal"
+                                android:textSize="@dimen/text_title_size_large"
                                 android:textStyle="bold" />
 
                         </LinearLayout>

@@ -45,7 +45,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +59,8 @@
 
             <ImageView
                 android:id="@+id/iv_logo"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="500dp"
+                android:layout_height="match_parent"
                 android:contentDescription="@string/_500_error"
                 android:src="@drawable/ic_logo"
 
@@ -117,11 +117,11 @@
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/montserrat"
                 android:hint="@string/enter_card_name_here"
-                android:textSize="@dimen/text_title_size_normal"
+                android:textSize="@dimen/text_title_size_large"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
                 android:textColor="@color/primary_off_black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_search"

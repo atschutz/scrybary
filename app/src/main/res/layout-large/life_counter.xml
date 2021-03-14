@@ -11,7 +11,7 @@
         android:layout_marginEnd="100dp"
         android:text="@string/minus"
         android:textColor="@color/dimmed_grey"
-        android:textSize="@dimen/text_counter_plus_minus_normal"
+        android:textSize="@dimen/text_counter_plus_minus_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/btn_life_minus"
@@ -25,7 +25,7 @@
         android:layout_marginStart="100dp"
         android:text="@string/plus"
         android:textColor="@color/dimmed_grey"
-        android:textSize="@dimen/text_counter_plus_minus_normal"
+        android:textSize="@dimen/text_counter_plus_minus_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_counter_life_total_normal"
+        android:textSize="@dimen/text_counter_life_total_large"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +76,7 @@
         android:paddingBottom="20dp"
         android:text="@string/plus_5"
         android:textColor="@color/dimmed_grey"
-        android:textSize="@dimen/text_counter_pm5_normal"
+        android:textSize="@dimen/text_counter_pm5_large"
         app:layout_constraintBottom_toBottomOf="@id/btn_life_plus"
         app:layout_constraintEnd_toEndOf="@id/btn_life_plus" />
 
@@ -91,7 +91,7 @@
         android:paddingBottom="20dp"
         android:text="@string/minus_5"
         android:textColor="@color/dimmed_grey"
-        android:textSize="@dimen/text_counter_pm5_normal"
+        android:textSize="@dimen/text_counter_pm5_large"
         app:layout_constraintBottom_toBottomOf="@id/btn_life_minus"
         app:layout_constraintStart_toStartOf="@id/btn_life_minus" />
 

@@ -78,7 +78,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                         override fun onError(e: Throwable) {
 
                             e.printStackTrace()
-                            Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show()
 
                             loading.value = false
                         }
@@ -106,7 +105,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
 
                         override fun onError(e: Throwable) {
                             e.printStackTrace()
-                            Toast.makeText(getApplication(), e.toString(), Toast.LENGTH_LONG).show()
 
                             loading.value = false
                         }

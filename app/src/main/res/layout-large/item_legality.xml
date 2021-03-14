@@ -32,14 +32,14 @@
                 android:layout_marginStart="8dp"
                 android:text="@{legality.format}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_generic_size_normal"
+                android:textSize="@dimen/text_generic_size_large"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_legality"
-                android:layout_width="80dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
                 android:gravity="center"
@@ -48,7 +48,7 @@
                 android:padding="4dp"
                 android:text="@{legality.state}"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_generic_size_normal"
+                android:textSize="@dimen/text_generic_size_large"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
