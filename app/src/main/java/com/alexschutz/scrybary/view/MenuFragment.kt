@@ -32,6 +32,9 @@ class MenuFragment : Fragment() {
         binding.btnDice.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_diceFragment)
         }
+        binding.btnSettings.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_settingsFragment)
+        }
 
         return binding.root
     }

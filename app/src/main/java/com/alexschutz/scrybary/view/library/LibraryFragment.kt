@@ -1,18 +1,13 @@
 package com.alexschutz.scrybary.view.library
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ImageSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.get
-import androidx.core.widget.doOnTextChanged
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +15,7 @@ import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
-import kotlin.concurrent.thread
+
 
 class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
@@ -31,8 +26,14 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
     private lateinit var viewModel: LibraryViewModel
     private val cardListAdapter = CardListAdapter(arrayListOf())
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
+    private lateinit var preferences: SharedPreferences
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+
+        preferences = requireContext().getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
 
         binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
@@ -52,7 +53,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             adapter = cardListAdapter
         }
 
-        binding.tvSearch.setOnEditorActionListener { _, actionId, _ ->
+        binding.actvSearch.setOnEditorActionListener { _, actionId, _ ->
 
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE,
@@ -63,6 +64,16 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
                 } else -> false
             }
         }
+
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            requireContext(),
+            R.layout.item_search_history_dropdown,
+            preferences.getStringSet(
+                    getString(R.string.search_history),
+                    setOf())?.toTypedArray() ?: arrayOf()
+        )
+
+        binding.actvSearch.setAdapter(adapter)
 
         viewModel.cards.observe(viewLifecycleOwner, { cards ->
             cards?.let {
@@ -75,7 +86,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
         viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
             isLoading?.let {
-                binding.cardList.visibility =  if (it) View.GONE else View.VISIBLE
+                binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
 
                 // Once we start loading, hide the logo and never show it again until fragment is
@@ -101,10 +112,26 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
     override fun onSearchClicked(v: View) {
 
-        viewModel.search.value = binding.tvSearch.text.toString()
+        viewModel.search.value = binding.actvSearch.text.toString()
         viewModel.fetchFromRemote()
 
         binding.cardList.visibility = View.GONE
+
+        var stringSet =
+            preferences.getStringSet(getString(R.string.search_history), setOf())?.toMutableSet() ?: mutableSetOf()
+
+        if ((viewModel.search.value)?.length ?: 0 >= 3 && !stringSet.contains(viewModel.search.value)) {
+
+            with(preferences.edit()) {
+
+                if (stringSet.size >= 10) stringSet = stringSet.drop(1).toMutableSet()
+                stringSet.add(viewModel.search.value)
+
+                putStringSet(getString(R.string.search_history), stringSet)
+
+                apply()
+            }
+        }
 
         v.hideKeyboard()
     }

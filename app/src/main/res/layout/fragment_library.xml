@@ -107,22 +107,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_back" />
 
-            <EditText
-                android:id="@+id/tv_search"
+            <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/actv_search"
                 android:layout_width="0dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/button_rectangle"
                 android:backgroundTint="@color/white"
+                android:completionThreshold="1"
                 android:fontFamily="@font/montserrat"
                 android:hint="@string/enter_card_name_here"
-                android:textSize="@dimen/text_title_size_normal"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/primary_off_black"
+                android:textSize="@dimen/text_title_size_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_search"
                 app:layout_constraintStart_toEndOf="@id/btn_back"

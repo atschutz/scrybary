@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         with (preferences.edit()) {
 
-            val keys = arrayListOf(
+            val counterKeys = arrayListOf(
                 getString(R.string.p1_life),
                 getString(R.string.p1_box_1),
                 getString(R.string.p1_box_2),
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
             )
 
             // Life totals default to 20, everything else defaults to 0.
-            for (key in keys )
+            for (key in counterKeys )
                 if (!preferences.contains(key))
                     putInt(
                         key,

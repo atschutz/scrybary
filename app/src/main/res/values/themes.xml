@@ -13,13 +13,21 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@color/primary_grey</item>
+        <item name="android:textColor">@color/primary_white</item>
+        <item name="android:textColorSecondary">@color/primary_white</item>
 
         <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <item name="android:preferenceStyle">@style/PreferencesTheme</item>
 
     </style>
 
     <style name="TextViewStyle" parent="android:Widget.TextView">
         <item name="fontFamily">@font/montserrat</item>
+    </style>
+
+    <style name="PreferencesTheme">
+        <item name="android:windowBackground">@color/primary_grey</item>
+        <item name="android:background">#FFEAEAEA</item>
     </style>
 
 </resources>
