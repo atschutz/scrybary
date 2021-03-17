@@ -3,7 +3,6 @@ package com.alexschutz.scrybary.view
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GestureDetectorCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.alexschutz.scrybary.R
@@ -40,7 +39,8 @@ class MainActivity : AppCompatActivity() {
                 if (!preferences.contains(key))
                     putInt(
                         key,
-                        if (key == getString(R.string.p1_life) || key == getString(R.string.p2_life)) 20
+                        if (key == getString(R.string.p1_life) || key == getString(R.string.p2_life))
+                            preferences.getInt(getString(R.string.starting_life_total), 20)
                         else 0
                     )
 

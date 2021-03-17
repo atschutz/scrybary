@@ -8,7 +8,7 @@
         android:id="@+id/tv_starting_life_total"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/starting_life_total"
+        android:text="@string/starting_life_total_label"
         android:textColor="@color/primary_white"
         android:textSize="@dimen/text_generic_size_normal"
         app:layout_constraintBottom_toBottomOf="parent"

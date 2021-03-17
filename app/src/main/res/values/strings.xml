@@ -13,6 +13,7 @@
 
     <!-- preference keys -->
     <string name="search_history">searchHistory</string>
+    <string name="starting_life_total">startingLifeTotal</string>
 
     <string name="app_name">Manadork</string>
     <string name="counter">Counter</string>
@@ -60,7 +61,7 @@
     <string name="have_a_suggestion">Have a suggestion?\u0020</string>
     <string name="reroll_if_tie">Reroll if tie</string>
     <string name="light_mode">Light mode</string>
-    <string name="starting_life_total">Starting life total</string>
+    <string name="starting_life_total_label">Starting life total</string>
     <string name="enter_life_total_here">Enter life total here…</string>
     <string name="number_of_players">Number of players</string>
     <string name="number_of_players_1">1</string>

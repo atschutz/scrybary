@@ -7,10 +7,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.alexschutz.scrybary.R
 
-class CounterButton(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs), Counter {
-
-    override lateinit var number: TextView
-    override var key = ""
+class CounterButton(context: Context, attrs: AttributeSet) : Counter(context, attrs) {
 
     private val counterMinus: AppCompatButton
     private val counterPlus: AppCompatButton

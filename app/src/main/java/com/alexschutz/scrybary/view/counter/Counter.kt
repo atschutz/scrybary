@@ -1,21 +1,22 @@
 package com.alexschutz.scrybary.view.counter
 
 import android.content.Context
-import android.provider.Settings.Global.getString
+import android.util.AttributeSet
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.alexschutz.scrybary.R
 
-interface Counter {
+open class Counter(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    // TODO make this a class that CounterButton and LifeCounter extend.
     // TODO bind on click
-    val number: TextView
-    var key: String
+    lateinit var number: TextView
+    lateinit var key: String
+    var value = 0
 
     fun setKeyAndButtons(key: String, minus: Button, plus: Button, minus5: Button?, plus5: Button?) {
 
-        var value = number.context
+        value = number.context
             .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
             .getInt(key, 0)
 
@@ -49,19 +50,22 @@ interface Counter {
     fun refresh() {
 
         // Set value to 20 if it's a life counter, 0 otherwise.
-        updatePrefs(
-            if (key == number.context.getString(R.string.p1_life)
-                || key == number.context.getString(R.string.p2_life)) 20
-            else 0
-        )
+        with (number.context) {
+            value =
+                if (key == getString(R.string.p1_life)
+                    || key == getString(R.string.p2_life)) {
 
-        number.text = number.context
-            .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-            .getInt(key, 0)
-            .toString()
+                        getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
+                            .getInt(getString(R.string.starting_life_total), 20)
+                }
+                else 0
+
+            number.text = value.toString()
+            updatePrefs(value)
+        }
     }
 
-    fun updatePrefs(value: Int) {
+    private fun updatePrefs(value: Int) {
         number.context
             .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
             .edit()

@@ -62,6 +62,9 @@ class CounterFragment : BackButtonFragment(), FlipClickListener {
             }
 
             btnRefresh.setOnClickListener {
+
+
+
                 topBtnContainer.refresh()
                 bottomBtnContainer.refresh()
                 topLifeCounter.refresh()

@@ -9,10 +9,7 @@ import com.alexschutz.scrybary.R
 
 // TODO add long press to change number and smaller font size with more digits.
 
-class LifeCounter(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs), Counter {
-
-    override lateinit var number: TextView
-    override var key = ""
+class LifeCounter(context: Context, attrs: AttributeSet) : Counter(context, attrs) {
 
     private val lifeMinus: AppCompatButton
     private val lifePlus: AppCompatButton
@@ -31,6 +28,7 @@ class LifeCounter(context: Context, attrs: AttributeSet) : ConstraintLayout(cont
         number = findViewById(R.id.life_number)
     }
 
+    // Lets us set the key from the fragment.
     fun setButtonsWithKey(keyString: String) {
         key = keyString
         setKeyAndButtons(key, lifeMinus, lifePlus, lifeMinus5, lifePlus5)
