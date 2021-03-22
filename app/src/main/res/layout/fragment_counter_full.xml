@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="backListener"
+            type="com.alexschutz.scrybary.view.BackButtonListener" />
+
+        <variable
+            name="flipListener"
+            type="com.alexschutz.scrybary.view.counter.FlipClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="layout_1p"
+            layout="@layout/counter_1p"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="layout_2p"
+            layout="@layout/counter_2p"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="layout_4p"
+            layout="@layout/counter_4p"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/layout_coin"
+            layout="@layout/coin_layout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

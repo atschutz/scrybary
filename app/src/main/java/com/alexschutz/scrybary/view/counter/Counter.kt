@@ -3,8 +3,10 @@ package com.alexschutz.scrybary.view.counter
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import com.alexschutz.scrybary.R
 
 open class Counter(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {

@@ -11,6 +11,7 @@ import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.alexschutz.scrybary.view.counter.Counter
 import com.alexschutz.scrybary.view.counter.CounterButtonContainer
+import com.alexschutz.scrybary.view.counter.PlayerContainer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions

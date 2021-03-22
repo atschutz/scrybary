@@ -1,5 +1,6 @@
 package com.alexschutz.scrybary.view.dice
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.hardware.Sensor
 import android.hardware.SensorManager
@@ -134,10 +135,18 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             p2Roll =
                 if (numberOfPlayers > 1) {
 
+                    var rollTotal = roll(numberOfDice, diceSides)
+
+                    if (requireContext().getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
+                            .getBoolean(getString(R.string.reroll_if_tie), false)) {
+                        while (rollTotal.sum == p1Roll?.sum) {
+                            rollTotal = roll(numberOfDice, diceSides)
+                        }
+                    }
+
                     p2TotalContainer.visibility = View.VISIBLE
                     p2DiceContainer.visibility = View.VISIBLE
 
-                    val rollTotal = roll(numberOfDice, diceSides)
                     drawDice(rollTotal.rolls, p2DiceContainer, 2, id)
 
                     rollTotal

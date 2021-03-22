@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.preference.PreferenceFragmentCompat
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentSettingsBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
@@ -48,7 +47,7 @@ class SettingsFragment : BackButtonFragment() {
             Toast.makeText(context, "Search history cleared.", Toast.LENGTH_SHORT).show()
         }
 
-        binding.layoutStartingLifeTotal.etLifeTotal.doOnTextChanged { text, start, before, count ->
+        binding.layoutStartingLifeTotal.etLifeTotal.doOnTextChanged { text, _, _, _ ->
 
             if (text?.isNotEmpty() == true) {
 
@@ -61,13 +60,44 @@ class SettingsFragment : BackButtonFragment() {
             }
         }
 
+        with (binding.layoutNumberOfPlayers.rgPlayers) {
+
+            // Check current preferred number of players, default 2.
+            (getChildAt(preferences.getInt(
+                getString(R.string.number_of_players),
+                2)
+                    - 1) as RadioButton).isChecked = true
+
+            // Change preference when number of players is changed.
+            setOnCheckedChangeListener { group, checkedId ->
+                preferences
+                    .edit()
+                    .putInt(
+                        getString(R.string.number_of_players),
+                        group.indexOfChild(view?.findViewById<RadioButton>(checkedId)) + 1)
+                    .apply()
+            }
+        }
+
+        with (binding.layoutReroll.swReroll) {
+
+            isChecked = preferences.getBoolean(getString(R.string.reroll_if_tie), false)
+
+            setOnCheckedChangeListener { _, isChecked ->
+                preferences.edit().putBoolean(getString(R.string.reroll_if_tie), isChecked).apply()
+            }
+        }
+
+        with (binding.layoutLightMode.swLightMode) {
+
+            isChecked = preferences.getBoolean(getString(R.string.light_mode), false)
+
+            setOnCheckedChangeListener { _, isChecked ->
+                preferences.edit().putBoolean(getString(R.string.light_mode), isChecked).apply()
+            }
+        }
+
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
     }
 
     override fun onBackPressed(v: View) {

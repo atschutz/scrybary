@@ -1,15 +1,12 @@
 package com.alexschutz.scrybary.view.counter
 
-import android.animation.Animator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
-import android.view.animation.AnimationSet
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.core.view.children
 import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
