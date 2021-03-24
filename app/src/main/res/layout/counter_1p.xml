@@ -1,87 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-  <data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-        <variable
-            name="backListener"
-            type="com.alexschutz.scrybary.view.BackButtonListener" />
+    <LinearLayout
+        android:id="@+id/ll_back_flip_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/divider_line"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <variable
-            name="flipListener"
-            type="com.alexschutz.scrybary.view.counter.FlipClickListener" />
+        <ImageButton
+            android:id="@+id/btn_back"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/counter_button_circle"
+            android:contentDescription="@string/back"
+            android:onClick="@{backListener::onBackPressed}"
+            app:srcCompat="@drawable/ic_arrow_back" />
 
-    </data>
+        <ImageButton
+            android:id="@+id/btn_flip"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/counter_button_circle"
+            android:contentDescription="@string/flip"
+            android:onClick="@{flipListener::onFlipClicked}"
+            app:srcCompat="@drawable/ic_coin" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:background="@drawable/counter_button_circle"
+            android:contentDescription="@string/refresh"
+            app:srcCompat="@drawable/ic_refresh" />
 
-        <LinearLayout
-            android:id="@+id/ll_back_flip_refresh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/divider_line"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    </LinearLayout>
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/counter_button_circle"
-                android:contentDescription="@string/back"
-                android:onClick="@{backListener::onBackPressed}"
-                app:srcCompat="@drawable/ic_arrow_back" />
+    <LinearLayout
+        android:id="@+id/divider_line"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:background="@color/dimmed_grey"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/p1_container"
+        app:layout_constraintStart_toEndOf="@id/ll_back_flip_refresh"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/btn_flip"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/counter_button_circle"
-                android:contentDescription="@string/flip"
-                android:onClick="@{flipListener::onFlipClicked}"
-                app:srcCompat="@drawable/ic_coin" />
+    <com.alexschutz.scrybary.view.counter.PlayerContainer
+        android:id="@+id/p1_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/divider_line"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/btn_refresh"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:background="@drawable/counter_button_circle"
-                android:contentDescription="@string/refresh"
-                app:srcCompat="@drawable/ic_refresh" />
+    <include
+        android:id="@+id/layout_coin"
+        layout="@layout/coin_layout" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/divider_line"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_margin="4dp"
-            android:background="@color/dimmed_grey"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/p1_container"
-            app:layout_constraintStart_toEndOf="@id/ll_back_flip_refresh"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.alexschutz.scrybary.view.counter.PlayerContainer
-            android:id="@+id/p1_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/divider_line"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <include
-            android:id="@+id/layout_coin"
-            layout="@layout/coin_layout" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

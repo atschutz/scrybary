@@ -2,14 +2,12 @@ package com.alexschutz.scrybary.view.counter
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.EditText
+import android.util.TypedValue
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.children
 import com.alexschutz.scrybary.R
 
 // TODO add long press to change number and smaller font size with more digits.
-
 class LifeCounter(context: Context, attrs: AttributeSet) : Counter(context, attrs) {
 
     private val lifeMinus: AppCompatButton
@@ -20,17 +18,6 @@ class LifeCounter(context: Context, attrs: AttributeSet) : Counter(context, attr
     init {
 
         inflate(context, R.layout.life_counter, this)
-
-        // If we have 4 players, half text sizes for all TextViews and EditTexts.
-        if (context.getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-                .getInt(context.getString(R.string.number_of_players), 2) == 4) {
-
-            for (child in children) {
-
-                if (child is TextView) child.textSize = child.textSize / 2
-                if (child is EditText) child.textSize = child.textSize / 2
-            }
-        }
 
         lifeMinus = findViewById(R.id.btn_life_minus)
         lifePlus = findViewById(R.id.btn_life_plus)
@@ -44,5 +31,20 @@ class LifeCounter(context: Context, attrs: AttributeSet) : Counter(context, attr
     fun setButtonsWithKey(keyString: String) {
         key = keyString
         setKeyAndButtons(key, lifeMinus, lifePlus, lifeMinus5, lifePlus5)
+    }
+
+    fun scaleTextSizeWhen4Players() {
+
+        with (findViewById<TextView>(R.id.life_number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
+        with (findViewById<TextView>(R.id.life_plus)) {
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4)
+            setPadding(paddingLeft, paddingTop, 200, paddingBottom)
+        }
+        with (findViewById<TextView>(R.id.life_minus)) {
+            setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4)
+            setPadding(200, paddingTop, paddingRight, paddingBottom)
+        }
+        with (findViewById<AppCompatButton>(R.id.btn_plus_5)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
+        with (findViewById<AppCompatButton>(R.id.btn_minus_5)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -11,36 +12,181 @@
             name="flipListener"
             type="com.alexschutz.scrybary.view.counter.FlipClickListener" />
 
+        <variable
+            name="refreshListener"
+            type="com.alexschutz.scrybary.view.counter.RefreshClickListener" />
+
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/counter_1p"
-            layout="@layout/counter_1p"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <include
-            android:id="@+id/counter_2p"
-            layout="@layout/counter_2p"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            <LinearLayout
+                android:id="@+id/ll_back_flip_refresh_vert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/divider_line"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <include
-            android:id="@+id/counter_4p"
-            layout="@layout/counter_4p"
+                <ImageButton
+                    android:id="@+id/btn_back_vert"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/counter_button_circle"
+                    android:contentDescription="@string/back"
+                    android:onClick="@{backListener::onBackPressed}"
+                    app:srcCompat="@drawable/ic_arrow_back" />
+
+                <ImageButton
+                    android:id="@+id/btn_flip_vert"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:layout_marginBottom="32dp"
+                    android:background="@drawable/counter_button_circle"
+                    android:contentDescription="@string/flip"
+                    android:onClick="@{flipListener::onFlipClicked}"
+                    app:srcCompat="@drawable/ic_coin" />
+
+                <ImageButton
+                    android:id="@+id/btn_refresh_vert"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:background="@drawable/counter_button_circle"
+                    android:contentDescription="@string/refresh"
+                    android:onClick="@{refreshListener::onRefreshClicked}"
+                    app:srcCompat="@drawable/ic_refresh" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_firstColumn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.alexschutz.scrybary.view.counter.PlayerContainer
+                    android:id="@+id/p2_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:rotation="180"
+                    android:visibility="gone" />
+
+                <com.alexschutz.scrybary.view.counter.PlayerContainer
+                    android:id="@+id/p1_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_secondColumn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <com.alexschutz.scrybary.view.counter.PlayerContainer
+                    android:id="@+id/p4_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:rotation="180" />
+
+                <com.alexschutz.scrybary.view.counter.PlayerContainer
+                    android:id="@+id/p3_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/divider_line"
             android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:background="@color/dimmed_grey"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/vertical_divider_line"
+            android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_centerHorizontal="true"
+            android:background="@color/dimmed_grey"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_back_flip_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/counter_button_circle"
+                android:contentDescription="@string/back"
+                android:onClick="@{backListener::onBackPressed}"
+                app:srcCompat="@drawable/ic_arrow_back" />
+
+            <ImageButton
+                android:id="@+id/btn_flip"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:layout_marginEnd="32dp"
+                android:background="@drawable/counter_button_circle"
+                android:contentDescription="@string/flip"
+                android:onClick="@{flipListener::onFlipClicked}"
+                app:srcCompat="@drawable/ic_coin" />
+
+            <ImageButton
+                android:id="@+id/btn_refresh"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:background="@drawable/counter_button_circle"
+                android:contentDescription="@string/refresh"
+                android:onClick="@{refreshListener::onRefreshClicked}"
+                app:srcCompat="@drawable/ic_refresh" />
+
+        </LinearLayout>
 
         <include
             android:id="@+id/layout_coin"
-            layout="@layout/coin_layout" />
+            layout="@layout/coin_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </layout>

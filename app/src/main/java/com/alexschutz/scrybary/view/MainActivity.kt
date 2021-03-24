@@ -19,30 +19,41 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        val preferences = getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
+        setupCounterDefaults()
+    }
 
+    private fun setupCounterDefaults() {
+
+        val preferences = getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
         with (preferences.edit()) {
 
-            val counterKeys = arrayListOf(
+            val lifeKeys = arrayListOf(
                 getString(R.string.p1_life),
+                getString(R.string.p2_life),
+                getString(R.string.p3_life),
+                getString(R.string.p4_life),
+            )
+
+            val counterKeys = arrayListOf(
                 getString(R.string.p1_box_1),
                 getString(R.string.p1_box_2),
                 getString(R.string.p1_box_3),
-                getString(R.string.p2_life),
                 getString(R.string.p2_box_1),
                 getString(R.string.p2_box_2),
-                getString(R.string.p2_box_3)
+                getString(R.string.p2_box_3),
+                getString(R.string.p3_box_1),
+                getString(R.string.p3_box_2),
+                getString(R.string.p3_box_3),
+                getString(R.string.p4_box_1),
+                getString(R.string.p4_box_2),
+                getString(R.string.p4_box_3)
             )
 
-            // Life totals default to 20, everything else defaults to 0.
-            for (key in counterKeys )
-                if (!preferences.contains(key))
-                    putInt(
-                        key,
-                        if (key == getString(R.string.p1_life) || key == getString(R.string.p2_life))
-                            preferences.getInt(getString(R.string.starting_life_total), 20)
-                        else 0
-                    )
+            // Life totals default to starting life total pref, counter buttons default to 0.
+            for (key in lifeKeys ) if (!preferences.contains(key))
+                putInt(key, preferences.getInt(getString(R.string.starting_life_total), 20))
+
+            for (key in counterKeys ) if (!preferences.contains(key)) putInt(key, 0)
 
             apply()
         }

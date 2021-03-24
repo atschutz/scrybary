@@ -2,6 +2,7 @@ package com.alexschutz.scrybary.view.counter
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
@@ -37,5 +38,12 @@ class CounterButton(context: Context, attrs: AttributeSet) : Counter(context, at
     fun setButtonsWithKey(keyString: String) {
         key = keyString
         setKeyAndButtons(key, counterMinus, counterPlus, null, null)
+    }
+
+    fun scaleTextSizeWhen4Players() {
+
+        with (findViewById<TextView>(R.id.number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
+        with (findViewById<TextView>(R.id.plus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
+        with (findViewById<TextView>(R.id.minus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
     }
 }

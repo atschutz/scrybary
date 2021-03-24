@@ -11,6 +11,16 @@
     <string name="p2_box_2">p2box2</string>
     <string name="p2_box_3">p2box3</string>
 
+    <string name="p3_life">p3life</string>
+    <string name="p3_box_1">p3box1</string>
+    <string name="p3_box_2">p3box2</string>
+    <string name="p3_box_3">p3box3</string>
+
+    <string name="p4_life">p4life</string>
+    <string name="p4_box_1">p4box1</string>
+    <string name="p4_box_2">p4box2</string>
+    <string name="p4_box_3">p4box3</string>
+
     <!-- preference keys -->
     <string name="search_history">searchHistory</string>
     <string name="starting_life_total">startingLifeTotal</string>

@@ -1,20 +1,18 @@
 package com.alexschutz.scrybary
 
+import android.content.Context
 import android.content.res.Resources
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ImageSpan
+import android.util.TypedValue
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.Dimension
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
-import com.alexschutz.scrybary.view.counter.Counter
-import com.alexschutz.scrybary.view.counter.CounterButtonContainer
-import com.alexschutz.scrybary.view.counter.PlayerContainer
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestOptions
 
 const val CMC_HEIGHT = 16
 
@@ -93,3 +91,4 @@ fun TextView.replaceCMCs(text: String?) {
 }
 
 fun dpToPx(dp: Int) = (dp * Resources.getSystem().displayMetrics.density).toInt()
+
