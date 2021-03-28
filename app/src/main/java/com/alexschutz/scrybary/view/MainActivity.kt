@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
             // Life totals default to starting life total pref, counter buttons default to 0.
             for (key in lifeKeys ) if (!preferences.contains(key))
-                putInt(key, preferences.getInt(getString(R.string.starting_life_total), 20))
+                putInt(key, preferences.getInt(getString(R.string.pref_starting_life_total), 20))
 
             for (key in counterKeys ) if (!preferences.contains(key)) putInt(key, 0)
 

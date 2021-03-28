@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import androidx.core.view.children
+import android.widget.RelativeLayout
 import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentCounterFullBinding
@@ -30,14 +30,17 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
         binding.flipListener = this
         binding.refreshListener = this
 
-        val players = requireContext()
+        val preferences = requireContext()
             .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-            .getInt(getString(R.string.number_of_players), 2)
+
+        val numberOfPlayers = preferences.getInt(getString(R.string.pref_number_of_players), 2)
+
+        binding.root.keepScreenOn = preferences.getBoolean(getString(R.string.pref_keep_screen_on), true)
 
         // Set view visibility based on number of players.
         with(binding) {
 
-            when (players) {
+            when (numberOfPlayers) {
                 1 -> {
                     activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                     llBackFlipRefreshVert.visibility = View.VISIBLE
@@ -46,6 +49,14 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
                     llBackFlipRefresh.visibility = View.VISIBLE
                     dividerLine.visibility = View.VISIBLE
                     p2Container.visibility = View.VISIBLE
+                }
+                3 -> {
+                    activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    (llBackFlipRefresh.layoutParams as RelativeLayout.LayoutParams).removeRule(RelativeLayout.CENTER_IN_PARENT)
+                    llBackFlipRefresh.visibility = View.VISIBLE
+                    dividerLineHalf.visibility = View.VISIBLE
+                    verticalDividerLine.visibility = View.VISIBLE
+                    llSecondColumn.visibility = View.VISIBLE
                 }
                 4 -> {
                     activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
@@ -59,59 +70,80 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
 
             }
 
+            // TODO make this less bad.
             // Quick and dirty way to set all the keys and system preferences.
             p1Container.lifeCounter.setButtonsWithKey(getString(R.string.p1_life))
             p2Container.lifeCounter.setButtonsWithKey(getString(R.string.p2_life))
             p3Container.lifeCounter.setButtonsWithKey(getString(R.string.p3_life))
             p4Container.lifeCounter.setButtonsWithKey(getString(R.string.p4_life))
 
-            if (requireContext().getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-                    .getInt(getString(R.string.number_of_players), 2) >= 4) {
-
-                p1Container.lifeCounter.scaleTextSizeWhen4Players()
-                p2Container.lifeCounter.scaleTextSizeWhen4Players()
-                p3Container.lifeCounter.scaleTextSizeWhen4Players()
-                p4Container.lifeCounter.scaleTextSizeWhen4Players()
-            }
-
             with (p1Container.buttonContainer) {
+
                 counterStart.setButtonsWithKey(getString(R.string.p1_box_1))
                 counterMiddle.setButtonsWithKey(getString(R.string.p1_box_2))
                 counterEnd.setButtonsWithKey(getString(R.string.p1_box_3))
-
-                counterStart.scaleTextSizeWhen4Players()
-                counterMiddle.scaleTextSizeWhen4Players()
-                counterEnd.scaleTextSizeWhen4Players()
             }
 
-            with (p2Container.buttonContainer) {
-                counterStart.setButtonsWithKey(getString(R.string.p2_box_1))
-                counterMiddle.setButtonsWithKey(getString(R.string.p2_box_2))
-                counterEnd.setButtonsWithKey(getString(R.string.p2_box_3))
+            if (numberOfPlayers >= 2) {
+                with (p2Container.buttonContainer) {
 
-                counterStart.scaleTextSizeWhen4Players()
-                counterMiddle.scaleTextSizeWhen4Players()
-                counterEnd.scaleTextSizeWhen4Players()
+                    counterStart.setButtonsWithKey(getString(R.string.p2_box_1))
+                    counterMiddle.setButtonsWithKey(getString(R.string.p2_box_2))
+                    counterEnd.setButtonsWithKey(getString(R.string.p2_box_3))
+                }
+            }
+
+            if (numberOfPlayers >= 3) {
+
+                p2Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
+                p3Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
+                p4Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
+
+                with (p2Container.buttonContainer) {
+
+                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
+                }
+
+                with (p3Container.buttonContainer) {
+
+                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
+                }
+
+                with (p4Container.buttonContainer) {
+
+                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
+                }
+            }
+
+            if (numberOfPlayers == 4) {
+                p1Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
+
+                with (p1Container.buttonContainer) {
+
+                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
+                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
+                }
             }
 
             with (p3Container.buttonContainer) {
+
                 counterStart.setButtonsWithKey(getString(R.string.p3_box_1))
                 counterMiddle.setButtonsWithKey(getString(R.string.p3_box_2))
                 counterEnd.setButtonsWithKey(getString(R.string.p3_box_3))
-
-                counterStart.scaleTextSizeWhen4Players()
-                counterMiddle.scaleTextSizeWhen4Players()
-                counterEnd.scaleTextSizeWhen4Players()
             }
 
             with (p4Container.buttonContainer) {
+
                 counterStart.setButtonsWithKey(getString(R.string.p4_box_1))
                 counterMiddle.setButtonsWithKey(getString(R.string.p4_box_2))
                 counterEnd.setButtonsWithKey(getString(R.string.p4_box_3))
-
-                counterStart.scaleTextSizeWhen4Players()
-                counterMiddle.scaleTextSizeWhen4Players()
-                counterEnd.scaleTextSizeWhen4Players()
             }
         }
 

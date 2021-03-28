@@ -69,7 +69,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             requireContext(),
             R.layout.item_search_history_dropdown,
             preferences.getStringSet(
-                    getString(R.string.search_history),
+                    getString(R.string.pref_search_history),
                     setOf())?.toTypedArray() ?: arrayOf()
         )
 
@@ -118,7 +118,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
         binding.cardList.visibility = View.GONE
 
         var stringSet =
-            preferences.getStringSet(getString(R.string.search_history), setOf())?.toMutableSet() ?: mutableSetOf()
+            preferences.getStringSet(getString(R.string.pref_search_history), setOf())?.toMutableSet() ?: mutableSetOf()
 
         if ((viewModel.search.value)?.length ?: 0 >= 3 && !stringSet.contains(viewModel.search.value)) {
 
@@ -127,7 +127,7 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
                 if (stringSet.size >= 10) stringSet = stringSet.drop(1).toMutableSet()
                 stringSet.add(viewModel.search.value)
 
-                putStringSet(getString(R.string.search_history), stringSet)
+                putStringSet(getString(R.string.pref_search_history), stringSet)
 
                 apply()
             }

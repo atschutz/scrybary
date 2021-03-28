@@ -31,32 +31,34 @@ class SettingsFragment : BackButtonFragment() {
         binding.backListener = this
 
         // TODO view bind
-        binding.layoutStartingLifeTotal.etLifeTotal
-            .setText(
-                (preferences.getInt(getString(R.string.starting_life_total), 20)).toString()
-            )
-
         binding.clearSearchHistory.setOnClickListener {
 
             // Clear search history
             preferences
                 .edit()
-                .putStringSet(getString(R.string.search_history), setOf())
+                .putStringSet(getString(R.string.pref_search_history), setOf())
                 .apply()
 
             Toast.makeText(context, "Search history cleared.", Toast.LENGTH_SHORT).show()
         }
 
-        binding.layoutStartingLifeTotal.etLifeTotal.doOnTextChanged { text, _, _, _ ->
+        with (binding.layoutStartingLifeTotal.etLifeTotal) {
 
-            if (text?.isNotEmpty() == true) {
+            setText(
+                (preferences.getInt(getString(R.string.pref_starting_life_total), 20)).toString()
+            )
 
-                preferences
-                    .edit()
-                    .putInt(getString(R.string.starting_life_total), text.toString().toInt())
-                    .apply()
+            doOnTextChanged { text, _, _, _ ->
 
-                resetCounterTotals()
+                if (text?.isNotEmpty() == true) {
+
+                    preferences
+                        .edit()
+                        .putInt(getString(R.string.pref_starting_life_total), text.toString().toInt())
+                        .apply()
+
+                    resetCounterTotals()
+                }
             }
         }
 
@@ -64,7 +66,7 @@ class SettingsFragment : BackButtonFragment() {
 
             // Check current preferred number of players, default 2.
             (getChildAt(preferences.getInt(
-                getString(R.string.number_of_players),
+                getString(R.string.pref_number_of_players),
                 2)
                     - 1) as RadioButton).isChecked = true
 
@@ -73,27 +75,42 @@ class SettingsFragment : BackButtonFragment() {
                 preferences
                     .edit()
                     .putInt(
-                        getString(R.string.number_of_players),
+                        getString(R.string.pref_number_of_players),
                         group.indexOfChild(view?.findViewById<RadioButton>(checkedId)) + 1)
+                    .apply()
+            }
+        }
+
+        with (binding.layoutKeepScreenOn.swKeepScreenOn) {
+
+            isChecked = preferences.getBoolean(getString(R.string.pref_keep_screen_on), false)
+
+            setOnCheckedChangeListener { _, isChecked ->
+                preferences
+                    .edit()
+                    .putBoolean(
+                        getString(R.string.pref_keep_screen_on),
+                        isChecked
+                    )
                     .apply()
             }
         }
 
         with (binding.layoutReroll.swReroll) {
 
-            isChecked = preferences.getBoolean(getString(R.string.reroll_if_tie), false)
+            isChecked = preferences.getBoolean(getString(R.string.pref_reroll_if_tie), false)
 
             setOnCheckedChangeListener { _, isChecked ->
-                preferences.edit().putBoolean(getString(R.string.reroll_if_tie), isChecked).apply()
+                preferences.edit().putBoolean(getString(R.string.pref_reroll_if_tie), isChecked).apply()
             }
         }
 
         with (binding.layoutLightMode.swLightMode) {
 
-            isChecked = preferences.getBoolean(getString(R.string.light_mode), false)
+            isChecked = preferences.getBoolean(getString(R.string.pref_light_mode), false)
 
             setOnCheckedChangeListener { _, isChecked ->
-                preferences.edit().putBoolean(getString(R.string.light_mode), isChecked).apply()
+                preferences.edit().putBoolean(getString(R.string.pref_light_mode), isChecked).apply()
             }
         }
 
@@ -128,7 +145,7 @@ class SettingsFragment : BackButtonFragment() {
                 putInt(
                     key,
                     if (key == getString(R.string.p1_life) || key == getString(R.string.p2_life))
-                        preferences.getInt(getString(R.string.starting_life_total), 20)
+                        preferences.getInt(getString(R.string.pref_starting_life_total), 20)
                     else 0
                 )
 

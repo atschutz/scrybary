@@ -126,9 +126,34 @@
             android:layout_centerVertical="true"
             android:background="@color/dimmed_grey"
             android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:visibility="gone" />
+
+
+        <LinearLayout
+            android:id="@+id/divider_line_half"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/divider_empty"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/dimmed_grey"
+                android:orientation="horizontal" />
+
+            <LinearLayout
+                android:id="@+id/divider_full"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/dimmed_grey"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/vertical_divider_line"
@@ -137,17 +162,14 @@
             android:layout_centerHorizontal="true"
             android:background="@color/dimmed_grey"
             android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/ll_back_flip_refresh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_margin="8dp"
             android:visibility="gone">
 
             <ImageButton

@@ -22,8 +22,12 @@
     <string name="p4_box_3">p4box3</string>
 
     <!-- preference keys -->
-    <string name="search_history">searchHistory</string>
-    <string name="starting_life_total">startingLifeTotal</string>
+    <string name="pref_search_history">searchHistory</string>
+    <string name="pref_number_of_players">numberOfPlayers</string>
+    <string name="pref_starting_life_total">startingLifeTotal</string>
+    <string name="pref_keep_screen_on">keepScreenOn</string>
+    <string name="pref_reroll_if_tie">reRollIfTie</string>
+    <string name="pref_light_mode">lightMode</string>
 
     <string name="app_name">Manadork</string>
     <string name="counter">Counter</string>
@@ -78,5 +82,6 @@
     <string name="number_of_players_2">2</string>
     <string name="number_of_players_3">3</string>
     <string name="number_of_players_4">4</string>
+    <string name="keep_screen_on">Keep screen on</string>
 
 </resources>

@@ -33,7 +33,7 @@ class LifeCounter(context: Context, attrs: AttributeSet) : Counter(context, attr
         setKeyAndButtons(key, lifeMinus, lifePlus, lifeMinus5, lifePlus5)
     }
 
-    fun scaleTextSizeWhen4Players() {
+    fun scaleTextSizeWhenThreeOrMorePlayers() {
 
         with (findViewById<TextView>(R.id.life_number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
         with (findViewById<TextView>(R.id.life_plus)) {

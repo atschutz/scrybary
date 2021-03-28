@@ -55,7 +55,7 @@ open class Counter(context: Context, attrs: AttributeSet) : ConstraintLayout(con
                 if (key.contains("life")) {
 
                         getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-                            .getInt(getString(R.string.starting_life_total), 20)
+                            .getInt(getString(R.string.pref_starting_life_total), 20)
                 }
                 else 0
 
