@@ -25,6 +25,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:baselineAligned="false"
             android:gravity="center"
             android:orientation="horizontal">
 
@@ -72,30 +73,78 @@
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ll_firstColumn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
+                <LinearLayout
+                    android:id="@+id/ll_3p_back_flip_refresh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/p2_container"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_3p_back"
+                        android:layout_width="62dp"
+                        android:layout_height="62dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/counter_button_circle"
+                        android:contentDescription="@string/back"
+                        android:onClick="@{backListener::onBackPressed}"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <ImageButton
+                        android:id="@+id/btn_3p_flip"
+                        android:layout_width="62dp"
+                        android:layout_height="62dp"
+                        android:layout_marginEnd="32dp"
+                        android:background="@drawable/counter_button_circle"
+                        android:contentDescription="@string/flip"
+                        android:onClick="@{flipListener::onFlipClicked}"
+                        app:srcCompat="@drawable/ic_coin" />
+
+                    <ImageButton
+                        android:id="@+id/btn_3p_refresh"
+                        android:layout_width="62dp"
+                        android:layout_height="62dp"
+                        android:background="@drawable/counter_button_circle"
+                        android:contentDescription="@string/refresh"
+                        android:onClick="@{refreshListener::onRefreshClicked}"
+                        app:srcCompat="@drawable/ic_refresh" />
+
+                </LinearLayout>
+
                 <com.alexschutz.scrybary.view.counter.PlayerContainer
                     android:id="@+id/p2_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
                     android:rotation="180"
-                    android:visibility="gone" />
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/p1_container"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_3p_back_flip_refresh" />
 
                 <com.alexschutz.scrybary.view.counter.PlayerContainer
                     android:id="@+id/p1_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/p2_container" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/ll_secondColumn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -107,16 +156,22 @@
                     android:id="@+id/p4_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:rotation="180" />
+                    android:rotation="180"
+                    app:layout_constraintBottom_toTopOf="@id/p3_container"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.alexschutz.scrybary.view.counter.PlayerContainer
                     android:id="@+id/p3_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/p4_container" />
 
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -134,6 +189,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:baselineAligned="false"
             android:orientation="horizontal"
             android:visibility="gone">
 

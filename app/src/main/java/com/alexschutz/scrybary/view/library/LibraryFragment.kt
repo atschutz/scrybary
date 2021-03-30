@@ -117,14 +117,19 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
         binding.cardList.visibility = View.GONE
 
+        // Add search to search history
         var stringSet =
             preferences.getStringSet(getString(R.string.pref_search_history), setOf())?.toMutableSet() ?: mutableSetOf()
 
+        // Only add if length of search is >= 3 and not in search history already
         if ((viewModel.search.value)?.length ?: 0 >= 3 && !stringSet.contains(viewModel.search.value)) {
 
             with(preferences.edit()) {
 
-                if (stringSet.size >= 10) stringSet = stringSet.drop(1).toMutableSet()
+                // If search history set is at max capacity, remove the oldest one.
+                if (stringSet.size >= resources.getInteger(R.integer.max_search_history))
+                    stringSet = stringSet.drop(1).toMutableSet()
+
                 stringSet.add(viewModel.search.value)
 
                 putStringSet(getString(R.string.pref_search_history), stringSet)

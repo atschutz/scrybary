@@ -11,7 +11,6 @@ import com.alexschutz.scrybary.databinding.FragmentMenuBinding
 
 class MenuFragment : Fragment() {
 
-    // View binding boiler plate
     private lateinit var binding: FragmentMenuBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

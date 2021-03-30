@@ -3,28 +3,30 @@
     android:id="@+id/ll_button_holder"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:baselineAligned="false">
+    android:layout_marginStart="4dp"
+    android:layout_marginEnd="4dp"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
     <com.alexschutz.scrybary.view.counter.CounterButton
         android:id="@+id/start_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="4dp" />
+        android:layout_margin="4dp"
+        android:layout_weight="1" />
 
     <com.alexschutz.scrybary.view.counter.CounterButton
         android:id="@+id/middle_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="4dp" />
+        android:layout_margin="4dp"
+        android:layout_weight="1" />
 
     <com.alexschutz.scrybary.view.counter.CounterButton
         android:id="@+id/end_counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_margin="4dp" />
+        android:layout_margin="4dp"
+        android:layout_weight="1" />
 
 </LinearLayout>

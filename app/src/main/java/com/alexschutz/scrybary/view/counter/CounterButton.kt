@@ -42,8 +42,8 @@ class CounterButton(context: Context, attrs: AttributeSet) : Counter(context, at
 
     fun scaleTextSizeWhenThreeOrMorePlayers() {
 
-        with (findViewById<TextView>(R.id.number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
-        with (findViewById<TextView>(R.id.plus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
-        with (findViewById<TextView>(R.id.minus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/6) }
+        with (findViewById<TextView>(R.id.number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
+        with (findViewById<TextView>(R.id.plus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
+        with (findViewById<TextView>(R.id.minus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
     }
 }

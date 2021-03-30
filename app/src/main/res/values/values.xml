@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="swipe_animation_speed">250</integer>
+    <integer name="max_search_history">25</integer>
 </resources>
