@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.view.settings
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +40,10 @@ class SettingsFragment : BackButtonFragment() {
                 .putStringSet(getString(R.string.pref_search_history), setOf())
                 .apply()
 
-            Toast.makeText(context, "Search history cleared.", Toast.LENGTH_SHORT).show()
+            val toast = Toast.makeText(context, "Search history cleared.", Toast.LENGTH_SHORT)
+
+            toast.cancel()
+            toast.show()
         }
 
         with (binding.layoutStartingLifeTotal.etLifeTotal) {
@@ -66,9 +70,7 @@ class SettingsFragment : BackButtonFragment() {
 
             // Check current preferred number of players, default 2.
             (getChildAt(preferences.getInt(
-                getString(R.string.pref_number_of_players),
-                2)
-                    - 1) as RadioButton).isChecked = true
+                getString(R.string.pref_number_of_players), 2) - 1) as RadioButton).isChecked = true
 
             // Change preference when number of players is changed.
             setOnCheckedChangeListener { group, checkedId ->
@@ -102,15 +104,6 @@ class SettingsFragment : BackButtonFragment() {
 
             setOnCheckedChangeListener { _, isChecked ->
                 preferences.edit().putBoolean(getString(R.string.pref_reroll_if_tie), isChecked).apply()
-            }
-        }
-
-        with (binding.layoutLightMode.swLightMode) {
-
-            isChecked = preferences.getBoolean(getString(R.string.pref_light_mode), false)
-
-            setOnCheckedChangeListener { _, isChecked ->
-                preferences.edit().putBoolean(getString(R.string.pref_light_mode), isChecked).apply()
             }
         }
 

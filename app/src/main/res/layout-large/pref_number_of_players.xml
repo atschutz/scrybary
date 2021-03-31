@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/number_of_players"
         android:textColor="@color/primary_off_white"
-        android:textSize="@dimen/text_generic_size_normal"
+        android:textSize="@dimen/text_generic_size_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rg_players"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
             android:gravity="center"
             android:text="@string/number_of_players_1"
             android:textColor="@drawable/settings_number_selector"
-            android:textSize="@dimen/text_generic_size_normal" />
+            android:textSize="@dimen/text_generic_size_large" />
 
         <RadioButton
             android:id="@+id/rb_players_2"
@@ -46,7 +46,7 @@
             android:gravity="center"
             android:text="@string/number_of_players_2"
             android:textColor="@drawable/settings_number_selector"
-            android:textSize="@dimen/text_generic_size_normal" />
+            android:textSize="@dimen/text_generic_size_large" />
 
         <RadioButton
             android:id="@+id/rb_players_3"
@@ -57,7 +57,7 @@
             android:gravity="center"
             android:text="@string/number_of_players_3"
             android:textColor="@drawable/settings_number_selector"
-            android:textSize="@dimen/text_generic_size_normal" />
+            android:textSize="@dimen/text_generic_size_large" />
 
         <RadioButton
             android:id="@+id/rb_players_4"
@@ -68,7 +68,7 @@
             android:gravity="center"
             android:text="@string/number_of_players_4"
             android:textColor="@drawable/settings_number_selector"
-            android:textSize="@dimen/text_generic_size_normal" />
+            android:textSize="@dimen/text_generic_size_large" />
 
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

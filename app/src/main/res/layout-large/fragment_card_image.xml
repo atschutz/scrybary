@@ -38,7 +38,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{cardSet.set}"
-                android:textColor="@color/primary_white"
+                android:textColor="@color/primary_off_white"
                 android:textSize="@dimen/text_generic_size_large" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dash"
-                android:textColor="@color/primary_white"
+                android:textColor="@color/primary_off_white"
                 android:textSize="@dimen/text_generic_size_large" />
 
             <TextView
@@ -54,7 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{cardSet.symbol}"
-                android:textColor="@color/primary_white"
+                android:textColor="@color/primary_off_white"
                 android:textSize="@dimen/text_generic_size_large"
                 android:textStyle="bold" />
 

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/reroll_if_tie"
         android:textColor="@color/primary_off_white"
-        android:textSize="@dimen/text_generic_size_normal"
+        android:textSize="@dimen/text_generic_size_large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rl_switch"
         app:layout_constraintStart_toStartOf="parent"

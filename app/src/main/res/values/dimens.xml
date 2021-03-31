@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_generic_size_normal">12sp</dimen>
-    <dimen name="text_generic_size_large">16sp</dimen>
+    <dimen name="text_generic_size_large">18sp</dimen>
 
     <dimen name="text_label_size_normal">24sp</dimen>
     <dimen name="text_label_size_large">36sp</dimen>
 
     <dimen name="text_title_size_normal">18sp</dimen>
-    <dimen name="text_title_size_large">24sp</dimen>
+    <dimen name="text_title_size_large">27sp</dimen>
 
     <dimen name="text_counter_button_normal">40sp</dimen>
-    <dimen name="text_counter_button_large">44sp</dimen>
+    <dimen name="text_counter_button_large">60sp</dimen>
 
     <dimen name="text_dice_total_normal">30sp</dimen>
-    <dimen name="text_dice_total_large">40sp</dimen>
+    <dimen name="text_dice_total_large">45sp</dimen>
 
     <dimen name="text_dice_rb_normal">24sp</dimen>
-    <dimen name="text_dice_rb_large">32sp</dimen>
+    <dimen name="text_dice_rb_large">36sp</dimen>
 
     <dimen name="text_card_name_normal">16sp</dimen>
-    <dimen name="text_card_name_large">22sp</dimen>
+    <dimen name="text_card_name_large">24sp</dimen>
 
     <dimen name="text_counter_plus_minus_normal">72sp</dimen>
-    <dimen name="text_counter_plus_minus_large">96sp</dimen>
+    <dimen name="text_counter_plus_minus_large">108sp</dimen>
 
     <dimen name="text_counter_life_total_normal">144sp</dimen>
-    <dimen name="text_counter_life_total_large">192sp</dimen>
+    <dimen name="text_counter_life_total_large">216sp</dimen>
 
     <dimen name="text_counter_pm5_normal">32sp</dimen>
-    <dimen name="text_counter_pm5_large">42sp</dimen>
+    <dimen name="text_counter_pm5_large">48sp</dimen>
 </resources>

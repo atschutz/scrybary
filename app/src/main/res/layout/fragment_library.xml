@@ -123,6 +123,7 @@
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:textColor="@color/primary_off_black"
+                android:textColorHint="@color/not_legal_grey"
                 android:textSize="@dimen/text_title_size_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btn_search"

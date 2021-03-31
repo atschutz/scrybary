@@ -87,7 +87,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_search_header"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="72dp"
             android:background="@drawable/search_header"
             android:paddingBottom="6dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
             <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                 android:id="@+id/actv_search"
                 android:layout_width="0dp"
-                android:layout_height="32dp"
+                android:layout_height="36dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/button_rectangle"

@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/keep_screen_on"
-        android:textColor="@color/primary_white"
+        android:textColor="@color/primary_off_white"
         android:textSize="@dimen/text_generic_size_normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rl_switch"

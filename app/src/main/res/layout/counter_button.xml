@@ -5,33 +5,11 @@
     android:layout_height="wrap_content"
     android:background="@drawable/button_rectangle">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_minus"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_plus"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_plus"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:background="@null"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/btn_minus"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
-
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/number"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginEnd="4dp"
         android:textColor="@color/white"
         android:textSize="@dimen/text_counter_button_normal"
@@ -44,7 +22,7 @@
         android:id="@+id/minus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="2dp"
         android:text="@string/minus"
@@ -58,7 +36,7 @@
         android:id="@+id/plus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginEnd="8dp"
         android:text="@string/plus"
         android:textColor="@color/white"
@@ -66,5 +44,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_minus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_plus"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_plus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_minus"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

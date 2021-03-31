@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.view
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     private fun setupCounterDefaults() {
 
         val preferences = getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-        with (preferences.edit()) {
+
+        with (getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE).edit()) {
 
             val lifeKeys = arrayListOf(
                 getString(R.string.p1_life),
