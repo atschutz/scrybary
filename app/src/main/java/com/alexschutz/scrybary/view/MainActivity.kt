@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary.view
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -20,10 +19,10 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupCounterDefaults()
+        setCounterDefaults()
     }
 
-    private fun setupCounterDefaults() {
+    fun setCounterDefaults() {
 
         val preferences = getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
 

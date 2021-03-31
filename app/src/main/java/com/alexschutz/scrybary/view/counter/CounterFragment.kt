@@ -1,14 +1,12 @@
 package com.alexschutz.scrybary.view.counter
 
 import android.content.Context
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.RelativeLayout
 import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentCounterFullBinding
@@ -26,24 +24,30 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
 
         binding = FragmentCounterFullBinding.inflate(inflater, container, false)
 
-        binding.backListener = this
-        binding.flipListener = this
-        binding.refreshListener = this
+        val preferences =
+            requireContext().getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
 
-        val preferences = requireContext()
-            .getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
-
-        val numberOfPlayers = preferences.getInt(getString(R.string.pref_number_of_players), 2)
-
-        binding.root.keepScreenOn = preferences.getBoolean(
-            getString(R.string.pref_keep_screen_on),
-            true
-        )
-
-        // Set view visibility based on number of players.
         with(binding) {
 
-            when (numberOfPlayers) {
+            // Set listeners
+            backListener = this@CounterFragment
+            flipListener = this@CounterFragment
+            refreshListener = this@CounterFragment
+
+            // Set "keep screen on" if preference calls for it.
+            root.keepScreenOn = preferences.getBoolean(
+                getString(R.string.pref_keep_screen_on),
+                true
+            )
+
+            // Set keys for all player containers.
+            p1Container.setKeys(R.string.p1_life, R.string.p1_box_1, R.string.p1_box_2, R.string.p1_box_3)
+            p2Container.setKeys(R.string.p2_life, R.string.p2_box_1, R.string.p2_box_2, R.string.p2_box_3)
+            p3Container.setKeys(R.string.p3_life, R.string.p3_box_1, R.string.p3_box_2, R.string.p3_box_3)
+            p4Container.setKeys(R.string.p4_life, R.string.p4_box_1, R.string.p4_box_2, R.string.p4_box_3)
+
+            // Set view visibility based on number of players.
+            when (preferences.getInt(getString(R.string.pref_number_of_players), 2)) {
                 1 -> {
                     rotateView(binding.root, container)
                     llBackFlipRefreshVert.visibility = View.VISIBLE
@@ -59,6 +63,10 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
                     dividerLineHalf.visibility = View.VISIBLE
                     verticalDividerLine.visibility = View.VISIBLE
                     llSecondColumn.visibility = View.VISIBLE
+
+                    // Players 3 and 4 shrink, 1 stays the same size. 2 is not visible.
+                    p3Container.scaleTextSizeWhenThreeOrMorePlayers()
+                    p4Container.scaleTextSizeWhenThreeOrMorePlayers()
                 }
                 4 -> {
                     rotateView(binding.root, container)
@@ -67,87 +75,16 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
                     verticalDividerLine.visibility = View.VISIBLE
                     llSecondColumn.visibility = View.VISIBLE
                     p2Container.visibility = View.VISIBLE
+
+                    // Player 1 shrinks to match 3 and 4. 2 is now visible, so it must shrink as well.
+                    p1Container.scaleTextSizeWhenThreeOrMorePlayers()
+                    p2Container.scaleTextSizeWhenThreeOrMorePlayers()
+                    p3Container.scaleTextSizeWhenThreeOrMorePlayers()
+                    p4Container.scaleTextSizeWhenThreeOrMorePlayers()
                 }
 
-            }
-
-            // TODO make this less bad.
-            // Quick and dirty way to set all the keys and system preferences.
-            p1Container.lifeCounter.setButtonsWithKey(getString(R.string.p1_life))
-            p2Container.lifeCounter.setButtonsWithKey(getString(R.string.p2_life))
-            p3Container.lifeCounter.setButtonsWithKey(getString(R.string.p3_life))
-            p4Container.lifeCounter.setButtonsWithKey(getString(R.string.p4_life))
-
-            with(p1Container.buttonContainer) {
-
-                counterStart.setButtonsWithKey(getString(R.string.p1_box_1))
-                counterMiddle.setButtonsWithKey(getString(R.string.p1_box_2))
-                counterEnd.setButtonsWithKey(getString(R.string.p1_box_3))
-            }
-
-            if (numberOfPlayers >= 2) {
-                with(p2Container.buttonContainer) {
-
-                    counterStart.setButtonsWithKey(getString(R.string.p2_box_1))
-                    counterMiddle.setButtonsWithKey(getString(R.string.p2_box_2))
-                    counterEnd.setButtonsWithKey(getString(R.string.p2_box_3))
-                }
-            }
-
-            if (numberOfPlayers >= 3) {
-
-                p2Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
-                p3Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
-                p4Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
-
-                with(p2Container.buttonContainer) {
-
-                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
-                }
-
-                with(p3Container.buttonContainer) {
-
-                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
-                }
-
-                with(p4Container.buttonContainer) {
-
-                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
-                }
-            }
-
-            if (numberOfPlayers == 4) {
-                p1Container.lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
-
-                with(p1Container.buttonContainer) {
-
-                    counterStart.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterMiddle.scaleTextSizeWhenThreeOrMorePlayers()
-                    counterEnd.scaleTextSizeWhenThreeOrMorePlayers()
-                }
-            }
-
-            with(p3Container.buttonContainer) {
-
-                counterStart.setButtonsWithKey(getString(R.string.p3_box_1))
-                counterMiddle.setButtonsWithKey(getString(R.string.p3_box_2))
-                counterEnd.setButtonsWithKey(getString(R.string.p3_box_3))
-            }
-
-            with(p4Container.buttonContainer) {
-
-                counterStart.setButtonsWithKey(getString(R.string.p4_box_1))
-                counterMiddle.setButtonsWithKey(getString(R.string.p4_box_2))
-                counterEnd.setButtonsWithKey(getString(R.string.p4_box_3))
             }
         }
-
         return binding.root
     }
 
@@ -160,6 +97,7 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
 
         with(binding.layoutCoin) {
 
+            // Set animations and animation timings.
             val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
             val wait = AnimationUtils.loadAnimation(context, R.anim.wait)
             val fadeOut = AnimationUtils.loadAnimation(context, R.anim.fade_out)
@@ -174,19 +112,13 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
                     clFlip.visibility = View.VISIBLE
                 }
 
-                override fun onAnimationEnd(animation: Animation?) {
-                    clFlip.startAnimation(wait)
-                }
-
+                override fun onAnimationEnd(animation: Animation?) { clFlip.startAnimation(wait) }
                 override fun onAnimationRepeat(animation: Animation?) {}
 
             })
             wait.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationStart(animation: Animation?) {}
-                override fun onAnimationEnd(animation: Animation?) {
-                    clFlip.startAnimation(fadeOut)
-                }
-
+                override fun onAnimationEnd(animation: Animation?) { clFlip.startAnimation(fadeOut) }
                 override fun onAnimationRepeat(animation: Animation?) {}
 
             })
@@ -199,7 +131,6 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
 
                     clFlip.animation = null
                 }
-
                 override fun onAnimationRepeat(animation: Animation?) {}
             })
 
@@ -211,6 +142,7 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
     override fun onRefreshClicked(view: View) {
 
         with(binding) {
+
             p1Container.refresh()
             p2Container.refresh()
             p3Container.refresh()
@@ -227,11 +159,9 @@ class CounterFragment : BackButtonFragment(), FlipClickListener, RefreshClickLis
                 rotation = 90f
                 translationX = ((vg.width - vg.height) / 2).toFloat()
                 translationY = ((vg.height - vg.width) / 2).toFloat()
+                layoutParams.height = vg.width
+                layoutParams.width = vg.height
 
-                with (layoutParams) {
-                    height = vg.width
-                    width = vg.height
-                }
                 requestLayout()
             }
         }

@@ -40,7 +40,7 @@ class CounterButton(context: Context, attrs: AttributeSet) : Counter(context, at
         setKeyAndButtons(key, counterMinus, counterPlus, null, null)
     }
 
-    fun scaleTextSizeWhenThreeOrMorePlayers() {
+    fun scaleTextSizeForThreeOrMorePlayers() {
 
         with (findViewById<TextView>(R.id.number)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }
         with (findViewById<TextView>(R.id.plus)) { setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize/4) }

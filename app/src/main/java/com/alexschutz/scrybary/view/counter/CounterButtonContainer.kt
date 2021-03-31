@@ -24,4 +24,16 @@ class CounterButtonContainer(context: Context, attrs: AttributeSet): LinearLayou
         counterMiddle.refresh()
         counterEnd.refresh()
     }
+
+    fun setKeys(k1: Int, k2: Int, k3: Int) {
+        counterStart.setButtonsWithKey(resources.getString(k1))
+        counterMiddle.setButtonsWithKey(resources.getString(k2))
+        counterEnd.setButtonsWithKey(resources.getString(k3))
+    }
+
+    fun scaleTextSizeForThreeOrMorePlayers() {
+        counterStart.scaleTextSizeForThreeOrMorePlayers()
+        counterMiddle.scaleTextSizeForThreeOrMorePlayers()
+        counterEnd.scaleTextSizeForThreeOrMorePlayers()
+    }
 }

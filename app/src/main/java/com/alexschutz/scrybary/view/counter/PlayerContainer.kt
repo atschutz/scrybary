@@ -23,4 +23,14 @@ class PlayerContainer(context: Context, attrs: AttributeSet) : ConstraintLayout(
         lifeCounter.refresh()
         buttonContainer.refresh()
     }
+
+    fun scaleTextSizeWhenThreeOrMorePlayers() {
+        lifeCounter.scaleTextSizeWhenThreeOrMorePlayers()
+        buttonContainer.scaleTextSizeForThreeOrMorePlayers()
+    }
+
+    fun setKeys(life: Int, k1: Int, k2: Int, k3: Int) {
+        lifeCounter.setButtonsWithKey(resources.getString(life))
+        buttonContainer.setKeys(k1, k2, k3)
+    }
 }
