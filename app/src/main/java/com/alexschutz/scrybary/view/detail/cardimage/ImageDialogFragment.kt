@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import com.alexschutz.scrybary.databinding.FragmentImageDialogBinding
 import com.alexschutz.scrybary.view.BackButtonListener
 import com.alexschutz.scrybary.viewmodel.CardImageViewModel

@@ -83,5 +83,10 @@
     <string name="number_of_players_3">3</string>
     <string name="number_of_players_4">4</string>
     <string name="keep_screen_on">Keep screen on</string>
+    <string name="suggestions_name">Name</string>
+    <string name="suggestions_email">Email</string>
+    <string name="suggestions_comments">Comments</string>
+    <string name="suggestions_submit">Submit</string>
+    <string name="this_field_is_required">This field is required.</string>
 
 </resources>

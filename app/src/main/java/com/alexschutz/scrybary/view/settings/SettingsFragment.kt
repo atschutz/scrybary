@@ -107,6 +107,10 @@ class SettingsFragment : BackButtonFragment() {
             }
         }
 
+        binding.llSendFeedback.setOnClickListener {
+            SuggestionDialogFragment().show(childFragmentManager, "dialog")
+        }
+
         return binding.root
     }
 

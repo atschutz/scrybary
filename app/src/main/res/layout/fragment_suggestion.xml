@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="submitListener"
+            type="com.alexschutz.scrybary.view.settings.SubmitClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_rectangle"
+        android:backgroundTint="@color/primary_off_black"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/suggestions_name"
+            android:textColor="@color/not_legal_grey"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/et_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_name_error"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/this_field_is_required"
+            android:textColor="@color/banned_red"
+            android:textSize="@dimen/text_generic_size_normal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/et_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_name" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/primary_grey"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_off_white"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/tv_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/suggestions_email"
+            android:textColor="@color/not_legal_grey"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/et_email"
+            app:layout_constraintEnd_toStartOf="@id/tv_email_error"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_name" />
+
+        <TextView
+            android:id="@+id/tv_email_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/this_field_is_required"
+            android:textColor="@color/banned_red"
+            android:textSize="@dimen/text_generic_size_normal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/et_email"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_email" />
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/primary_grey"
+            android:padding="8dp"
+            android:singleLine="true"
+            android:textColor="@color/primary_off_white"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/tv_comments"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_email" />
+
+        <TextView
+            android:id="@+id/tv_comments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/suggestions_comments"
+            android:textColor="@color/not_legal_grey"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/et_comments"
+            app:layout_constraintEnd_toStartOf="@id/tv_comments_error"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_email" />
+
+        <TextView
+            android:id="@+id/tv_comments_error"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:text="@string/this_field_is_required"
+            android:textColor="@color/banned_red"
+            android:textSize="@dimen/text_generic_size_normal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/et_comments"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_comments" />
+
+        <EditText
+            android:id="@+id/et_comments"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/button_rectangle"
+            android:backgroundTint="@color/primary_grey"
+            android:gravity="top"
+            android:maxLines="40"
+            android:padding="8dp"
+            android:textColor="@color/primary_off_white"
+            android:textSize="@dimen/text_generic_size_normal"
+            app:layout_constraintBottom_toTopOf="@id/btn_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_comments" />
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_rectangle"
+            android:fontFamily="@font/montserrat"
+            android:onClick="@{submitListener::onSubmitClicked}"
+            android:text="@string/suggestions_submit"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_title_size_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_comments" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
