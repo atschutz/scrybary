@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentSettingsBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
+import com.alexschutz.scrybary.view.MainActivity
 
 class SettingsFragment : BackButtonFragment() {
 
@@ -108,7 +109,12 @@ class SettingsFragment : BackButtonFragment() {
         }
 
         binding.llSendFeedback.setOnClickListener {
-            SuggestionDialogFragment().show(childFragmentManager, "dialog")
+
+            // Create intent to open Email app.
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("manadorkapp@gmail.com"))
+            intent.type = "message/rfc822"
+            startActivity(Intent.createChooser(intent, "Select email"))
         }
 
         return binding.root
@@ -127,33 +133,11 @@ class SettingsFragment : BackButtonFragment() {
         // TODO find a place to combine this with the part in MainActivity that does the same.
         with(preferences.edit()) {
 
-            val lifeKeys = arrayListOf(
-                getString(R.string.p1_life),
-                getString(R.string.p2_life),
-                getString(R.string.p3_life),
-                getString(R.string.p4_life),
-            )
-
-            val counterKeys = arrayListOf(
-                getString(R.string.p1_box_1),
-                getString(R.string.p1_box_2),
-                getString(R.string.p1_box_3),
-                getString(R.string.p2_box_1),
-                getString(R.string.p2_box_2),
-                getString(R.string.p2_box_3),
-                getString(R.string.p3_box_1),
-                getString(R.string.p3_box_2),
-                getString(R.string.p3_box_3),
-                getString(R.string.p4_box_1),
-                getString(R.string.p4_box_2),
-                getString(R.string.p4_box_3)
-            )
-
             // Life totals default to 20, everything else defaults to 0.
-            for (key in lifeKeys) {
+            for (key in (activity as MainActivity).lifeKeys)
                 putInt(key, preferences.getInt(getString(R.string.pref_starting_life_total), 20))
-            }
-            for (key in counterKeys) putInt(key, 0)
+
+            for (key in (activity as MainActivity).counterKeys) putInt(key, 0)
 
             apply()
         }

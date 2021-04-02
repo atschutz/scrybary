@@ -1,11 +1,13 @@
 package com.alexschutz.scrybary.view.settings
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import com.alexschutz.scrybary.databinding.FragmentSuggestionBinding
 
@@ -13,6 +15,7 @@ import com.alexschutz.scrybary.databinding.FragmentSuggestionBinding
 class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener {
 
     private lateinit var binding: FragmentSuggestionBinding
+    private var canResend = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,8 +67,8 @@ class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener 
                     View.GONE
                 }
 
-            tvEmailError.visibility =
-                if (etEmail.text.isEmpty()) {
+            tvSubjectError.visibility =
+                if (etSubject.text.isEmpty()) {
 
                     hasErrors = true
                     View.VISIBLE
@@ -82,6 +85,24 @@ class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener 
                     hasErrors = hasErrors && false
                     View.GONE
                 }
+
+            if (!hasErrors) {
+                dismiss()
+                sendEmail()
+                Toast.makeText(context, "Thank you for your feedback!", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun sendEmail() {
+
+        val intent = Intent(Intent.ACTION_SEND)
+
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("manadorkapp@gmail.com"))
+        intent.putExtra(Intent.EXTRA_SUBJECT, binding.etSubject.text.toString())
+        intent.putExtra(Intent.EXTRA_TEXT, binding.etComments.text.toString())
+        intent.type = "message/rfc822"
+
+        startActivity(Intent.createChooser(intent, "Select email"))
     }
 }

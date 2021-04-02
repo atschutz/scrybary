@@ -12,7 +12,30 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
+    val lifeKeys = arrayListOf(
+        getString(R.string.p1_life),
+        getString(R.string.p2_life),
+        getString(R.string.p3_life),
+        getString(R.string.p4_life),
+    )
+
+    val counterKeys = arrayListOf(
+        getString(R.string.p1_box_1),
+        getString(R.string.p1_box_2),
+        getString(R.string.p1_box_3),
+        getString(R.string.p2_box_1),
+        getString(R.string.p2_box_2),
+        getString(R.string.p2_box_3),
+        getString(R.string.p3_box_1),
+        getString(R.string.p3_box_2),
+        getString(R.string.p3_box_3),
+        getString(R.string.p4_box_1),
+        getString(R.string.p4_box_2),
+        getString(R.string.p4_box_3)
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -22,39 +45,17 @@ class MainActivity : AppCompatActivity() {
         setCounterDefaults()
     }
 
-    fun setCounterDefaults() {
+    private fun setCounterDefaults() {
 
         val preferences = getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE)
 
         with (getSharedPreferences("SHARED PREFS", Context.MODE_PRIVATE).edit()) {
 
-            val lifeKeys = arrayListOf(
-                getString(R.string.p1_life),
-                getString(R.string.p2_life),
-                getString(R.string.p3_life),
-                getString(R.string.p4_life),
-            )
-
-            val counterKeys = arrayListOf(
-                getString(R.string.p1_box_1),
-                getString(R.string.p1_box_2),
-                getString(R.string.p1_box_3),
-                getString(R.string.p2_box_1),
-                getString(R.string.p2_box_2),
-                getString(R.string.p2_box_3),
-                getString(R.string.p3_box_1),
-                getString(R.string.p3_box_2),
-                getString(R.string.p3_box_3),
-                getString(R.string.p4_box_1),
-                getString(R.string.p4_box_2),
-                getString(R.string.p4_box_3)
-            )
-
             // Life totals default to starting life total pref, counter buttons default to 0.
-            for (key in lifeKeys ) if (!preferences.contains(key))
+            for (key in lifeKeys) if (!preferences.contains(key))
                 putInt(key, preferences.getInt(getString(R.string.pref_starting_life_total), 20))
 
-            for (key in counterKeys ) if (!preferences.contains(key)) putInt(key, 0)
+            for (key in counterKeys) if (!preferences.contains(key)) putInt(key, 0)
 
             apply()
         }
