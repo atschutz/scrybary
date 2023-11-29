@@ -12,32 +12,35 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
 
-    val lifeKeys = arrayListOf(
-        getString(R.string.p1_life),
-        getString(R.string.p2_life),
-        getString(R.string.p3_life),
-        getString(R.string.p4_life),
-    )
-
-    val counterKeys = arrayListOf(
-        getString(R.string.p1_box_1),
-        getString(R.string.p1_box_2),
-        getString(R.string.p1_box_3),
-        getString(R.string.p2_box_1),
-        getString(R.string.p2_box_2),
-        getString(R.string.p2_box_3),
-        getString(R.string.p3_box_1),
-        getString(R.string.p3_box_2),
-        getString(R.string.p3_box_3),
-        getString(R.string.p4_box_1),
-        getString(R.string.p4_box_2),
-        getString(R.string.p4_box_3)
-    )
+    lateinit var lifeKeys: List<String>
+    lateinit var counterKeys: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        lifeKeys = arrayListOf(
+            getString(R.string.p1_life),
+            getString(R.string.p2_life),
+            getString(R.string.p3_life),
+            getString(R.string.p4_life)
+        )
+
+        counterKeys = arrayListOf(
+            getString(R.string.p1_box_1),
+            getString(R.string.p1_box_2),
+            getString(R.string.p1_box_3),
+            getString(R.string.p2_box_1),
+            getString(R.string.p2_box_2),
+            getString(R.string.p2_box_3),
+            getString(R.string.p3_box_1),
+            getString(R.string.p3_box_2),
+            getString(R.string.p3_box_3),
+            getString(R.string.p4_box_1),
+            getString(R.string.p4_box_2),
+            getString(R.string.p4_box_3)
+        )
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         navController = navHostFragment.navController

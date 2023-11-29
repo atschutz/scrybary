@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary.viewmodel
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.alexschutz.scrybary.model.*
@@ -19,9 +18,6 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
     private val disposable = CompositeDisposable()
 
     val printingsUri = MutableLiveData<String>()
-
-    val frontUris = MutableLiveData<ArrayList<String>>()
-    val backUris = MutableLiveData<ArrayList<String>>()
 
     val frontSets = MutableLiveData<ArrayList<CardSet>>()
     val backSets = MutableLiveData<ArrayList<CardSet>>()
