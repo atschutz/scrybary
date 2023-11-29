@@ -66,7 +66,8 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
 
         // Register shake listener.
         sensorManager = getSystemService(requireContext(), SensorManager::class.java)
-            toggleShakeSensor(true)
+
+        toggleShakeSensor(true)
 
         return binding.root
     }
@@ -162,13 +163,13 @@ class DiceFragment : BackButtonFragment(), RollClickListener, ShakeListener {
             tvP1Total.setTextColor(
                 ContextCompat.getColor(
                     tvP1Total.context,
-                    if (p1Roll?.sum ?: 0 < p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
+                    if ((p1Roll?.sum ?: 0) < (p2Roll?.sum ?: 0)) R.color.dimmed_grey else R.color.white
                 )
             )
             tvP2Total.setTextColor(
                 ContextCompat.getColor(
                     tvP2Total.context,
-                    if (p1Roll?.sum ?: 0 > p2Roll?.sum ?: 0) R.color.dimmed_grey else R.color.white
+                    if ((p1Roll?.sum ?: 0) > (p2Roll?.sum ?: 0)) R.color.dimmed_grey else R.color.white
                 )
             )
 

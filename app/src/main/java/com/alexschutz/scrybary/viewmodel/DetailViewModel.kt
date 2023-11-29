@@ -52,7 +52,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                             configureCardFaces(it, detail)
 
                             // Get printing Uri to pass to CardImage.
-                            printUri.value = detail.printUri
+                            printUri.value = detail.printUri ?: ""
 
                             // Since Scryfall keeps its legalities in a json with a property representing
                             // each format, and we want to future proof, we have to parse the json into
@@ -62,9 +62,10 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                                 .fromJson(detail.legalities, Map::class.java)) {
 
                                 // Format fields to look nice.
-                                val format = key.toString().capitalize(Locale.getDefault())
+                                val format = key.toString()
+                                    .replaceFirstChar { first -> if (first.isLowerCase()) first.titlecase(Locale.getDefault()) else it.toString() }
                                 var legality = value.toString().replace("_", " ")
-                                    .toUpperCase(Locale.getDefault())
+                                    .uppercase(Locale.getDefault())
 
                                 legality = if (legality == "RESTRICTED") "RESTR." else legality
 
@@ -114,9 +115,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun configureCardFaces(card: Card, detail: CardDetail) {
-
-        cardFront.value = null
-        cardBack.value = null
 
         val gson = GsonBuilder().create()
 

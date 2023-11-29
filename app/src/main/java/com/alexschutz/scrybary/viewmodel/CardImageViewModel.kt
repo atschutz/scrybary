@@ -46,7 +46,7 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
                                     fronts.add(
                                         CardSet(
                                             json.setName,
-                                            json.symbol.toString().toUpperCase(Locale.getDefault()),
+                                            json.symbol.toString().uppercase(Locale.getDefault()),
                                             gson.fromJson(faces[0].imageUris, CardImage::class.java)?.imageUri ?: ""
                                         )
                                     )
@@ -54,7 +54,7 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
                                     backs.add(
                                         CardSet(
                                             json.setName,
-                                            json.symbol.toString().toUpperCase(Locale.getDefault()),
+                                            json.symbol.toString().uppercase(Locale.getDefault()),
                                             gson.fromJson(faces[1].imageUris, CardImage::class.java)?.imageUri ?: ""
                                         )
                                     )
@@ -62,7 +62,7 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
                                     fronts.add(
                                         CardSet(
                                             json.setName,
-                                            json.symbol.toString().toUpperCase(Locale.getDefault()),
+                                            json.symbol.toString().uppercase(Locale.getDefault()),
                                             gson.fromJson(json.imageUris, CardImage::class.java)?.imageUri ?: ""
                                         )
                                     )

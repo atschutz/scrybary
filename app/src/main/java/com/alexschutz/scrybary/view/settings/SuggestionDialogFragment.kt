@@ -37,16 +37,10 @@ class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener 
 
         // Set window width based on device size
         val window: Window? = dialog?.window
-        val size = Point()
 
-        // Support older display methods for the time being.
-        val display: Display? =
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) context?.display
-            else activity?.windowManager?.defaultDisplay
+        val bounds = window?.windowManager?.currentWindowMetrics?.bounds
 
-        display?.getRealSize(size)
-
-        val width: Int = size.x
+        val width: Int = bounds?.width() ?: 0
 
         window?.setLayout((width * 0.75).toInt(), WindowManager.LayoutParams.WRAP_CONTENT)
         window?.setGravity(Gravity.CENTER)
@@ -73,7 +67,7 @@ class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener 
                     hasErrors = true
                     View.VISIBLE
                 } else {
-                    hasErrors = hasErrors && false
+                    hasErrors = hasErrors
                     View.GONE
                 }
 
@@ -82,7 +76,7 @@ class SuggestionDialogFragment : AppCompatDialogFragment(), SubmitClickListener 
                     hasErrors = true
                     View.VISIBLE
                 } else {
-                    hasErrors = hasErrors && false
+                    hasErrors = hasErrors
                     View.GONE
                 }
 
