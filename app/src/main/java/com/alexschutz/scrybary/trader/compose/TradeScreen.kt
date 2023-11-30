@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,12 +19,12 @@ import androidx.compose.ui.unit.dp
 fun TradeScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
         TradeListTopBar()
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.fillMaxSize()) {
             TraderColumn(modifier = Modifier.weight(1f))
             Spacer(
                 modifier = Modifier
-                    .fillMaxHeight()
-                    .width(1.dp)
+                    .fillMaxWidth()
+                    .height(1.dp)
                     .background(Color.Gray)
             )
             TraderColumn(
