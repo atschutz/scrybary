@@ -23,7 +23,6 @@ fun TraderColumn(modifier: Modifier = Modifier) {
             TraderListItem()
             TraderListItem()
         }
-        TraderBottomBar()
     }
 }
 

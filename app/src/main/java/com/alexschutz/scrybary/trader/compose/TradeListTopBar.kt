@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun TradeListTopBar() {
+fun TradeListMiddleBar() {
     Box(
         modifier = Modifier
             .height(48.dp)
