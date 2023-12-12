@@ -29,6 +29,11 @@
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/swipe_right_enter"
             app:exitAnim="@anim/swipe_right_exit" />
+        <action
+            android:id="@+id/action_menuFragment_to_tradeFragment"
+            app:destination="@id/tradeFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
 
     </fragment>
 
@@ -87,6 +92,7 @@
             app:argType="com.alexschutz.scrybary.model.Card" />
 
     </fragment>
+
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.alexschutz.scrybary.view.settings.SettingsFragment"
@@ -96,5 +102,18 @@
             app:destination="@id/menuFragment"
             app:enterAnim="@anim/swipe_left_enter"
             app:exitAnim="@anim/swipe_left_exit" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tradeFragment"
+        android:name="com.alexschutz.scrybary.view.trade.TradeFragment"
+        android:label="TradeFragment">
+
+        <action
+            android:id="@+id/action_tradeFragment_to_menuFragment"
+            app:destination="@id/menuFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
+
     </fragment>
 </navigation>

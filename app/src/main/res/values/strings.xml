@@ -89,5 +89,6 @@
     <string name="suggestions_submit">Submit</string>
     <string name="this_field_is_required">This field is required.</string>
     <string name="suggestions_subject">Subject</string>
+    <string name="trade">Trade</string>
 
 </resources>

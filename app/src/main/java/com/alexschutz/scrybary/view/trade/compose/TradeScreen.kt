@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.trader.compose
+package com.alexschutz.scrybary.view.trade.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

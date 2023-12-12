@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.trader.compose
+package com.alexschutz.scrybary.view.trade.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
