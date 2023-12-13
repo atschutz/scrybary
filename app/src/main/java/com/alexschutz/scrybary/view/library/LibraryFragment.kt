@@ -75,16 +75,16 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
 
         binding.actvSearch.setAdapter(adapter)
 
-        viewModel.cards.observe(viewLifecycleOwner, { cards ->
+        viewModel.cards.observe(viewLifecycleOwner) { cards ->
             cards?.let {
                 cardListAdapter.updateCardList(cards)
 
                 // Reset recycler view to top position.
                 binding.cardList.scrollToPosition(0)
             }
-        })
+        }
 
-        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             isLoading?.let {
                 binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
@@ -93,21 +93,21 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
                 // reloaded.
                 binding.ivLogo.visibility = View.GONE
             }
-        })
+        }
 
-        viewModel.hasNoResults.observe(viewLifecycleOwner, { hasNoResults ->
+        viewModel.hasNoResults.observe(viewLifecycleOwner) { hasNoResults ->
             hasNoResults?.let {
                 binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
                 binding.ivNarrow.visibility = if (it) View.VISIBLE else View.GONE
             }
-        })
+        }
 
-        viewModel.hasError.observe(viewLifecycleOwner, { hasNoResults ->
+        viewModel.hasError.observe(viewLifecycleOwner) { hasNoResults ->
             hasNoResults?.let {
                 binding.cardList.visibility = if (it) View.GONE else View.VISIBLE
                 binding.ivError.visibility = if (it) View.VISIBLE else View.GONE
             }
-        })
+        }
     }
 
     override fun onSearchClicked(v: View) {
@@ -122,7 +122,10 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             preferences.getStringSet(getString(R.string.pref_search_history), setOf())?.toMutableSet() ?: mutableSetOf()
 
         // Only add if length of search is >= 3 and not in search history already
-        if ((viewModel.search.value)?.length ?: 0 >= 3 && !stringSet.contains(viewModel.search.value)) {
+        if (
+            ((viewModel.search.value)?.length ?: 0) >= 3 &&
+            !stringSet.contains(viewModel.search.value)
+        ) {
 
             with(preferences.edit()) {
 

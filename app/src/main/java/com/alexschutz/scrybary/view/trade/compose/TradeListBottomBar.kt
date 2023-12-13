@@ -2,6 +2,7 @@ package com.alexschutz.scrybary.view.trade.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun TradeListBottomBar() {
+fun TradeListBottomBar(onBack: (Int) -> Unit) {
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
@@ -50,24 +51,31 @@ fun TradeListBottomBar() {
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(start = 8.dp)
+                    .clickable {
+                        onBack(R.id.action_tradeFragment_to_menuFragment)
+                    }
             )
-            // TODO Center input.
+            // TODO Set fonts.
             BasicTextField(
                 value = search,
                 onValueChange = { search = it },
                 decorationBox = {
-                    Row(
+                    Box(
                         Modifier
                             .background(Color.White, RoundedCornerShape(percent = 100))
                             .fillMaxWidth()
                             .height(32.dp)
-                            .padding(start = 10.dp)
+
+                    )
+                    Box(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(start = 10.dp, top = 5.dp)
                     ) {
                         if (search.text.isEmpty()) {
                             Text(
                                 text = "Search...",
                                 color = colorResource(id = R.color.not_legal_grey),
-                                modifier = Modifier.align(Alignment.CenterVertically)
                             )
                         }
                         it()
@@ -94,5 +102,5 @@ fun TradeListBottomBar() {
 @Preview(showBackground = true)
 @Composable
 fun TradeListBottomBarPreview() {
-    TradeListBottomBar()
+    TradeListBottomBar { }
 }
