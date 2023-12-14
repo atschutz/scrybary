@@ -22,13 +22,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun TradeListBottomBar(onBack: (Int) -> Unit) {
+fun TradeListBottomBar(onNavigate: (Int) -> Unit) {
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
@@ -52,7 +53,7 @@ fun TradeListBottomBar(onBack: (Int) -> Unit) {
                     .align(Alignment.CenterVertically)
                     .padding(start = 8.dp)
                     .clickable {
-                        onBack(R.id.action_tradeFragment_to_menuFragment)
+                        onNavigate(R.id.action_tradeFragment_to_menuFragment)
                     }
             )
             // TODO Set fonts.
@@ -74,7 +75,7 @@ fun TradeListBottomBar(onBack: (Int) -> Unit) {
                     ) {
                         if (search.text.isEmpty()) {
                             Text(
-                                text = "Search...",
+                                text = stringResource(id = R.string.enter_card_name_here),
                                 color = colorResource(id = R.color.not_legal_grey),
                             )
                         }
@@ -93,7 +94,9 @@ fun TradeListBottomBar(onBack: (Int) -> Unit) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(end = 8.dp)
+                    .padding(end = 8.dp) .clickable {
+                        onNavigate(R.id.action_tradeFragment_to_libraryFragment)
+                    }
             )
         }
     }

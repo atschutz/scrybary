@@ -115,5 +115,11 @@
             app:enterAnim="@anim/swipe_right_enter"
             app:exitAnim="@anim/swipe_right_exit" />
 
+        <action
+            android:id="@+id/action_tradeFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/swipe_right_enter"
+            app:exitAnim="@anim/swipe_right_exit" />
+
     </fragment>
 </navigation>

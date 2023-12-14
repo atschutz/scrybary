@@ -37,29 +37,30 @@ class ImageDialogFragment(val printingsUri: String?, val isFront: Boolean): AppC
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(CardImageViewModel::class.java)
+        viewModel = ViewModelProvider(this)[CardImageViewModel::class.java]
         viewModel.printingsUri.value = printingsUri
 
         viewModel.fetchUris()
 
         if (isFront) {
-            viewModel.frontSets.observe(viewLifecycleOwner, { cardSets ->
+            viewModel.frontSets.observe(viewLifecycleOwner) { cardSets ->
                 val adapter = CardImageStateAdapter(childFragmentManager, lifecycle)
                 for (cardSet in cardSets) adapter.fragments.add(CardImageFragment(cardSet))
 
-                adapter.notifyDataSetChanged()
+                //adapter.notifyDataSetChanged()
+                adapter.notifyItemRangeChanged(0, cardSets.size)
 
                 binding.vpImages.adapter = adapter
-            })
+            }
         } else {
-            viewModel.backSets.observe(viewLifecycleOwner, { cardSets ->
+            viewModel.backSets.observe(viewLifecycleOwner) { cardSets ->
                 val adapter = CardImageStateAdapter(childFragmentManager, lifecycle)
                 for (cardSet in cardSets) adapter.fragments.add(CardImageFragment(cardSet))
 
-                adapter.notifyDataSetChanged()
+                adapter.notifyItemRangeChanged(0, cardSets.size)
 
                 binding.vpImages.adapter = adapter
-            })
+            }
         }
     }
 
