@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose
+package com.alexschutz.scrybary.view.trade.compose.tradelist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -45,6 +48,7 @@ fun TradeListMiddleBar() {
         )
         Text(
             text ="$0.00",
+            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
             fontSize = 12.sp,
             color = Color.White,
             modifier = Modifier
@@ -53,6 +57,7 @@ fun TradeListMiddleBar() {
         )
         Text(
             text ="$0.00",
+            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
             fontSize = 12.sp,
             color = Color.White,
             modifier = Modifier
@@ -89,13 +94,20 @@ fun TradeListMiddleBar() {
                     if (isListView) ColorFilter.tint(colorResource(id = R.color.deselected_purple))
                     else null,
                 modifier = Modifier
-                    .padding(end = 8.dp)
                     .size(24.dp)
                     .align(Alignment.CenterVertically)
                     .clickable { isListView = false }
             )
+            Box(
+                modifier = Modifier
+                    .padding(12.dp)
+                    .fillMaxHeight()
+                    .width(1.dp)
+                    .background(colorResource(id = R.color.light_purple))
+            )
             Text(
                 text ="$0.00",
+                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
                 fontSize = 24.sp,
                 color = Color.White,
                 modifier = Modifier

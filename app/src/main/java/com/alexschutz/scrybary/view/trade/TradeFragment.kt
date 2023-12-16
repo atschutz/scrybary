@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
-import com.alexschutz.scrybary.view.trade.compose.TradeScreen
+import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeScreen
 
 class TradeFragment : BackButtonFragment() {
     private lateinit var binding: FragmentTradeBinding
