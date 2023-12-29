@@ -81,7 +81,7 @@ fun ConditionBottomBar() {
             )
             Image(
                 painter = painterResource(id = R.drawable.ic_foil),
-                contentDescription = "Toggle is foil",
+                contentDescription = "Foil toggle",
                 colorFilter =
                     if (isFoil) null
                     else ColorFilter.tint(colorResource(id = R.color.deselected_purple)),
