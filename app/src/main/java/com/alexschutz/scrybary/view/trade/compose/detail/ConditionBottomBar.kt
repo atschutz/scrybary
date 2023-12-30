@@ -116,6 +116,7 @@ fun ConditionBottomBarPreview() {
     ConditionBottomBar()
 }
 
+// TODO Move somewhere more generic.
 enum class CardCondition(val text: String) {
     NEAR_MINT("NM"),
     MODERATELY_PLAYED("MP"),

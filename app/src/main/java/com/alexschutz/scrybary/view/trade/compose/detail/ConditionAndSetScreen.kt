@@ -60,6 +60,7 @@ fun ConditionAndSetScreen() {
                 color = colorResource(id = R.color.white)
             )
             PriceLabel(price = "$37.50")
+            // TODO add swipe indicators.
             Image(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)

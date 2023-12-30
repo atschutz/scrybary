@@ -1,50 +1,75 @@
 package com.alexschutz.scrybary.view.trade.compose.tradelist
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.model.Card
+import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition
+import com.alexschutz.scrybary.view.trade.compose.testCard
 
 @Composable
-fun TraderListItem() {
+fun TraderListItem(
+    card: Card,
+    setSymbol: String,
+    condition: CardCondition,
+    isFoil: Boolean = true,
+    price: String
+) {
+    // TODO Incorporate price and set into card info.
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(2.dp)
+            .padding(4.dp)
     ) {
-        Text(
-            text = "Card Name",
-            fontSize = 12.sp,
-            modifier = Modifier
-                .weight(1f)
-        )
-        Text(
-            text = "SET",
-            fontSize = 12.sp,
-            modifier = Modifier
-                .weight(0.25f)
-        )
-        Text(
-            text = "CD",
-            fontSize = 12.sp,
-            modifier = Modifier
-                .weight(0.25f)
-        )
-        Text(
-            text = "*F*",
-            fontSize = 12.sp,
-            modifier = Modifier
-                .weight(0.25f)
-        )
-        Text(
-            text = "$0.00",
-            fontSize = 12.sp,
-            modifier = Modifier
-                .weight(0.25f)
-        )
+        Row(modifier = Modifier.weight(1f)) {
+            if (isFoil) {
+                Image(
+                    painter = painterResource(id = R.drawable.ic_foil),
+                    contentDescription = "CMC symbol",
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                        .size(12.dp)
+                        .align(Alignment.CenterVertically)
+
+                )
+            }
+            MiscCardInfoText(text = card.name, modifier = Modifier.weight(1f))
+        }
+        MiscCardInfoText(text = setSymbol, modifier = Modifier.weight(0.25f))
+        MiscCardInfoText(text = condition.text, modifier = Modifier.weight(0.25f))
+        MiscCardInfoText(text = price, modifier = Modifier.weight(0.25f), true)
     }
+}
+
+@Composable
+fun MiscCardInfoText(text: String, modifier: Modifier, alignToEnd: Boolean = false) {
+    Text(
+        modifier = modifier,
+        text = text,
+        fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+        fontSize = 12.sp,
+        color = colorResource(id = R.color.white),
+        textAlign = if (alignToEnd) TextAlign.End else TextAlign.Start
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TradeListItemPreview() {
+    TraderListItem(testCard, "MM3", CardCondition.NEAR_MINT, true, "$8.50")
 }

@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun TradeListBottomBar(onNavigate: (Int) -> Unit) {
+fun TradeListTopBar(onNavigate: (Int) -> Unit) {
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
@@ -105,5 +105,5 @@ fun TradeListBottomBar(onNavigate: (Int) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun TradeListBottomBarPreview() {
-    TradeListBottomBar { }
+    TradeListTopBar { }
 }
