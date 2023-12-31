@@ -97,11 +97,13 @@
         android:id="@+id/settingsFragment"
         android:name="com.alexschutz.scrybary.view.settings.SettingsFragment"
         android:label="SettingsFragment">
+
         <action
             android:id="@+id/action_settingsFragment_to_menuFragment"
             app:destination="@id/menuFragment"
             app:enterAnim="@anim/swipe_left_enter"
             app:exitAnim="@anim/swipe_left_exit" />
+
     </fragment>
 
     <fragment
@@ -112,12 +114,6 @@
         <action
             android:id="@+id/action_tradeFragment_to_menuFragment"
             app:destination="@id/menuFragment"
-            app:enterAnim="@anim/swipe_right_enter"
-            app:exitAnim="@anim/swipe_right_exit" />
-
-        <action
-            android:id="@+id/action_tradeFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment"
             app:enterAnim="@anim/swipe_right_enter"
             app:exitAnim="@anim/swipe_right_exit" />
 

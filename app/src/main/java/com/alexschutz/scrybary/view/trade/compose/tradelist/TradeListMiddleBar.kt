@@ -49,19 +49,19 @@ fun TradeListMiddleBar() {
         Text(
             text ="$0.00",
             fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
-            fontSize = 12.sp,
+            fontSize = 16.sp,
             color = Color.White,
             modifier = Modifier
-                .padding(top = 4.dp, end = 8.dp)
+                .padding(end = 8.dp)
                 .align(Alignment.TopEnd)
         )
         Text(
             text ="$0.00",
             fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
-            fontSize = 12.sp,
+            fontSize = 16.sp,
             color = Color.White,
             modifier = Modifier
-                .padding(bottom = 4.dp, end = 8.dp)
+                .padding(end = 8.dp)
                 .align(Alignment.BottomEnd)
         )
         Row(

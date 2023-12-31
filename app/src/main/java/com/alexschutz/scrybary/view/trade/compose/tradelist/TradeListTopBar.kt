@@ -94,8 +94,9 @@ fun TradeListTopBar(onNavigate: (Int) -> Unit) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
-                    .padding(end = 8.dp) .clickable {
-                        onNavigate(R.id.action_tradeFragment_to_libraryFragment)
+                    .padding(end = 8.dp)
+                    .clickable {
+                        // TODO Open item list.
                     }
             )
         }

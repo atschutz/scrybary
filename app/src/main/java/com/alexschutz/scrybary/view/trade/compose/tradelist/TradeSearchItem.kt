@@ -2,9 +2,9 @@ package com.alexschutz.scrybary.view.trade.compose.tradelist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,20 +17,20 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.symbols
 import com.alexschutz.scrybary.view.trade.compose.testCard
 
 @Composable
-fun TradeSearchItem(card: Card) {
+fun TradeSearchItem(card: Card, onSearchItemClicked: () -> Unit) {
     Row (
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxWidth()
             .background(colorResource(id = R.color.dimmed_grey))
-            .padding(4.dp),
+            .padding(4.dp)
+            .clickable { onSearchItemClicked() },
     ) {
         Text(
             modifier = Modifier
@@ -54,15 +54,14 @@ fun TradeSearchItem(card: Card) {
                 }
             }
         }
-
     }
 }
 
 fun generateSymbolIdListFromCmc(cmc: String?): List<Int?> =
-    cmc?.split(regex = "(?<=})".toRegex())?.map { symbols[it] } ?: listOf()
+    cmc?.split(regex = "(?<=\\})".toRegex())?.map { symbols[it] } ?: listOf()
 
 @Preview(showBackground = true)
 @Composable
 fun TradeScreenSearchItemPreview() {
-    TradeSearchItem(testCard)
+    TradeSearchItem(testCard) { }
 }
