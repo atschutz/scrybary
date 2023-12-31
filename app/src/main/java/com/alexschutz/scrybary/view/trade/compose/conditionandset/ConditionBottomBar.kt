@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.detail
+package com.alexschutz.scrybary.view.trade.compose.conditionandset
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,10 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
-import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition.NEAR_MINT
-import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition.MODERATELY_PLAYED
-import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition.HEAVILY_PLAYED
-import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition.DAMAGED
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition.NEAR_MINT
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition.MODERATELY_PLAYED
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition.HEAVILY_PLAYED
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition.DAMAGED
 
 
 @Composable

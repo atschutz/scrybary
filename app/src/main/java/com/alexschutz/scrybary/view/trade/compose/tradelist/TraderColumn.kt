@@ -8,7 +8,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.alexschutz.scrybary.view.trade.compose.detail.CardCondition
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition
 import com.alexschutz.scrybary.view.trade.compose.testCard
 import com.alexschutz.scrybary.view.trade.compose.testCards
 

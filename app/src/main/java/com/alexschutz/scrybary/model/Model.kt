@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.model
 
 import android.os.Parcelable
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
@@ -138,5 +139,12 @@ data class CardSet(
     val set: String?,
     val symbol: String?,
     val imageUri: String?
+)
+
+data class CardTradeInfo(
+    val card: Card,
+    val cardSet: CardSet,
+    val condition: CardCondition,
+    val isFoil: Boolean = false,
 )
 
