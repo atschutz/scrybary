@@ -1,28 +1,19 @@
-package com.alexschutz.scrybary.view.trade.compose.tradelist
+package com.alexschutz.scrybary.model
 
 import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import androidx.lifecycle.ViewModel
-import com.alexschutz.scrybary.model.Card
-import com.alexschutz.scrybary.model.CardListJson
-import com.alexschutz.scrybary.model.CardSearchRepository
-import com.alexschutz.scrybary.model.CardsApiService
 import com.google.gson.GsonBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class TradeListViewModel: ViewModel() {
+class CardSearchRepository {
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
 
-    var cards: List<Card> by mutableStateOf(listOf())
-
-    fun fetchFromRemote(search: String) {
+    fun fetchFromRemote(search: String): List<Card> {
         Log.d("-as-", "fetching with $search...")
+        var list = mutableListOf<Card>()
         if (search.length >= 3) {
             disposable.add(
                 cardService.getCardList(search)
@@ -32,7 +23,7 @@ class TradeListViewModel: ViewModel() {
                         override fun onSuccess(cardListJson: CardListJson) {
                             Log.d("-as-", "success!")
                             val gson = GsonBuilder().create()
-                            val list = gson.fromJson(cardListJson.data, Array<Card>::class.java)
+                            list = gson.fromJson(cardListJson.data, Array<Card>::class.java)
                                 .toMutableList()
 
                             // Sort list so perfect matches are at the top
@@ -55,7 +46,6 @@ class TradeListViewModel: ViewModel() {
                                     }
                                 }
                             }
-                            cards = list
                             Log.d("-as-", "cards were updated: $list")
                         }
 
@@ -63,10 +53,21 @@ class TradeListViewModel: ViewModel() {
                             e.printStackTrace()
                             Log.d("-as-", "error! ${e.printStackTrace()}")
                             // Clear card list.
-                            cards = mutableListOf()
+                            list = mutableListOf()
                         }
                     })
             )
+        }
+        Log.d("-as-", "list outside: $list")
+        return list
+    }
+
+    companion object {
+        @Volatile
+        private var instance: CardSearchRepository? = null
+
+        fun getInstance() = instance ?: synchronized(this) {
+            instance ?: CardSearchRepository().also {  instance = it }
         }
     }
 }

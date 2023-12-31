@@ -4,7 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,8 +17,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
+import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.view.trade.compose.conditionandset.ConditionAndSetScreen
+import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeListViewModel
 import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeScreen
 
 class TradeFragment : BackButtonFragment() {
@@ -30,16 +37,21 @@ class TradeFragment : BackButtonFragment() {
             // Dispose when view's owner is destroyed.
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
+                val viewModel: TradeListViewModel = viewModel()
                 val navController = rememberNavController()
+
                 NavHost(
                     navController = navController,
                     startDestination = TradeScreen.Trade.name,
                 ) {
-                    // TODO Pass UI state.
                     composable(route = TradeScreen.Trade.name) {
-                        TradeScreen (
-                            { id -> findNavController().navigate(id) },
-                            { navController.navigate(route = TradeScreen.ConditionAndSet.name) }
+                        TradeScreen(
+                            cards = viewModel.cards,
+                            onNavigate = { id -> findNavController().navigate(id) },
+                            onSearchClicked = { search -> viewModel.fetchFromRemote(search) },
+                            onCardClicked = {
+                                navController.navigate(route = TradeScreen.ConditionAndSet.name)
+                            }
                         )
                     }
                     composable(route = TradeScreen.ConditionAndSet.name) {

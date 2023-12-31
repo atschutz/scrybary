@@ -1,5 +1,6 @@
 package com.alexschutz.scrybary.view.trade.compose.tradelist
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,16 +11,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.view.trade.compose.testCards
 
 @Composable
-fun TradeScreen(onNavigate: (Int) -> Unit, onCardClicked: () -> Unit) {
+fun TradeScreen(
+    cards: List<Card>,
+    onNavigate: (Int) -> Unit,
+    onSearchClicked: (String) -> Unit,
+    onCardClicked: () -> Unit,
+) {
+    Log.d("-as-", "cards in trade screen: $cards")
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            TradeListTopBar(onNavigate)
+            TradeListTopBar(onNavigate, onSearchClicked)
             TraderColumn(modifier = Modifier.weight(1f))
             TradeListMiddleBar()
             TraderColumn(modifier = Modifier.weight(1f))
@@ -29,7 +37,8 @@ fun TradeScreen(onNavigate: (Int) -> Unit, onCardClicked: () -> Unit) {
             modifier = Modifier
                 .padding(top = 44.dp, start = 56.dp, end = 56.dp)
         ) {
-            items(testCards) { TradeSearchItem(card = it) { onCardClicked() } }
+            Log.d("-as-", "cards updated in trade screen: $cards")
+            items(cards) { TradeSearchItem(card = it) { onCardClicked() } }
         }
     }
 }
@@ -37,6 +46,6 @@ fun TradeScreen(onNavigate: (Int) -> Unit, onCardClicked: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun TradeScreenPreview() {
-    TradeScreen({ },{ })
+    TradeScreen(testCards, { }, { }, { })
 }
 

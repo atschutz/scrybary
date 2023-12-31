@@ -23,13 +23,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun TradeListTopBar(onNavigate: (Int) -> Unit) {
+fun TradeListTopBar(
+    onNavigate: (Int) -> Unit,
+    onSearchPressed: (String) -> Unit
+) {
+    var search by remember { mutableStateOf(TextFieldValue("")) }
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
@@ -43,8 +49,6 @@ fun TradeListTopBar(onNavigate: (Int) -> Unit) {
                 .height(60.dp)
                 .fillMaxWidth()
         ) {
-            var search by remember { mutableStateOf(TextFieldValue("")) }
-
             Image(
                 painter = painterResource(id = R.drawable.ic_arrow_back),
                 contentDescription = "",
@@ -77,6 +81,7 @@ fun TradeListTopBar(onNavigate: (Int) -> Unit) {
                             Text(
                                 text = stringResource(id = R.string.enter_card_name_here),
                                 color = colorResource(id = R.color.not_legal_grey),
+                                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
                             )
                         }
                         it()
@@ -95,9 +100,7 @@ fun TradeListTopBar(onNavigate: (Int) -> Unit) {
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp)
-                    .clickable {
-                        // TODO Open item list.
-                    }
+                    .clickable { onSearchPressed(search.text) }
             )
         }
     }
@@ -105,6 +108,6 @@ fun TradeListTopBar(onNavigate: (Int) -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun TradeListBottomBarPreview() {
-    TradeListTopBar { }
+fun TradeListTopBarPreview() {
+    TradeListTopBar({ }, { })
 }
