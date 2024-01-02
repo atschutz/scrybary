@@ -46,8 +46,8 @@ class DetailFragment : BackButtonFragment()  {
 
         viewModel.fetchCardDetail()
 
-        viewModel.cardFront.observe(viewLifecycleOwner, { front ->
-            with (binding) {
+        viewModel.cardFront.observe(viewLifecycleOwner) { front ->
+            with(binding) {
                 this.front = front
 
                 tvSlash.visibility =
@@ -55,14 +55,14 @@ class DetailFragment : BackButtonFragment()  {
                     else View.GONE
 
                 tvLoyaltyLabel.visibility =
-                    if(front?.loyalty != null) View.VISIBLE else View.GONE
+                    if (front?.loyalty != null) View.VISIBLE else View.GONE
 
                 toggleCardFrontViews(front)
             }
-        })
+        }
 
-        viewModel.cardBack.observe(viewLifecycleOwner, { back ->
-            with (binding) {
+        viewModel.cardBack.observe(viewLifecycleOwner) { back ->
+            with(binding) {
                 this.back = back
 
                 if (back == null) {
@@ -78,19 +78,19 @@ class DetailFragment : BackButtonFragment()  {
                     else View.GONE
 
                 tvBackLoyaltyLabel.visibility =
-                    if(back?.loyalty != null) View.VISIBLE else View.GONE
+                    if (back?.loyalty != null) View.VISIBLE else View.GONE
 
                 toggleCardBackViews(back)
             }
-        })
+        }
 
-        viewModel.cardFrontImageUri.observe(viewLifecycleOwner, { uri ->
+        viewModel.cardFrontImageUri.observe(viewLifecycleOwner) { uri ->
             binding.frontImageUri = uri
-        })
+        }
 
-        viewModel.cardBackImageUri.observe(viewLifecycleOwner, { uri ->
+        viewModel.cardBackImageUri.observe(viewLifecycleOwner) { uri ->
             binding.backImageUri = uri
-        })
+        }
 
         binding.rulingsList.apply {
             layoutManager = LinearLayoutManager(context)
@@ -102,35 +102,35 @@ class DetailFragment : BackButtonFragment()  {
             adapter = legalityListAdapter
         }
 
-        viewModel.rulings.observe(viewLifecycleOwner, { rulings ->
+        viewModel.rulings.observe(viewLifecycleOwner) { rulings ->
             rulings?.let {
                 rulingsListAdapter.updateRulingsList(rulings)
             }
-        })
+        }
 
-        viewModel.legalities.observe(viewLifecycleOwner, { legalities ->
+        viewModel.legalities.observe(viewLifecycleOwner) { legalities ->
             legalities?.let {
                 legalityListAdapter.updateLegalityList(legalities)
             }
-        })
+        }
 
-        viewModel.loading.observe(viewLifecycleOwner, { isLoading ->
+        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             isLoading?.let {
-                binding.nestedScrollView.visibility =  if (it) View.GONE else View.VISIBLE
+                binding.nestedScrollView.visibility = if (it) View.GONE else View.VISIBLE
                 binding.loadBar.visibility = if (it) View.VISIBLE else View.GONE
 
             }
-        })
+        }
 
         // TODO view bind :^)
-        viewModel.printUri.observe(viewLifecycleOwner, { id ->
+        viewModel.printUri.observe(viewLifecycleOwner) { id ->
             binding.ivCardImage.setOnClickListener {
                 ImageDialogFragment(id, true).show(childFragmentManager, "dialog")
             }
             binding.ivBackCardImage.setOnClickListener {
                 ImageDialogFragment(id, false).show(childFragmentManager, "dialog")
             }
-        })
+        }
     }
 
     override fun onBackPressed(v: View) {

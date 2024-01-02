@@ -7,16 +7,24 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -28,44 +36,57 @@ import com.alexschutz.scrybary.R
 
 @Composable
 fun ConditionAndSetScreen() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Box(
-            modifier = Modifier
-                .clickable {
-                    // TODO Go back.
-                },
-        ) {
-            Image(
-                modifier = Modifier
-                    .padding(6.dp)
-                    .size(36.dp),
-                painter = painterResource(id = R.drawable.ic_arrow_back),
-                contentDescription = "Back button",
-                contentScale = ContentScale.Fit,
-            )
-        }
+    var isFoil by remember { mutableStateOf(false) }
 
+    Box(modifier = Modifier.fillMaxSize()) {
+        Image(
+            modifier = Modifier
+                .padding(6.dp)
+                .size(36.dp),
+            painter = painterResource(id = R.drawable.ic_arrow_back),
+            contentDescription = "Back button",
+            contentScale = ContentScale.Fit,
+        )
+        Image(
+            modifier = Modifier
+                .padding(6.dp)
+                .size(36.dp)
+                .align(Alignment.CenterStart)
+                .rotate(90f),
+            painter = painterResource(id = R.drawable.ic_arrow_down),
+            contentDescription = "Swipe card printing back",
+            contentScale = ContentScale.Fit,
+        )
+        Image(
+            modifier = Modifier
+                .padding(6.dp)
+                .size(36.dp)
+                .align(Alignment.CenterEnd)
+                .rotate(-90f),
+            painter = painterResource(id = R.drawable.ic_arrow_down),
+            contentDescription = "Swipe card printing back",
+            contentScale = ContentScale.Fit,
+        )
         Column(
             modifier = Modifier
+                .fillMaxHeight()
                 .align(Alignment.Center)
-                .padding(start = 60.dp, end = 60.dp, bottom = 60.dp),
+                .padding(start = 60.dp, end = 60.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                modifier = Modifier.padding(bottom = 16.dp),
+                modifier = Modifier.padding(bottom = 8.dp),
                 text = "Tarmogoyf",
                 textAlign = TextAlign.Center,
                 fontSize = 32.sp,
                 color = colorResource(id = R.color.white)
             )
             PriceLabel(price = "$37.50")
-            // TODO add swipe indicators.
             Image(
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .fillMaxWidth(),
-
                 painter = painterResource(id = R.drawable.card_placeholder),
                 contentDescription = "Card placeholder",
                 contentScale = ContentScale.Fit,
@@ -85,18 +106,32 @@ fun ConditionAndSetScreen() {
                     color = colorResource(id = R.color.white)
                 )
             }
-            Row {
+            Row( modifier = Modifier
+                    .padding(16.dp)
+                    .background(
+                        colorResource(id = R.color.mid_purple),
+                        RoundedCornerShape(percent = 100)
+                    ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 AddButton(isTop = true)
+                Divider()
+                Image(
+                    painter = painterResource(id = R.drawable.ic_foil),
+                    contentDescription = "Foil toggle",
+                    colorFilter =
+                        if (isFoil) null
+                        else ColorFilter.tint(colorResource(id = R.color.deselected_purple)),
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp, )
+                        .size(28.dp)
+                        .align(Alignment.CenterVertically)
+                        .clickable { isFoil = !isFoil }
+                )
+                Divider()
                 AddButton(isTop = false)
             }
         }
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-        ) {
-            ConditionBottomBar()
-        }
-
     }
 }
 
@@ -104,7 +139,7 @@ fun ConditionAndSetScreen() {
 fun PriceLabel(price: String) {
     Box(
         modifier = Modifier
-            .padding(bottom = 32.dp)
+            .padding(bottom = 16.dp)
             .background(
                 colorResource(id = R.color.mid_purple),
                 RoundedCornerShape(percent = 100)
@@ -125,11 +160,7 @@ fun AddButton(isTop: Boolean = false) {
     // TODO make padding look nicer.
     Box(
         modifier = Modifier
-            .padding(top = 32.dp, start = 30.dp, end = 30.dp)
-            .background(
-                colorResource(id = R.color.mid_purple),
-                RoundedCornerShape(percent = 100)
-            )
+            .padding()
     ) {
         Row(
             modifier = Modifier
@@ -155,6 +186,17 @@ fun AddButton(isTop: Boolean = false) {
             )
         }
     }
+}
+
+@Composable
+fun Divider() {
+    Box(
+        modifier = Modifier
+            .padding(start = 4.dp, end = 4.dp)
+            .width(1.dp)
+            .height(32.dp)
+            .background(colorResource(id = R.color.light_purple))
+    )
 }
 
 @Preview(showBackground = true)

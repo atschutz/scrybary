@@ -106,7 +106,10 @@ data class ImageJson(
     val symbol: String?,
 
     @SerializedName("set_name")
-    val setName: String?
+    val setName: String?,
+
+    @SerializedName("prices")
+    val prices: JsonObject?,
 )
 
 data class CardListJson(
@@ -138,7 +141,8 @@ data class Legality(
 data class CardSet(
     val set: String?,
     val symbol: String?,
-    val imageUri: String?
+    val imageUri: String?,
+    val prices: PriceData,
 )
 
 data class CardTradeInfo(
@@ -146,5 +150,10 @@ data class CardTradeInfo(
     val cardSet: CardSet,
     val condition: CardCondition,
     val isFoil: Boolean = false,
+)
+
+data class PriceData(
+    val usd: Float?,
+    val usdFoil: Float?,
 )
 

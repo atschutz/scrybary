@@ -21,7 +21,6 @@ fun TradeScreen(
     onSearchClicked: (String) -> Unit,
     onCardClicked: () -> Unit,
 ) {
-    Log.d("-as-", "cards in trade screen: $cards")
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -37,7 +36,6 @@ fun TradeScreen(
             modifier = Modifier
                 .padding(top = 44.dp, start = 56.dp, end = 56.dp)
         ) {
-            Log.d("-as-", "cards updated in trade screen: $cards")
             items(cards) { TradeSearchItem(card = it) { onCardClicked() } }
         }
     }

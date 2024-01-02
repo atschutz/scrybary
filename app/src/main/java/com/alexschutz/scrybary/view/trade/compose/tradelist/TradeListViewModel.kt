@@ -22,7 +22,6 @@ class TradeListViewModel: ViewModel() {
     var cards: List<Card> by mutableStateOf(listOf())
 
     fun fetchFromRemote(search: String) {
-        Log.d("-as-", "fetching with $search...")
         if (search.length >= 3) {
             disposable.add(
                 cardService.getCardList(search)
@@ -30,7 +29,6 @@ class TradeListViewModel: ViewModel() {
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeWith(object: DisposableSingleObserver<CardListJson>() {
                         override fun onSuccess(cardListJson: CardListJson) {
-                            Log.d("-as-", "success!")
                             val gson = GsonBuilder().create()
                             val list = gson.fromJson(cardListJson.data, Array<Card>::class.java)
                                 .toMutableList()
@@ -56,12 +54,10 @@ class TradeListViewModel: ViewModel() {
                                 }
                             }
                             cards = list
-                            Log.d("-as-", "cards were updated: $list")
                         }
 
                         override fun onError(e: Throwable) {
                             e.printStackTrace()
-                            Log.d("-as-", "error! ${e.printStackTrace()}")
                             // Clear card list.
                             cards = mutableListOf()
                         }

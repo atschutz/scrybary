@@ -12,7 +12,6 @@ class CardSearchRepository {
     private val disposable = CompositeDisposable()
 
     fun fetchFromRemote(search: String): List<Card> {
-        Log.d("-as-", "fetching with $search...")
         var list = mutableListOf<Card>()
         if (search.length >= 3) {
             disposable.add(
