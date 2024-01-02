@@ -20,13 +20,14 @@ fun TradeScreen(
     onNavigate: (Int) -> Unit,
     onSearchClicked: (String) -> Unit,
     onCardClicked: () -> Unit,
+    onClearClicked: () -> Unit,
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
-            TradeListTopBar(onNavigate, onSearchClicked)
+            TradeListTopBar(onNavigate, onSearchClicked, onClearClicked)
             TraderColumn(modifier = Modifier.weight(1f))
             TradeListMiddleBar()
             TraderColumn(modifier = Modifier.weight(1f))
@@ -44,6 +45,6 @@ fun TradeScreen(
 @Preview(showBackground = true)
 @Composable
 fun TradeScreenPreview() {
-    TradeScreen(testCards, { }, { }, { })
+    TradeScreen(testCards, { }, { }, { }, { })
 }
 

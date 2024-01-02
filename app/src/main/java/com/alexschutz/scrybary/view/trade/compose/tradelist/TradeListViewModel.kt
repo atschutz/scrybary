@@ -1,13 +1,11 @@
 package com.alexschutz.scrybary.view.trade.compose.tradelist
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.model.CardListJson
-import com.alexschutz.scrybary.model.CardSearchRepository
 import com.alexschutz.scrybary.model.CardsApiService
 import com.google.gson.GsonBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -13,6 +13,7 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,9 +34,11 @@ import com.alexschutz.scrybary.R
 @Composable
 fun TradeListTopBar(
     onNavigate: (Int) -> Unit,
-    onSearchPressed: (String) -> Unit
+    onSearchPressed: (String) -> Unit,
+    onClearClicked: () -> Unit,
 ) {
     var search by remember { mutableStateOf(TextFieldValue("")) }
+    var isSearchable by remember { mutableStateOf(true) }
 
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
@@ -63,7 +66,10 @@ fun TradeListTopBar(
             // TODO Set fonts.
             BasicTextField(
                 value = search,
-                onValueChange = { search = it },
+                onValueChange = {
+                    search = it
+                    if (!isSearchable) isSearchable = true
+                },
                 decorationBox = {
                     Box(
                         Modifier
@@ -94,13 +100,25 @@ fun TradeListTopBar(
                     .weight(1f)
             )
             Image(
-                painter = painterResource(id = R.drawable.ic_search),
+                painter = painterResource(
+                    id = if (isSearchable) R.drawable.ic_search else R.drawable.ic_x
+                ),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp)
-                    .clickable { onSearchPressed(search.text) }
+                    .clickable {
+                        if (isSearchable && search.text.length >= 3) {
+                            onSearchPressed(search.text)
+                            isSearchable = !isSearchable
+                        } else if (!isSearchable) {
+                            // TODO clear list.
+                            search = TextFieldValue("")
+                            isSearchable = true
+                            onClearClicked()
+                        }
+                    }
             )
         }
     }
@@ -109,5 +127,5 @@ fun TradeListTopBar(
 @Preview(showBackground = true)
 @Composable
 fun TradeListTopBarPreview() {
-    TradeListTopBar({ }, { })
+    TradeListTopBar({ }, { }, { })
 }

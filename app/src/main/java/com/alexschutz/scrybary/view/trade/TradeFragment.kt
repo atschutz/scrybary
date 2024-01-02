@@ -1,13 +1,10 @@
 package com.alexschutz.scrybary.view.trade
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.Navigation
@@ -17,9 +14,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.findNavController
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
-import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.view.BackButtonFragment
-import com.alexschutz.scrybary.view.trade.compose.conditionandset.ConditionAndSetScreen
+import com.alexschutz.scrybary.view.trade.compose.conditionandset.PrintingSelectorScreen
 import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeListViewModel
 import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeScreen
 
@@ -50,12 +46,20 @@ class TradeFragment : BackButtonFragment() {
                             onNavigate = { id -> findNavController().navigate(id) },
                             onSearchClicked = { search -> viewModel.fetchFromRemote(search) },
                             onCardClicked = {
-                                navController.navigate(route = TradeScreen.ConditionAndSet.name)
+                                navController.navigate(route = TradeScreen.PrintingSelector.name)
+                            },
+                            onClearClicked = {
+                                viewModel.cards = listOf()
+                                Log.d("-as-", "clear clicked! ${viewModel.cards}")
                             }
                         )
                     }
-                    composable(route = TradeScreen.ConditionAndSet.name) {
-                        ConditionAndSetScreen()
+                    composable(route = TradeScreen.PrintingSelector.name) {
+                        PrintingSelectorScreen(
+                            onBackClicked = {
+                                navController.navigate(route = TradeScreen.Trade.name)
+                            }
+                        )
                     }
                 }
             }
@@ -71,6 +75,6 @@ class TradeFragment : BackButtonFragment() {
 
     enum class TradeScreen {
         Trade,
-        ConditionAndSet,
+        PrintingSelector,
     }
 }

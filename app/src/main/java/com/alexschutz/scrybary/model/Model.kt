@@ -142,7 +142,8 @@ data class CardSet(
     val set: String?,
     val symbol: String?,
     val imageUri: String?,
-    val prices: PriceData,
+    // TODO fit this in
+    // val prices: PriceData,
 )
 
 data class CardTradeInfo(

@@ -35,14 +35,15 @@ import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 
 @Composable
-fun ConditionAndSetScreen() {
+fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
     var isFoil by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             modifier = Modifier
                 .padding(6.dp)
-                .size(36.dp),
+                .size(36.dp)
+                .clickable { onBackClicked() },
             painter = painterResource(id = R.drawable.ic_arrow_back),
             contentDescription = "Back button",
             contentScale = ContentScale.Fit,
@@ -202,5 +203,5 @@ fun Divider() {
 @Preview(showBackground = true)
 @Composable
 fun ConditionAndSetScreenPreview() {
-    ConditionAndSetScreen()
+    PrintingSelectorScreen { }
 }
