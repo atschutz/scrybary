@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.conditionandset
+package com.alexschutz.scrybary.view.trade.compose.printingselector
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,16 +27,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.alexschutz.scrybary.R
 
 @Composable
 fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
+    // TODO pass CardDetails then get ImageUris.
+    val viewModel: PrintingSelectorViewModel = viewModel()
+
     var isFoil by remember { mutableStateOf(false) }
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -76,22 +84,43 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // TODO resize so giant names don't ruin everything.
             Text(
                 modifier = Modifier.padding(bottom = 8.dp),
-                text = "Tarmogoyf",
+                text = viewModel.cardName,
                 textAlign = TextAlign.Center,
                 fontSize = 32.sp,
                 color = colorResource(id = R.color.white)
             )
-            PriceLabel(price = "$37.50")
-            Image(
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-                    .fillMaxWidth(),
-                painter = painterResource(id = R.drawable.card_placeholder),
-                contentDescription = "Card placeholder",
-                contentScale = ContentScale.Fit,
+            // TODO handle auto-foiling.
+            PriceLabel(
+                price = with(viewModel.currentPrinting) {
+                    if (isFoil) prices?.usdFoil?.toString()
+                    else prices?.usd?.toString()
+                } ?: "null"
             )
+            Box(modifier = Modifier
+                .align(Alignment.CenterHorizontally),
+            ) {
+                AsyncImage(
+                    model = ImageRequest
+                        .Builder(LocalContext.current)
+                        .data(viewModel.currentPrinting.imageUri)
+                        .build(),
+                    placeholder = painterResource(id = R.drawable.card_placeholder),
+                    modifier = Modifier.fillMaxWidth().aspectRatio(0.71428573f),
+                    contentDescription = "Card placeholder",
+                    contentScale = ContentScale.Fit,
+                )
+                // TODO Size is still very slightly off!!!
+                Image(
+                    modifier = Modifier.fillMaxWidth(),
+                    painter = painterResource(id = R.drawable.foil_overlay),
+                    contentDescription = "Foil overlay",
+                    alpha = if (isFoil) 0.8f else 0.0f,
+                    contentScale = ContentScale.Crop
+                )
+            }
             Box(
                 modifier = Modifier
                     .background(
@@ -103,16 +132,16 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
             ) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
-                    text = "Modern Masters 3 - MM3",
+                    text = with(viewModel.currentPrinting) {"$set - $symbol"},
                     color = colorResource(id = R.color.white)
                 )
             }
             Row( modifier = Modifier
-                    .padding(16.dp)
-                    .background(
-                        colorResource(id = R.color.mid_purple),
-                        RoundedCornerShape(percent = 100)
-                    ),
+                .padding(16.dp)
+                .background(
+                    colorResource(id = R.color.mid_purple),
+                    RoundedCornerShape(percent = 100)
+                ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AddButton(isTop = true)
@@ -124,7 +153,7 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                         if (isFoil) null
                         else ColorFilter.tint(colorResource(id = R.color.deselected_purple)),
                     modifier = Modifier
-                        .padding(horizontal = 8.dp, )
+                        .padding(horizontal = 8.dp,)
                         .size(28.dp)
                         .align(Alignment.CenterVertically)
                         .clickable { isFoil = !isFoil }
@@ -148,7 +177,7 @@ fun PriceLabel(price: String) {
     ) {
         Text(
             modifier = Modifier.padding(horizontal = 24.dp, vertical = 12.dp),
-            text = price,
+            text = "$$price",
             textAlign = TextAlign.Center,
             fontSize = 32.sp,
             color = colorResource(id = R.color.white)

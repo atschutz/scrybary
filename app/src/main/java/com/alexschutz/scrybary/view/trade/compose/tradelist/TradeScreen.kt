@@ -19,7 +19,7 @@ fun TradeScreen(
     cards: List<Card>,
     onNavigate: (Int) -> Unit,
     onSearchClicked: (String) -> Unit,
-    onCardClicked: () -> Unit,
+    onCardClicked: (Card) -> Unit,
     onClearClicked: () -> Unit,
 ) {
     Box(
@@ -35,9 +35,9 @@ fun TradeScreen(
         // TODO Have ViewModel send search bar state back up and update visibility accordingly.
         LazyColumn(
             modifier = Modifier
-                .padding(top = 44.dp, start = 56.dp, end = 56.dp)
+                .padding(top = 44.dp, bottom = 56.dp, start = 56.dp, end = 56.dp)
         ) {
-            items(cards) { TradeSearchItem(card = it) { onCardClicked() } }
+            items(cards) { TradeSearchItem(card = it) { onCardClicked(it) } }
         }
     }
 }

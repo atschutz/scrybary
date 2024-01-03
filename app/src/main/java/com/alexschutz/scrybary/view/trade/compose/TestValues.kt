@@ -3,8 +3,7 @@ package com.alexschutz.scrybary.view.trade.compose
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.model.CardSet
 import com.alexschutz.scrybary.model.CardTradeInfo
-import com.alexschutz.scrybary.model.PriceData
-import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition
+import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
 
 val testCard = Card(
     id = "123456",

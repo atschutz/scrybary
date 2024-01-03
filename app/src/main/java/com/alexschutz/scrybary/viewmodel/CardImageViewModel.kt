@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.alexschutz.scrybary.model.*
@@ -40,7 +41,7 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
 
                             for (json in imageJsonlist) {
                                 if (json.faces != null) {
-
+                                    Log.d("-as-", "${json.prices}")
                                     val faces = gson.fromJson(json.faces, Array<ImageJson>::class.java).toList()
 
                                     fronts.add(
@@ -59,6 +60,7 @@ class CardImageViewModel(application: Application) : AndroidViewModel(applicatio
                                         )
                                     )
                                 } else {
+                                    Log.d("-as-", "${json.prices}")
                                     fronts.add(
                                         CardSet(
                                             json.setName,

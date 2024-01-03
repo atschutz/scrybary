@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.Card
-import com.alexschutz.scrybary.view.trade.compose.conditionandset.CardCondition
+import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
 import com.alexschutz.scrybary.view.trade.compose.testCard
 
 @Composable

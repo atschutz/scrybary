@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -47,7 +48,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                     .subscribeWith(object : DisposableSingleObserver<CardDetail>() {
 
                         override fun onSuccess(detail: CardDetail) {
-
                             // Assign values to front and back card faces.
                             configureCardFaces(it, detail)
 
