@@ -2,6 +2,7 @@ package com.alexschutz.scrybary.view.trade.compose.printingselector
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
@@ -32,12 +33,7 @@ class PrintingSelectorViewModel(
 
     var cardSets: List<CardSet> by mutableStateOf(listOf())
 
-    var currentPrinting: CardSet by mutableStateOf(
-        CardSet(
-            "", "", "",
-            PriceData(0.00f, 0.00f)
-        )
-    )
+    var currentPrintingIndex: Int by mutableIntStateOf(0)
 
     init {
         val cardId: String = checkNotNull(savedStateHandle["card_id"])
@@ -103,8 +99,6 @@ class PrintingSelectorViewModel(
         }
 
         cardSets = cards
-        if (cardSets.isNotEmpty()) { currentPrinting = cardSets[0] }
-
         Log.d("-as-", "printings fetched! $cardSets")
     }
 }

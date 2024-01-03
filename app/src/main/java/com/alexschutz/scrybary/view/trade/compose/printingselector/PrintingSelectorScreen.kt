@@ -34,10 +34,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.math.MathUtils
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.model.Card
+import com.alexschutz.scrybary.model.CardSet
+import com.alexschutz.scrybary.model.PriceData
 
 @Composable
 fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
@@ -61,7 +65,14 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                 .padding(6.dp)
                 .size(36.dp)
                 .align(Alignment.CenterStart)
-                .rotate(90f),
+                .rotate(90f)
+                .clickable {
+                    with(viewModel) {
+                        currentPrintingIndex = MathUtils.clamp(
+                            currentPrintingIndex - 1, 0, cardSets.size - 1
+                        )
+                    }
+                },
             painter = painterResource(id = R.drawable.ic_arrow_down),
             contentDescription = "Swipe card printing back",
             contentScale = ContentScale.Fit,
@@ -71,9 +82,16 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                 .padding(6.dp)
                 .size(36.dp)
                 .align(Alignment.CenterEnd)
-                .rotate(-90f),
+                .rotate(-90f)
+                .clickable {
+                    with(viewModel) {
+                        currentPrintingIndex = MathUtils.clamp(
+                            currentPrintingIndex + 1, 0, cardSets.size - 1
+                        )
+                    }
+                },
             painter = painterResource(id = R.drawable.ic_arrow_down),
-            contentDescription = "Swipe card printing back",
+            contentDescription = "Swipe card printing forward",
             contentScale = ContentScale.Fit,
         )
         Column(
@@ -93,11 +111,13 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                 color = colorResource(id = R.color.white)
             )
             // TODO handle auto-foiling.
+            // TODO Block out possibilities of non-priced prints.
             PriceLabel(
-                price = with(viewModel.currentPrinting) {
-                    if (isFoil) prices?.usdFoil?.toString()
-                    else prices?.usd?.toString()
-                } ?: "null"
+                price =
+                    with(getCardSet(viewModel.cardSets, viewModel.currentPrintingIndex)) {
+                        if (isFoil) prices?.usdFoil?.toString()
+                        else prices?.usd?.toString()
+                    } ?: "TODO"
             )
             Box(modifier = Modifier
                 .align(Alignment.CenterHorizontally),
@@ -105,10 +125,13 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                 AsyncImage(
                     model = ImageRequest
                         .Builder(LocalContext.current)
-                        .data(viewModel.currentPrinting.imageUri)
-                        .build(),
+                        .data(
+                            getCardSet(viewModel.cardSets, viewModel.currentPrintingIndex).imageUri
+                        ).build(),
                     placeholder = painterResource(id = R.drawable.card_placeholder),
-                    modifier = Modifier.fillMaxWidth().aspectRatio(0.71428573f),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(0.71428573f),
                     contentDescription = "Card placeholder",
                     contentScale = ContentScale.Fit,
                 )
@@ -117,7 +140,7 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                     painter = painterResource(id = R.drawable.foil_overlay),
                     contentDescription = "Foil overlay",
-                    alpha = if (isFoil) 0.8f else 0.0f,
+                    alpha = if (isFoil) 1.0f else 0.0f,
                     contentScale = ContentScale.Crop
                 )
             }
@@ -132,7 +155,9 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
             ) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
-                    text = with(viewModel.currentPrinting) {"$set - $symbol"},
+                    text = with(getCardSet(viewModel.cardSets, viewModel.currentPrintingIndex)) {
+                        "$set - $symbol"
+                    },
                     color = colorResource(id = R.color.white)
                 )
             }
@@ -234,3 +259,13 @@ fun Divider() {
 fun ConditionAndSetScreenPreview() {
     PrintingSelectorScreen { }
 }
+
+// Get card set from list with given index, or return a placeholder if the list is empty.
+fun getCardSet(cardSets: List<CardSet>, index: Int): CardSet =
+    if (cardSets.isNotEmpty()) cardSets[index]
+    else {
+         CardSet(
+             "", "", "",
+             PriceData(0f, 0f)
+         )
+    }
