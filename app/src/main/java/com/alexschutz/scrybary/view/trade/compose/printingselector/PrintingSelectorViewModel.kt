@@ -1,12 +1,11 @@
 package com.alexschutz.scrybary.view.trade.compose.printingselector
 
-import android.util.Log
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.alexschutz.scrybary.model.CardData
 import com.alexschutz.scrybary.model.CardDetail
 import com.alexschutz.scrybary.model.CardImage
 import com.alexschutz.scrybary.model.CardListJson
@@ -19,8 +18,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Response
-import java.security.PrivateKey
 import java.util.*
 
 class PrintingSelectorViewModel(
@@ -29,11 +26,14 @@ class PrintingSelectorViewModel(
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
 
-    val cardName: String = checkNotNull(savedStateHandle["card_name"])
+    val name: String = checkNotNull(savedStateHandle["card_name"])
 
-    var cardSets: List<CardSet> by mutableStateOf(listOf())
+    var data: List<CardData> by mutableStateOf(listOf())
 
-    var currentPrintingIndex: Int by mutableIntStateOf(0)
+    // Currently focused card. Blank card if empty data.
+    var currentCard: CardData by mutableStateOf(BLANK_CARD)
+
+    var isFoil: Boolean by mutableStateOf(false)
 
     init {
         val cardId: String = checkNotNull(savedStateHandle["card_id"])
@@ -41,7 +41,6 @@ class PrintingSelectorViewModel(
     }
 
     private fun fetchCardSets(id: String) {
-        Log.d("-as-", "fetching $id...")
         // ID -> Printings -> Image URIs, Sets, and Prices.
         disposable.add(
             cardService.getCardDetail(id)
@@ -49,7 +48,6 @@ class PrintingSelectorViewModel(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<CardDetail>() {
                     override fun onSuccess(detail: CardDetail) {
-                        Log.d("-as-", "card detail fetched! URI: ${detail.printUri}")
                         detail.printUri?.let {
                             cardService.getPrintings(it)
                                 .subscribeOn(Schedulers.newThread())
@@ -61,7 +59,6 @@ class PrintingSelectorViewModel(
 
                                     override fun onError(e: Throwable) {
                                         e.printStackTrace()
-                                        Log.d("-as-", "error fetching printings: $e")
                                     }
                                 })
                         }
@@ -69,7 +66,6 @@ class PrintingSelectorViewModel(
 
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
-                        Log.d("-as-", "error fetching card detail: $e")
                     }
                 }
             )
@@ -80,25 +76,41 @@ class PrintingSelectorViewModel(
         val gson = GsonBuilder().create()
         val imageJsonList = gson.fromJson(cardListJson.data, Array<ImageJson>::class.java).toList()
 
-        val cards = mutableListOf<CardSet>()
+        val cards = mutableListOf<CardData>()
 
         for (json in imageJsonList) {
             val faces = json.faces?.let { gson.fromJson(it, Array<ImageJson>::class.java).toList() }
 
             cards.add(
-                CardSet(
-                    json.setName,
-                    json.symbol.toString().uppercase(Locale.getDefault()),
-                    gson.fromJson(
-                        faces?.let { it[0].imageUris } ?: json.imageUris,
-                        CardImage::class.java
-                    )?.imageUri ?: "",
-                    gson.fromJson(json.prices, PriceData::class.java)
+                CardData(
+                    CardSet(
+                        json.setName,
+                        json.symbol.toString().uppercase(Locale.getDefault()),
+                        gson.fromJson(
+                            faces?.let { it[0].imageUris } ?: json.imageUris,
+                            CardImage::class.java
+                        )?.imageUri ?: "",
+                        gson.fromJson(json.prices, PriceData::class.java)
+                    ),
+                    cards.size,
                 )
             )
         }
 
-        cardSets = cards
-        Log.d("-as-", "printings fetched! $cardSets")
+        data = cards
+        currentCard = if (data.isNotEmpty()) data.first() else BLANK_CARD
+        isFoil = currentCard.startFoil
+    }
+
+    companion object {
+        val BLANK_CARD =
+            CardData(
+                CardSet(
+                    set = null,
+                    symbol = null,
+                    imageUri = null,
+                ),
+                index = -1
+            )
     }
 }

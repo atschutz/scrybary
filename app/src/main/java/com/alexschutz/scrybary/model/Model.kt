@@ -160,3 +160,10 @@ data class PriceData(
     val usdFoil: Float?,
 )
 
+data class CardData(
+    val set: CardSet,
+    val index: Int,
+) {
+    val startFoil = set.prices?.usd == null
+    val canChangeFoil = !startFoil && set.prices?.usdFoil != null
+}
