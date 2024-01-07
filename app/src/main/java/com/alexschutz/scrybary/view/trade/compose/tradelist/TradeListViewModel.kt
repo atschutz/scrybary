@@ -5,7 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.alexschutz.scrybary.model.Card
+import com.alexschutz.scrybary.model.CardData
 import com.alexschutz.scrybary.model.CardListJson
+import com.alexschutz.scrybary.model.CardSet
+import com.alexschutz.scrybary.model.CardTradeInfo
 import com.alexschutz.scrybary.model.CardsApiService
 import com.google.gson.GsonBuilder
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,9 +20,12 @@ class TradeListViewModel: ViewModel() {
     private val cardService = CardsApiService()
     private val disposable = CompositeDisposable()
 
-    var cards: List<Card> by mutableStateOf(listOf())
+    var searchListCards: List<Card> by mutableStateOf(listOf())
 
-    fun fetchFromRemote(search: String) {
+    var p1List: List<CardTradeInfo> by mutableStateOf(listOf())
+    var p2List: List<CardTradeInfo> by mutableStateOf(listOf())
+
+    fun fetchFromRemoteWithSearch(search: String) {
         if (search.length >= 3) {
             disposable.add(
                 cardService.getCardList(search)
@@ -51,16 +57,28 @@ class TradeListViewModel: ViewModel() {
                                     }
                                 }
                             }
-                            cards = list
+                            searchListCards = list
                         }
 
                         override fun onError(e: Throwable) {
                             e.printStackTrace()
                             // Clear card list.
-                            cards = mutableListOf()
+                            searchListCards = mutableListOf()
                         }
                     })
             )
         }
+    }
+
+    companion object {
+        val BLANK_CARD =
+            CardData(
+                CardSet(
+                    set = null,
+                    symbol = null,
+                    imageUri = null,
+                ),
+                index = -1
+            )
     }
 }

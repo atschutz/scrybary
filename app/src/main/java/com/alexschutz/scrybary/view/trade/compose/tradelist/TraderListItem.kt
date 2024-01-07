@@ -24,9 +24,9 @@ import com.alexschutz.scrybary.view.trade.compose.testCard
 
 @Composable
 fun TraderListItem(
-    card: Card,
+    id: String,
+    name: String,
     setSymbol: String,
-    condition: CardCondition,
     isFoil: Boolean = true,
     price: String
 ) {
@@ -48,10 +48,10 @@ fun TraderListItem(
 
                 )
             }
-            MiscCardInfoText(text = card.name, modifier = Modifier.weight(1f))
+            MiscCardInfoText(text = name, modifier = Modifier.weight(1f))
         }
         MiscCardInfoText(text = setSymbol, modifier = Modifier.weight(0.25f))
-        MiscCardInfoText(text = condition.text, modifier = Modifier.weight(0.25f))
+
         MiscCardInfoText(text = price, modifier = Modifier.weight(0.25f), true)
     }
 }
@@ -71,5 +71,5 @@ fun MiscCardInfoText(text: String, modifier: Modifier, alignToEnd: Boolean = fal
 @Preview(showBackground = true)
 @Composable
 fun TradeListItemPreview() {
-    TraderListItem(testCard, "MM3", CardCondition.NEAR_MINT, true, "$8.50")
+    TraderListItem("1234", "Tarmogoyf", "MM3", true, "$8.50")
 }

@@ -27,6 +27,7 @@ class PrintingSelectorViewModel(
     private val disposable = CompositeDisposable()
 
     val name: String = checkNotNull(savedStateHandle["card_name"])
+    val cardId: String = checkNotNull(savedStateHandle["card_id"])
 
     var data: List<CardData> by mutableStateOf(listOf())
 
@@ -36,12 +37,12 @@ class PrintingSelectorViewModel(
     var isFoil: Boolean by mutableStateOf(false)
 
     init {
-        val cardId: String = checkNotNull(savedStateHandle["card_id"])
         fetchCardSets(cardId)
     }
 
+    // TODO Move to a repository.
     private fun fetchCardSets(id: String) {
-        // ID -> Printings -> Image URIs, Sets, and Prices.
+        // TODO Un-nest with flatMap.
         disposable.add(
             cardService.getCardDetail(id)
                 .subscribeOn(Schedulers.newThread())
@@ -79,22 +80,31 @@ class PrintingSelectorViewModel(
         val cards = mutableListOf<CardData>()
 
         for (json in imageJsonList) {
-            val faces = json.faces?.let { gson.fromJson(it, Array<ImageJson>::class.java).toList() }
+            val prices = gson.fromJson(json.prices, PriceData::class.java)
 
-            cards.add(
-                CardData(
-                    CardSet(
-                        json.setName,
-                        json.symbol.toString().uppercase(Locale.getDefault()),
-                        gson.fromJson(
-                            faces?.let { it[0].imageUris } ?: json.imageUris,
-                            CardImage::class.java
-                        )?.imageUri ?: "",
-                        gson.fromJson(json.prices, PriceData::class.java)
-                    ),
-                    cards.size,
+            // Only include cards with physical printings for now.
+            if (prices.usdFoil != null || prices.usd != null) {
+                val faces = json.faces?.let {
+                    gson.fromJson(it, Array<ImageJson>::class.java).toList()
+                }
+
+                val imageUri = gson.fromJson(
+                    faces?.let { it[0].imageUris } ?: json.imageUris,
+                    CardImage::class.java
+                )?.imageUri ?: ""
+
+                cards.add(
+                    CardData(
+                        CardSet(
+                            json.setName,
+                            json.symbol.toString().uppercase(Locale.getDefault()),
+                            imageUri,
+                            prices
+                        ),
+                        cards.size,
+                    )
                 )
-            )
+            }
         }
 
         data = cards

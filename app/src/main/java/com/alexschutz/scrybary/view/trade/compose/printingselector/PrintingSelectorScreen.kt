@@ -1,6 +1,5 @@
 package com.alexschutz.scrybary.view.trade.compose.printingselector
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,10 +18,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -32,16 +27,19 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.model.CardTradeInfo
 
 @Composable
-fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
+fun PrintingSelectorScreen(
+    onBackClicked: () -> Unit,
+    onAddClicked: (tradeInfo: CardTradeInfo, isP1: Boolean) -> Unit,
+) {
     val viewModel: PrintingSelectorViewModel = viewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
@@ -100,7 +98,6 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // TODO resize so giant names don't ruin everything.
             Text(
                 modifier = Modifier.padding(bottom = 8.dp),
                 text = viewModel.name,
@@ -166,7 +163,17 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                 ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                AddButton(isTop = true)
+                // TODO Dry.
+                AddButton(
+                    isTop = true,
+                    tradeInfo = CardTradeInfo(
+                        id = viewModel.cardId,
+                        name = viewModel.name,
+                        cardSet = viewModel.currentCard.set,
+                        isFoil = viewModel.isFoil,
+                    ),
+                    onAddClicked = onAddClicked
+                )
                 Divider()
                 Image(
                     painter = painterResource(id = R.drawable.ic_foil),
@@ -184,7 +191,16 @@ fun PrintingSelectorScreen(onBackClicked: () -> Unit) {
                         }
                 )
                 Divider()
-                AddButton(isTop = false)
+                AddButton(
+                    isTop = false,
+                    tradeInfo = CardTradeInfo(
+                        id = viewModel.cardId,
+                        name = viewModel.name,
+                        cardSet = viewModel.currentCard.set,
+                        isFoil = viewModel.isFoil,
+                    ),
+                    onAddClicked = onAddClicked
+                )
             }
         }
     }
@@ -211,7 +227,11 @@ fun PriceLabel(price: String) {
 }
 
 @Composable
-fun AddButton(isTop: Boolean = false) {
+fun AddButton(
+    isTop: Boolean = false,
+    tradeInfo: CardTradeInfo,
+    onAddClicked: (tradeInfo: CardTradeInfo, isP1: Boolean) -> Unit,
+) {
     // TODO make padding look nicer.
     Box(
         modifier = Modifier
@@ -219,7 +239,8 @@ fun AddButton(isTop: Boolean = false) {
     ) {
         Row(
             modifier = Modifier
-                .align(Alignment.Center),
+                .align(Alignment.Center)
+                .clickable { onAddClicked(tradeInfo, isTop) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -252,10 +273,4 @@ fun Divider() {
             .height(32.dp)
             .background(colorResource(id = R.color.light_purple))
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun ConditionAndSetScreenPreview() {
-    PrintingSelectorScreen { }
 }

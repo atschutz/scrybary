@@ -146,9 +146,9 @@ data class CardSet(
 )
 
 data class CardTradeInfo(
-    val card: Card,
+    val id: String,
+    val name: String,
     val cardSet: CardSet,
-    val condition: CardCondition,
     val isFoil: Boolean = false,
 )
 

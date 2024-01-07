@@ -1,12 +1,10 @@
 package com.alexschutz.scrybary.view.trade
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavType
 import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
@@ -16,10 +14,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.navArgument
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
-import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.view.trade.compose.printingselector.PrintingSelectorScreen
-import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeListViewModel
 import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeScreen
 
 class TradeFragment : BackButtonFragment() {
@@ -36,7 +32,6 @@ class TradeFragment : BackButtonFragment() {
             // Dispose when view's owner is destroyed.
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                val viewModel: TradeListViewModel = viewModel()
                 val navController = rememberNavController()
 
                 NavHost(
@@ -45,18 +40,13 @@ class TradeFragment : BackButtonFragment() {
                 ) {
                     composable(route = TradeScreen.Trade.name) {
                         TradeScreen(
-                            cards = viewModel.cards,
                             onNavigate = { id -> findNavController().navigate(id) },
-                            onSearchClicked = { search -> viewModel.fetchFromRemote(search) },
                             onCardClicked = {
                                 navController.navigate(
-                                    route = "${TradeScreen.PrintingSelector.name}/${it.id}/${it.name}"
+                                    route =
+                                        "${TradeScreen.PrintingSelector.name}/${it.id}/${it.name}"
                                 )
                             },
-                            onClearClicked = {
-                                viewModel.cards = listOf()
-                                Log.d("-as-", "clear clicked! ${viewModel.cards}")
-                            }
                         )
                     }
                     composable(
@@ -68,6 +58,9 @@ class TradeFragment : BackButtonFragment() {
                     ) {
                         PrintingSelectorScreen(
                             onBackClicked = {
+                                navController.navigate(route = TradeScreen.Trade.name)
+                            },
+                            onAddClicked = { cardTradeInfo, isP1 ->
                                 navController.navigate(route = TradeScreen.Trade.name)
                             }
                         )

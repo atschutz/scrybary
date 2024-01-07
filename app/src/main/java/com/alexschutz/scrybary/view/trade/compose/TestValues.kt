@@ -34,9 +34,9 @@ val testCardSet = CardSet(
 )
 
 val testCardTradeInfo = CardTradeInfo(
-    testCard,
+    "1234",
+    "Tarmogoyf",
     testCardSet,
-    CardCondition.NEAR_MINT,
     true,
 )
 
