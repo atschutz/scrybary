@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.navArgument
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
+import com.alexschutz.scrybary.hideKeyboard
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorScreen
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
@@ -48,6 +49,7 @@ class TradeFragment : BackButtonFragment() {
                             viewModel = viewModel,
                             onNavigate = { id -> findNavController().navigate(id) },
                             onCardClicked = {
+                                hideKeyboard()
                                 navController.navigate(
                                     route =
                                         "${TradeScreen.PrintingSelector.name}/${it.id}/${it.name}"

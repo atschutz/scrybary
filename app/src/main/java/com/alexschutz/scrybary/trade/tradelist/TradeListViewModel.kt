@@ -2,7 +2,6 @@ package com.alexschutz.scrybary.trade.tradelist
 
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -19,6 +18,8 @@ import javax.inject.Inject
 class TradeListViewModel @Inject constructor(
     private val repository: TradeRepository,
 ) : ViewModel() {
+    var isListView by mutableStateOf(true)
+
     var searchListCards: List<Card> by mutableStateOf(listOf())
 
     var p1List: List<CardTradeInfo> by mutableStateOf(listOf())

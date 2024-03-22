@@ -29,16 +29,21 @@ fun TradeScreen(
                 { search -> viewModel.fetchFromRemoteWithSearch(search) },
                 { viewModel.searchListCards = listOf() }
             )
-            TraderColumn(modifier = Modifier.weight(1f), viewModel.p1List)
+            TraderView(modifier = Modifier.weight(1f), viewModel.p1List, viewModel.isListView)
             TradeListMiddleBar(viewModel = viewModel)
-            TraderColumn(modifier = Modifier.weight(1f), viewModel.p2List)
+            TraderView(modifier = Modifier.weight(1f), viewModel.p2List, viewModel.isListView)
         }
         // TODO Have ViewModel send search bar state back up and update visibility accordingly.
         LazyColumn(
             modifier = Modifier
                 .padding(top = 44.dp, bottom = 56.dp, start = 56.dp, end = 56.dp)
         ) {
-            items(viewModel.searchListCards) { TradeSearchItem(card = it) { onCardClicked(it) } }
+            items(viewModel.searchListCards) {
+                TradeSearchItem(card = it) {
+                    onCardClicked(it)
+                    viewModel.searchListCards = listOf()
+                }
+            }
         }
     }
 }
