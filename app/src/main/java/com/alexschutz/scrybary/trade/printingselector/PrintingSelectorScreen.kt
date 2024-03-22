@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.printingselector
+package com.alexschutz.scrybary.trade.printingselector
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -40,7 +41,7 @@ fun PrintingSelectorScreen(
     onBackClicked: () -> Unit,
     onAddClicked: (tradeInfo: CardTradeInfo, isP1: Boolean) -> Unit,
 ) {
-    val viewModel: PrintingSelectorViewModel = viewModel()
+    val viewModel: PrintingSelectorViewModel = hiltViewModel()
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
@@ -60,11 +61,11 @@ fun PrintingSelectorScreen(
                 .rotate(90f)
                 .clickable {
                     with(viewModel) {
-                        currentCard = data[
-                            if (currentCard.index - 1 < 0) data.size - 1
-                            else currentCard.index - 1
+                        currentPrinting = printingData[
+                            if (currentPrinting.index - 1 < 0) printingData.size - 1
+                            else currentPrinting.index - 1
                         ]
-                        isFoil = currentCard.startFoil
+                        isFoil = currentPrinting.startFoil
                     }
                 },
             painter = painterResource(id = R.drawable.ic_arrow_down),
@@ -79,11 +80,11 @@ fun PrintingSelectorScreen(
                 .rotate(-90f)
                 .clickable {
                     with(viewModel) {
-                        currentCard = data[
-                            if (currentCard.index + 1 >= data.size) 0
-                            else currentCard.index + 1
+                        currentPrinting = printingData[
+                            if (currentPrinting.index + 1 >= printingData.size) 0
+                            else currentPrinting.index + 1
                         ]
-                        isFoil = currentCard.startFoil
+                        isFoil = currentPrinting.startFoil
                     }
                 },
             painter = painterResource(id = R.drawable.ic_arrow_down),
@@ -105,11 +106,9 @@ fun PrintingSelectorScreen(
                 fontSize = 24.sp,
                 color = colorResource(id = R.color.white)
             )
-            // TODO handle auto-foiling.
-            // TODO Block out possibilities of non-priced prints.
             PriceLabel(
                 price =
-                    with(viewModel.currentCard.set) {
+                    with(viewModel.currentPrinting.set) {
                         // TODO 2 decimals always.
                         if (viewModel.isFoil) prices?.usdFoil?.toString()
                         else prices?.usd?.toString()
@@ -122,7 +121,7 @@ fun PrintingSelectorScreen(
                     model = ImageRequest
                         .Builder(LocalContext.current)
                         .data(
-                           viewModel.currentCard.set.imageUri
+                           viewModel.currentPrinting.set.imageUri
                         ).build(),
                     placeholder = painterResource(id = R.drawable.card_placeholder),
                     modifier = Modifier
@@ -151,7 +150,7 @@ fun PrintingSelectorScreen(
             ) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
-                    text = with(viewModel.currentCard.set) { "$set - $symbol" },
+                    text = with(viewModel.currentPrinting.set) { "$set - $symbol" },
                     color = colorResource(id = R.color.white)
                 )
             }
@@ -169,7 +168,7 @@ fun PrintingSelectorScreen(
                     tradeInfo = CardTradeInfo(
                         id = viewModel.cardId,
                         name = viewModel.name,
-                        cardSet = viewModel.currentCard.set,
+                        cardSet = viewModel.currentPrinting.set,
                         isFoil = viewModel.isFoil,
                     ),
                     onAddClicked = onAddClicked
@@ -186,7 +185,7 @@ fun PrintingSelectorScreen(
                         .size(28.dp)
                         .align(Alignment.CenterVertically)
                         .clickable {
-                            if (viewModel.currentCard.canChangeFoil)
+                            if (viewModel.currentPrinting.canChangeFoil)
                                 viewModel.isFoil = !viewModel.isFoil
                         }
                 )
@@ -196,7 +195,7 @@ fun PrintingSelectorScreen(
                     tradeInfo = CardTradeInfo(
                         id = viewModel.cardId,
                         name = viewModel.name,
-                        cardSet = viewModel.currentCard.set,
+                        cardSet = viewModel.currentPrinting.set,
                         isFoil = viewModel.isFoil,
                     ),
                     onAddClicked = onAddClicked

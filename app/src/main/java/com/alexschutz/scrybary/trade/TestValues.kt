@@ -1,9 +1,8 @@
-package com.alexschutz.scrybary.view.trade.compose
+package com.alexschutz.scrybary.trade
 
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.model.CardSet
 import com.alexschutz.scrybary.model.CardTradeInfo
-import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
 
 val testCard = Card(
     id = "123456",

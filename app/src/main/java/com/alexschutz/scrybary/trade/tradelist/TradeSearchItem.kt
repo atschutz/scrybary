@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.tradelist
+package com.alexschutz.scrybary.trade.tradelist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.symbols
-import com.alexschutz.scrybary.view.trade.compose.testCard
+import com.alexschutz.scrybary.trade.testCard
 
 @Composable
 fun TradeSearchItem(card: Card, onSearchItemClicked: () -> Unit) {

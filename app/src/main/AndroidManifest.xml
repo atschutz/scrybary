@@ -10,6 +10,7 @@
         android:xlargeScreens="true" />
 
     <application
+        android:name=".ScrybaryApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"

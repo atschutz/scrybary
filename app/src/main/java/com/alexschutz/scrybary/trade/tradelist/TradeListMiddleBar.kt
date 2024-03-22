@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.tradelist
+package com.alexschutz.scrybary.trade.tradelist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,19 +20,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.toDollars
+import kotlin.math.abs
 
 @Composable
-fun TradeListMiddleBar() {
+fun TradeListMiddleBar(viewModel: TradeListViewModel) {
     var isListView by remember { mutableStateOf(true) }
 
     Box(
@@ -47,7 +49,7 @@ fun TradeListMiddleBar() {
             .align(Alignment.Center)
         )
         Text(
-            text ="$0.00",
+            text = viewModel.p1Total.toDollars(),
             fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
             fontSize = 16.sp,
             color = Color.White,
@@ -56,7 +58,7 @@ fun TradeListMiddleBar() {
                 .align(Alignment.TopEnd)
         )
         Text(
-            text ="$0.00",
+            text = viewModel.p2Total.toDollars(),
             fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
             fontSize = 16.sp,
             color = Color.White,
@@ -106,7 +108,7 @@ fun TradeListMiddleBar() {
                     .background(colorResource(id = R.color.light_purple))
             )
             Text(
-                text ="$0.00",
+                text = abs(viewModel.difference).toDollars(),
                 fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
                 fontSize = 24.sp,
                 color = Color.White,
@@ -116,18 +118,13 @@ fun TradeListMiddleBar() {
             )
             Image(
                 painter = painterResource(id = R.drawable.ic_arrow_down),
-                contentDescription = "Back button",
+                contentDescription = "Difference signifier",
                 modifier = Modifier
                     .size(20.dp)
                     .align(Alignment.CenterVertically)
-                    .padding(start = 8.dp, top = 2.dp)
+                    .padding(start = 8.dp)
+                    .rotate(if (viewModel.difference > 0) 180F else 0F)
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TradeListMiddleBarPreview() {
-    TradeListMiddleBar()
 }

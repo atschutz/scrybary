@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.tradelist
+package com.alexschutz.scrybary.trade.tradelist
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -18,9 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
-import com.alexschutz.scrybary.model.Card
-import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
-import com.alexschutz.scrybary.view.trade.compose.testCard
 
 @Composable
 fun TraderListItem(

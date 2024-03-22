@@ -1,4 +1,4 @@
-package com.alexschutz.scrybary.view.trade.compose.tradelist
+package com.alexschutz.scrybary.trade.tradelist
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding
@@ -9,9 +9,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.model.CardTradeInfo
-import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
-import com.alexschutz.scrybary.view.trade.compose.testCard
-import com.alexschutz.scrybary.view.trade.compose.testCards
 
 @Composable
 fun TraderColumn(

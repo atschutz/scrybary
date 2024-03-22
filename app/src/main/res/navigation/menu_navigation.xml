@@ -108,7 +108,7 @@
 
     <fragment
         android:id="@+id/tradeFragment"
-        android:name="com.alexschutz.scrybary.view.trade.TradeFragment"
+        android:name="com.alexschutz.scrybary.trade.TradeFragment"
         android:label="TradeFragment">
 
         <action

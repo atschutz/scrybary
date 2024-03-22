@@ -1,10 +1,11 @@
-package com.alexschutz.scrybary.view.trade
+package com.alexschutz.scrybary.trade
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.Navigation
 import androidx.navigation.compose.NavHost
@@ -15,9 +16,12 @@ import androidx.navigation.navArgument
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
-import com.alexschutz.scrybary.view.trade.compose.printingselector.PrintingSelectorScreen
-import com.alexschutz.scrybary.view.trade.compose.tradelist.TradeScreen
+import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorScreen
+import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
+import com.alexschutz.scrybary.trade.tradelist.TradeScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TradeFragment : BackButtonFragment() {
     private lateinit var binding: FragmentTradeBinding
 
@@ -33,6 +37,7 @@ class TradeFragment : BackButtonFragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 val navController = rememberNavController()
+                val viewModel: TradeListViewModel = hiltViewModel()
 
                 NavHost(
                     navController = navController,
@@ -40,6 +45,7 @@ class TradeFragment : BackButtonFragment() {
                 ) {
                     composable(route = TradeScreen.Trade.name) {
                         TradeScreen(
+                            viewModel = viewModel,
                             onNavigate = { id -> findNavController().navigate(id) },
                             onCardClicked = {
                                 navController.navigate(
@@ -61,6 +67,7 @@ class TradeFragment : BackButtonFragment() {
                                 navController.navigate(route = TradeScreen.Trade.name)
                             },
                             onAddClicked = { cardTradeInfo, isP1 ->
+                                viewModel.addCard(cardTradeInfo, isP1)
                                 navController.navigate(route = TradeScreen.Trade.name)
                             }
                         )

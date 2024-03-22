@@ -1,7 +1,7 @@
 package com.alexschutz.scrybary.model
 
 import android.os.Parcelable
-import com.alexschutz.scrybary.view.trade.compose.printingselector.CardCondition
+import com.alexschutz.scrybary.trade.printingselector.CardCondition
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
@@ -150,7 +150,11 @@ data class CardTradeInfo(
     val name: String,
     val cardSet: CardSet,
     val isFoil: Boolean = false,
-)
+) {
+    val price =
+        if (isFoil) cardSet.prices?.usdFoil ?: 0.00F
+        else cardSet.prices?.usd ?: 0.00F
+}
 
 data class PriceData(
     @SerializedName("usd")
