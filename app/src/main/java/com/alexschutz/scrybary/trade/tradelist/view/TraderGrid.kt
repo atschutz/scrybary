@@ -1,8 +1,7 @@
-package com.alexschutz.scrybary.trade.tradelist
+package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -20,6 +19,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.alexschutz.scrybary.R
@@ -31,15 +31,20 @@ const val ROW_SIZE = 3
 fun TraderGrid(
     modifier: Modifier,
     list: List<CardTradeInfo>,
+    margin: Dp,
+    isTop: Boolean
 ) {
     val localDensity = LocalDensity.current
     var cardHeight by remember { mutableStateOf(0.dp) }
+
     LazyColumn(
         modifier = modifier
             .fillMaxHeight()
             .padding(horizontal = 4.dp)
     ) {
         val chunks = list.chunked(ROW_SIZE)
+
+        if (!isTop) item { Box(modifier = Modifier.height(margin)) }
         items(chunks) { chunk ->
             Row {
                 chunk.forEach {
@@ -71,11 +76,12 @@ fun TraderGrid(
             }
 
         }
+        if (isTop) item { Box(modifier = Modifier.height(margin)) }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun TraderGridPreview() {
-    TraderGrid(Modifier, listOf())
+    TraderGrid(Modifier, listOf(), 0.dp, true)
 }

@@ -1,9 +1,10 @@
-package com.alexschutz.scrybary.trade.tradelist
+package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,53 +24,70 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.toDollars
+import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 import kotlin.math.abs
 
 @Composable
-fun TradeListMiddleBar(viewModel: TradeListViewModel) {
+fun TradeListMiddleBar(
+    viewModel: TradeListViewModel,
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .height(48.dp)
             .fillMaxWidth()
     ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight()
+                .align(Alignment.CenterEnd)
+                .background(
+                    color = colorResource(id = R.color.mid_purple),
+                    shape = RoundedCornerShape(topStart = 100F, bottomStart = 100F)
+                )
+                .padding(start = 20.dp)
+        ) {
+            Text(
+                text = viewModel.p1Total.toDollars(),
+                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .align(Alignment.TopEnd)
+            )
+            Text(
+                text = viewModel.p2Total.toDollars(),
+                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp,
+                color = Color.White,
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .align(Alignment.BottomEnd)
+            )
+        }
         Box (modifier = Modifier
             .height(1.dp)
             .fillMaxWidth()
-            .background(colorResource(id = R.color.not_legal_grey))
+            .background(colorResource(id = R.color.light_purple))
             .align(Alignment.Center)
-        )
-        Text(
-            text = viewModel.p1Total.toDollars(),
-            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
-            fontSize = 16.sp,
-            color = Color.White,
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .align(Alignment.TopEnd)
-        )
-        Text(
-            text = viewModel.p2Total.toDollars(),
-            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
-            fontSize = 16.sp,
-            color = Color.White,
-            modifier = Modifier
-                .padding(end = 8.dp)
-                .align(Alignment.BottomEnd)
         )
         Row(
             modifier = Modifier
                 .background(
                     colorResource(id = R.color.mid_purple),
-                    RoundedCornerShape(percent = 100)
+                    RoundedCornerShape(topEnd = 100F, bottomEnd = 100F)
                 )
                 .padding(start = 16.dp, end = 16.dp)
                 .fillMaxHeight()
-                .align(Alignment.Center)
-
+                .align(Alignment.CenterStart)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_list),

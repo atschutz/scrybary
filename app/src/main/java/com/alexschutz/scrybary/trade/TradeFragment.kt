@@ -17,9 +17,9 @@ import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.databinding.FragmentTradeBinding
 import com.alexschutz.scrybary.hideKeyboard
 import com.alexschutz.scrybary.view.BackButtonFragment
-import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorScreen
+import com.alexschutz.scrybary.trade.printingselector.view.PrintingSelectorScreen
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
-import com.alexschutz.scrybary.trade.tradelist.TradeScreen
+import com.alexschutz.scrybary.trade.tradelist.view.TradeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

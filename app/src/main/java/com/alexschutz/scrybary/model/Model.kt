@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary.model
 
 import android.os.Parcelable
-import com.alexschutz.scrybary.trade.printingselector.CardCondition
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
