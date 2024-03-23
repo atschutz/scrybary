@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -32,7 +33,8 @@ fun TraderGrid(
     modifier: Modifier,
     list: List<CardTradeInfo>,
     margin: Dp,
-    isTop: Boolean
+    isTop: Boolean,
+    onListItemClicked: (card: CardTradeInfo) -> Unit,
 ) {
     val localDensity = LocalDensity.current
     var cardHeight by remember { mutableStateOf(0.dp) }
@@ -49,7 +51,11 @@ fun TraderGrid(
             Row {
                 chunk.forEach {
                     Box(
-                        modifier = Modifier.weight(1F)
+                        modifier = Modifier
+                            .weight(1F)
+                            .clickable {
+                                onListItemClicked(it)
+                            }
                     ) {
                         AsyncImage(
                             model = it.cardSet.imageUri,
@@ -83,5 +89,5 @@ fun TraderGrid(
 @Preview(showBackground = true)
 @Composable
 fun TraderGridPreview() {
-    TraderGrid(Modifier, listOf(), 0.dp, true)
+    TraderGrid(Modifier, listOf(), 0.dp, true) { }
 }

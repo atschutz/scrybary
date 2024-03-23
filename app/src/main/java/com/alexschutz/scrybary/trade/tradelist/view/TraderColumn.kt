@@ -1,5 +1,6 @@
 package com.alexschutz.scrybary.trade.tradelist.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -20,6 +21,7 @@ fun TraderColumn(
     list: List<CardTradeInfo>,
     margin: Dp,
     isTop: Boolean,
+    onListItemClicked: (card: CardTradeInfo) -> Unit,
 ) {
     LazyColumn(
         modifier = modifier
@@ -33,9 +35,11 @@ fun TraderColumn(
                 else it.cardSet.prices?.usd?.toDollars() ?: "$0.00"
 
             TraderListItem(
-                it.id,
                 it.name,
                 it.cardSet.symbol ?: "",
+                Modifier.clickable {
+                    onListItemClicked(it)
+                },
                 it.isFoil,
                 price
             )
@@ -47,6 +51,6 @@ fun TraderColumn(
 @Preview(showBackground = true)
 @Composable
 fun TradeColumnPreview() {
-    TraderColumn(Modifier, listOf(), 0.dp, true)
+    TraderColumn(Modifier, listOf(), 0.dp, true) { }
 }
 

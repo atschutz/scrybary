@@ -22,15 +22,15 @@ import com.alexschutz.scrybary.R
 
 @Composable
 fun TraderListItem(
-    id: String,
     name: String,
     setSymbol: String,
+    modifier: Modifier = Modifier,
     isFoil: Boolean = true,
-    price: String
+    price: String,
 ) {
     // TODO Incorporate price and set into card info.
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(4.dp)
     ) {
@@ -52,7 +52,6 @@ fun TraderListItem(
             }
         }
         MiscCardInfoText(text = setSymbol, modifier = Modifier.weight(0.20f))
-
         MiscCardInfoText(text = price, modifier = Modifier.weight(0.30f), true)
     }
 }
@@ -74,5 +73,5 @@ fun MiscCardInfoText(text: String, modifier: Modifier = Modifier, alignToEnd: Bo
 @Preview(showBackground = true)
 @Composable
 fun TradeListItemPreview() {
-    TraderListItem("1234", "Tarmogoyf", "MM3", true, "$8.50")
+    TraderListItem("Tarmogoyf", "MM3", Modifier, true, "$8.50")
 }

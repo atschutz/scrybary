@@ -12,7 +12,19 @@ fun TraderView(
     isListMode: Boolean,
     margin: Dp,
     isTop: Boolean,
+    onListItemClicked: (card: CardTradeInfo) -> Unit
 ) {
-    if (isListMode) TraderColumn(modifier = modifier, list = list, margin = margin, isTop = isTop)
-    else TraderGrid(modifier = modifier, list = list, margin = margin, isTop = isTop)
+    if (isListMode) TraderColumn(
+        modifier = modifier,
+        list = list,
+        margin = margin,
+        isTop = isTop,
+        onListItemClicked = onListItemClicked
+    ) else TraderGrid(
+        modifier = modifier,
+        list = list,
+        margin = margin,
+        isTop = isTop,
+        onListItemClicked = onListItemClicked
+    )
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.model.Card
+import com.alexschutz.scrybary.model.CardTradeInfo
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 
 @Composable
@@ -24,6 +25,7 @@ fun TradeScreen(
     viewModel: TradeListViewModel,
     onNavigate: (Int) -> Unit,
     onCardClicked: (Card) -> Unit,
+    onListItemClicked: (card: CardTradeInfo) -> Unit,
 ) {
     val localDensity = LocalDensity.current
     var middleBarHeight by remember { mutableStateOf(0.dp) }
@@ -49,6 +51,7 @@ fun TradeScreen(
                         isListMode = viewModel.isListView,
                         margin = middleBarHeight / 2,
                         isTop = true,
+                        onListItemClicked = onListItemClicked,
                     )
                     TraderView(
                         modifier = Modifier.weight(1f),
@@ -56,6 +59,7 @@ fun TradeScreen(
                         isListMode = viewModel.isListView,
                         margin = middleBarHeight / 2,
                         isTop = false,
+                        onListItemClicked = onListItemClicked,
                     )
                 }
                 TradeListMiddleBar(

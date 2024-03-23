@@ -42,9 +42,9 @@ class TradeFragment : BackButtonFragment() {
 
                 NavHost(
                     navController = navController,
-                    startDestination = TradeScreen.Trade.name,
+                    startDestination = TradeNav.Trade.name,
                 ) {
-                    composable(route = TradeScreen.Trade.name) {
+                    composable(route = TradeNav.Trade.name) {
                         TradeScreen(
                             viewModel = viewModel,
                             onNavigate = { id -> findNavController().navigate(id) },
@@ -52,13 +52,20 @@ class TradeFragment : BackButtonFragment() {
                                 hideKeyboard()
                                 navController.navigate(
                                     route =
-                                        "${TradeScreen.PrintingSelector.name}/${it.id}/${it.name}"
+                                        "${TradeNav.PrintingSelector.name}/${it.id}/${it.name}"
                                 )
                             },
+                            onListItemClicked = { card ->
+                                hideKeyboard()
+                                navController.navigate(
+                                    route =
+                                        "${TradeNav.PrintingSelector.name}/${card.id}/${card.name}"
+                                )
+                            }
                         )
                     }
                     composable(
-                        route = "${TradeScreen.PrintingSelector.name}/{card_id}/{card_name}",
+                        route = "${TradeNav.PrintingSelector.name}/{card_id}/{card_name}/{card_index}/{card_foil}",
                         arguments = listOf(
                             navArgument("card_id") { type = NavType.StringType },
                             navArgument("card_name") { type = NavType.StringType },
@@ -66,11 +73,11 @@ class TradeFragment : BackButtonFragment() {
                     ) {
                         PrintingSelectorScreen(
                             onBackClicked = {
-                                navController.navigate(route = TradeScreen.Trade.name)
+                                navController.navigate(route = TradeNav.Trade.name)
                             },
                             onAddClicked = { cardTradeInfo, isP1 ->
                                 viewModel.addCard(cardTradeInfo, isP1)
-                                navController.navigate(route = TradeScreen.Trade.name)
+                                navController.navigate(route = TradeNav.Trade.name)
                             }
                         )
                     }
@@ -86,7 +93,7 @@ class TradeFragment : BackButtonFragment() {
         Navigation.findNavController(v).navigate(R.id.action_tradeFragment_to_menuFragment)
     }
 
-    enum class TradeScreen {
+    enum class TradeNav {
         Trade,
         PrintingSelector,
     }
