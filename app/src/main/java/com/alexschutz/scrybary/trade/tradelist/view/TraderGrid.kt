@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -15,9 +16,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -38,6 +41,7 @@ fun TraderGrid(
 ) {
     val localDensity = LocalDensity.current
     var cardHeight by remember { mutableStateOf(0.dp) }
+    var selectedCard by remember { mutableStateOf<CardTradeInfo?>(null) }
 
     LazyColumn(
         modifier = modifier
@@ -50,10 +54,18 @@ fun TraderGrid(
         items(chunks) { chunk ->
             Row {
                 chunk.forEach {
+                    val isSelected = selectedCard == it
                     Box(
                         modifier = Modifier
+                            .border(
+                                width = if (isSelected) 4.dp else 0.dp,
+                                color =
+                                    if (isSelected) colorResource(id = R.color.light_purple)
+                                    else Color.Transparent
+                            )
                             .weight(1F)
                             .clickable {
+                                selectedCard = if (selectedCard == it) null else it
                                 onListItemClicked(it)
                             }
                     ) {

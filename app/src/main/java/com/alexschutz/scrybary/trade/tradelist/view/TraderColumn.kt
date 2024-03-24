@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -23,6 +27,8 @@ fun TraderColumn(
     isTop: Boolean,
     onListItemClicked: (card: CardTradeInfo) -> Unit,
 ) {
+    var selectedCard by remember { mutableStateOf<CardTradeInfo?>(null) }
+
     LazyColumn(
         modifier = modifier
             .fillMaxHeight()
@@ -38,10 +44,12 @@ fun TraderColumn(
                 it.name,
                 it.cardSet.symbol ?: "",
                 Modifier.clickable {
+                    selectedCard = if (selectedCard == it) null else it
                     onListItemClicked(it)
                 },
                 it.isFoil,
-                price
+                price,
+                it == selectedCard
             )
         }
         if (isTop) { item { Box(modifier = Modifier.height(margin)) }}

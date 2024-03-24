@@ -99,7 +99,10 @@ fun TradeListMiddleBar(
                     .padding(end = 8.dp)
                     .size(20.dp)
                     .align(Alignment.CenterVertically)
-                    .clickable { viewModel.isListView = true }
+                    .clickable {
+                        viewModel.isListView = true
+                        viewModel.selectedCard = null
+                    }
             )
             Image(
                 painter = painterResource(id = R.drawable.ic_grid),
@@ -110,7 +113,10 @@ fun TradeListMiddleBar(
                 modifier = Modifier
                     .size(24.dp)
                     .align(Alignment.CenterVertically)
-                    .clickable { viewModel.isListView = false }
+                    .clickable {
+                        viewModel.isListView = false
+                        viewModel.selectedCard = null
+                    }
             )
             Box(
                 modifier = Modifier

@@ -55,17 +55,11 @@ class TradeFragment : BackButtonFragment() {
                                         "${TradeNav.PrintingSelector.name}/${it.id}/${it.name}"
                                 )
                             },
-                            onListItemClicked = { card ->
-                                hideKeyboard()
-                                navController.navigate(
-                                    route =
-                                        "${TradeNav.PrintingSelector.name}/${card.id}/${card.name}"
-                                )
-                            }
+                            hideKeyboard = { hideKeyboard() }
                         )
                     }
                     composable(
-                        route = "${TradeNav.PrintingSelector.name}/{card_id}/{card_name}/{card_index}/{card_foil}",
+                        route = "${TradeNav.PrintingSelector.name}/{card_id}/{card_name}",
                         arguments = listOf(
                             navArgument("card_id") { type = NavType.StringType },
                             navArgument("card_name") { type = NavType.StringType },

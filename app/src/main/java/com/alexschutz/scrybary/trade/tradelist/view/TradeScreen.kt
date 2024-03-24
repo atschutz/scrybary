@@ -17,7 +17,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.model.Card
-import com.alexschutz.scrybary.model.CardTradeInfo
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 
 @Composable
@@ -25,7 +24,7 @@ fun TradeScreen(
     viewModel: TradeListViewModel,
     onNavigate: (Int) -> Unit,
     onCardClicked: (Card) -> Unit,
-    onListItemClicked: (card: CardTradeInfo) -> Unit,
+    hideKeyboard: () -> Unit,
 ) {
     val localDensity = LocalDensity.current
     var middleBarHeight by remember { mutableStateOf(0.dp) }
@@ -35,13 +34,22 @@ fun TradeScreen(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             TradeListTopBar(
-                onNavigate,
-                { search ->
+                isCardSelected = viewModel.selectedCard != null,
+                onNavigate = onNavigate,
+                onSearch = { search ->
                     if (search.length < SEARCH_LENGTH_THRESHOLD) {
                         viewModel.searchListCards = listOf()
                     } else viewModel.fetchFromRemoteWithSearch(search)
                 },
-                { viewModel.searchListCards = listOf() }
+                onClearClicked = {
+                    hideKeyboard()
+                    viewModel.searchListCards = listOf()
+                },
+                onDeleteClicked = {
+                    hideKeyboard()
+                    viewModel.deleteCard(viewModel.selectedCard, viewModel.isP1Selected)
+                    viewModel.selectedCard = null
+                }
             )
             Box {
                 Column {
@@ -51,7 +59,11 @@ fun TradeScreen(
                         isListMode = viewModel.isListView,
                         margin = middleBarHeight / 2,
                         isTop = true,
-                        onListItemClicked = onListItemClicked,
+                        onListItemClicked = {
+                            hideKeyboard()
+                            viewModel.isP1Selected = true
+                            viewModel.selectedCard = if (viewModel.selectedCard == it) null else it
+                        },
                     )
                     TraderView(
                         modifier = Modifier.weight(1f),
@@ -59,7 +71,11 @@ fun TradeScreen(
                         isListMode = viewModel.isListView,
                         margin = middleBarHeight / 2,
                         isTop = false,
-                        onListItemClicked = onListItemClicked,
+                        onListItemClicked = {
+                            hideKeyboard()
+                            viewModel.isP1Selected = false
+                            viewModel.selectedCard = if (viewModel.selectedCard == it) null else it
+                        },
                     )
                 }
                 TradeListMiddleBar(

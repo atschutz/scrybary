@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -9,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
@@ -27,11 +29,16 @@ fun TraderListItem(
     modifier: Modifier = Modifier,
     isFoil: Boolean = true,
     price: String,
+    isSelected: Boolean,
 ) {
     // TODO Incorporate price and set into card info.
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .background(
+                if (isSelected) colorResource(id = R.color.dimmed_grey)
+                else Color.Transparent
+            )
             .padding(4.dp)
     ) {
         Row(modifier = Modifier
@@ -73,5 +80,5 @@ fun MiscCardInfoText(text: String, modifier: Modifier = Modifier, alignToEnd: Bo
 @Preview(showBackground = true)
 @Composable
 fun TradeListItemPreview() {
-    TraderListItem("Tarmogoyf", "MM3", Modifier, true, "$8.50")
+    TraderListItem("Tarmogoyf", "MM3", Modifier, true, "$8.50", false)
 }

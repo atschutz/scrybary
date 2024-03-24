@@ -22,9 +22,11 @@ import com.alexschutz.scrybary.R
 
 @Composable
 fun TradeListTopBar(
+    isCardSelected: Boolean,
     onNavigate: (Int) -> Unit,
     onSearch: (String) -> Unit,
     onClearClicked: () -> Unit,
+    onDeleteClicked: () -> Unit,
 ) {
     var search by remember { mutableStateOf("") }
     var shouldReset by remember { mutableStateOf(false) }
@@ -57,23 +59,30 @@ fun TradeListTopBar(
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(8.dp)
-                    .weight(1f),
+                    .weight(1f)
             ) {
                 shouldReset = false
                 search = it
                 onSearch(search)
             }
             Image(
-                painter = painterResource(R.drawable.ic_x),
+                painter = painterResource(
+                    if (isCardSelected) R.drawable.ic_trash
+                    else R.drawable.ic_x
+                ),
                 contentDescription = "Clear button",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp)
                     .clickable {
-                        search = ""
-                        shouldReset = true
-                        onClearClicked()
+                        if (isCardSelected) {
+                            onDeleteClicked()
+                        } else {
+                            search = ""
+                            shouldReset = true
+                            onClearClicked()
+                        }
                     }
             )
         }
@@ -83,5 +92,5 @@ fun TradeListTopBar(
 @Preview(showBackground = true)
 @Composable
 fun TradeListTopBarPreview() {
-    TradeListTopBar({ }, { }, { })
+    TradeListTopBar(false, { }, { }, { }, { })
 }

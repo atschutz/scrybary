@@ -35,6 +35,9 @@ class TradeListViewModel @Inject constructor(
 
     val difference by derivedStateOf { p1Total - p2Total }
 
+    var selectedCard by mutableStateOf<CardTradeInfo?>(null)
+    var isP1Selected by mutableStateOf(true)
+
     fun fetchFromRemoteWithSearch(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
             searchListCards = repository.fetchFromRemoteWithSearch(search)
@@ -44,5 +47,12 @@ class TradeListViewModel @Inject constructor(
     fun addCard(cardTradeInfo: CardTradeInfo, isP1: Boolean) {
         if (isP1) p1List = p1List + cardTradeInfo
         else p2List = p2List + cardTradeInfo
+    }
+
+    fun deleteCard(cardTradeInfo: CardTradeInfo?, isP1: Boolean) {
+        cardTradeInfo?.let {
+            if (isP1) p1List = p1List - cardTradeInfo
+            else p2List = p2List - cardTradeInfo
+        }
     }
 }
