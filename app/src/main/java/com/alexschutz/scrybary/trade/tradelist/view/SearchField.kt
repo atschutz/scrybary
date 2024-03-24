@@ -11,10 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -24,18 +20,20 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 import kotlinx.coroutines.delay
 
 const val SEARCH_LENGTH_THRESHOLD = 3
 
 @Composable
-fun SearchField(shouldReset: Boolean, modifier: Modifier = Modifier, onInputChanged: (String) -> Unit) {
-    var text by remember { mutableStateOf("") }
-    if (shouldReset) text = ""
-
+fun SearchField(
+    viewModel: TradeListViewModel,
+    modifier: Modifier = Modifier,
+    onInputChanged: (String) -> Unit
+) {
     BasicTextField(
-        value = text,
-        onValueChange = { text = it },
+        value = viewModel.searchQuery,
+        onValueChange = { viewModel.searchQuery = it },
         decorationBox = {
             Box(
                 Modifier
@@ -48,7 +46,7 @@ fun SearchField(shouldReset: Boolean, modifier: Modifier = Modifier, onInputChan
                     .fillMaxWidth()
                     .padding(start = 10.dp, top = 5.dp)
             ) {
-                if (text.isEmpty()) {
+                if (viewModel.searchQuery.isEmpty()) {
                     Text(
                         text = stringResource(id = R.string.enter_card_name_here),
                         color = colorResource(id = R.color.not_legal_grey),
@@ -63,8 +61,8 @@ fun SearchField(shouldReset: Boolean, modifier: Modifier = Modifier, onInputChan
         modifier = modifier.fillMaxWidth()
     )
 
-    LaunchedEffect(key1 = text) {
+    LaunchedEffect(key1 = viewModel.searchQuery) {
         delay(500L)
-        onInputChanged(text)
+        onInputChanged(viewModel.searchQuery)
     }
 }

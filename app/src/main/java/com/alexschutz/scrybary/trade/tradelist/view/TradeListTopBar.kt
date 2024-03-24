@@ -19,18 +19,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 
 @Composable
 fun TradeListTopBar(
-    isCardSelected: Boolean,
+    viewModel: TradeListViewModel,
     onNavigate: (Int) -> Unit,
     onSearch: (String) -> Unit,
     onClearClicked: () -> Unit,
     onDeleteClicked: () -> Unit,
 ) {
-    var search by remember { mutableStateOf("") }
-    var shouldReset by remember { mutableStateOf(false) }
-
     Box(modifier = Modifier.fillMaxWidth()) {
         Image(
             painter = painterResource(id = R.drawable.search_header),
@@ -55,20 +53,18 @@ fun TradeListTopBar(
                     }
             )
             SearchField(
-                shouldReset = shouldReset,
+                viewModel = viewModel,
                 modifier = Modifier
                     .align(Alignment.CenterVertically)
                     .padding(8.dp)
                     .weight(1f)
             ) {
-                shouldReset = false
-                search = it
-                onSearch(search)
+                onSearch(viewModel.searchQuery)
             }
             Image(
                 painter = painterResource(
-                    if (isCardSelected) R.drawable.ic_trash
-                    else R.drawable.ic_x
+                    if (viewModel.selectedCard == null) R.drawable.ic_x
+                    else R.drawable.ic_trash
                 ),
                 contentDescription = "Clear button",
                 contentScale = ContentScale.Crop,
@@ -76,21 +72,13 @@ fun TradeListTopBar(
                     .align(Alignment.CenterVertically)
                     .padding(end = 8.dp)
                     .clickable {
-                        if (isCardSelected) {
-                            onDeleteClicked()
-                        } else {
-                            search = ""
-                            shouldReset = true
+                        if (viewModel.selectedCard == null) {
                             onClearClicked()
+                        } else {
+                            onDeleteClicked()
                         }
                     }
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun TradeListTopBarPreview() {
-    TradeListTopBar(false, { }, { }, { }, { })
 }

@@ -48,7 +48,7 @@ class TradeFragment : BackButtonFragment() {
                         TradeScreen(
                             viewModel = viewModel,
                             onNavigate = { id -> findNavController().navigate(id) },
-                            onCardClicked = {
+                            onSearchItemClicked = {
                                 hideKeyboard()
                                 navController.navigate(
                                     route =

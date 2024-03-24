@@ -23,7 +23,7 @@ import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 fun TradeScreen(
     viewModel: TradeListViewModel,
     onNavigate: (Int) -> Unit,
-    onCardClicked: (Card) -> Unit,
+    onSearchItemClicked: (Card) -> Unit,
     hideKeyboard: () -> Unit,
 ) {
     val localDensity = LocalDensity.current
@@ -34,19 +34,21 @@ fun TradeScreen(
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             TradeListTopBar(
-                isCardSelected = viewModel.selectedCard != null,
+                viewModel = viewModel,
                 onNavigate = onNavigate,
                 onSearch = { search ->
+                    viewModel.searchQuery = search
                     if (search.length < SEARCH_LENGTH_THRESHOLD) {
                         viewModel.searchListCards = listOf()
                     } else viewModel.fetchFromRemoteWithSearch(search)
                 },
                 onClearClicked = {
                     hideKeyboard()
-                    viewModel.searchListCards = listOf()
+                    viewModel.clearSearch()
                 },
                 onDeleteClicked = {
                     hideKeyboard()
+                    viewModel.clearSearch()
                     viewModel.deleteCard(viewModel.selectedCard, viewModel.isP1Selected)
                     viewModel.selectedCard = null
                 }
@@ -97,10 +99,15 @@ fun TradeScreen(
         ) {
             items(viewModel.searchListCards) {
                 TradeSearchItem(card = it) {
-                    onCardClicked(it)
-                    viewModel.searchListCards = listOf()
+                    onSearchItemClicked(it)
+                    viewModel.clearSearch()
                 }
             }
+//            item {
+//                EnterManuallyRow {
+//                    // TODO - Open manual card entry.
+//                }
+//            }
         }
     }
 }

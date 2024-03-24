@@ -135,7 +135,11 @@ fun TradeListMiddleBar(
                     .align(Alignment.CenterVertically)
             )
             Image(
-                painter = painterResource(id = R.drawable.ic_arrow_down),
+                painter = painterResource(
+                    id =
+                        if (viewModel.difference == 0F) R.drawable.ic_equal
+                        else R.drawable.ic_arrow_down
+                ),
                 contentDescription = "Difference signifier",
                 modifier = Modifier
                     .size(20.dp)

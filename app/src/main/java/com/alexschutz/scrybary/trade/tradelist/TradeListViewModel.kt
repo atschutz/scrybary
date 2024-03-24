@@ -18,6 +18,8 @@ import javax.inject.Inject
 class TradeListViewModel @Inject constructor(
     private val repository: TradeRepository,
 ) : ViewModel() {
+    var searchQuery by mutableStateOf("")
+
     var isListView by mutableStateOf(true)
 
     var searchListCards: List<Card> by mutableStateOf(listOf())
@@ -54,5 +56,10 @@ class TradeListViewModel @Inject constructor(
             if (isP1) p1List = p1List - cardTradeInfo
             else p2List = p2List - cardTradeInfo
         }
+    }
+
+    fun clearSearch() {
+        searchQuery = ""
+        searchListCards = listOf()
     }
 }
