@@ -27,13 +27,15 @@
 
             <TextView
                 android:id="@+id/tv_format"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@{legality.format}"
+                android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_generic_size_large"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_legality"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

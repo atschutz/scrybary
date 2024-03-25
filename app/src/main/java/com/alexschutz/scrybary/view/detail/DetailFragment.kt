@@ -1,6 +1,7 @@
 package com.alexschutz.scrybary.view.detail
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -65,7 +66,9 @@ class DetailFragment : BackButtonFragment()  {
             with(binding) {
                 this.back = back
 
-                if (back == null) {
+                Log.d("-as-", "${viewModel.cardBack.value}")
+
+                if (back == null || back.name.isNullOrBlank()) {
                     clBack.visibility = View.GONE
                     dividerLine.visibility = View.GONE
                 } else {

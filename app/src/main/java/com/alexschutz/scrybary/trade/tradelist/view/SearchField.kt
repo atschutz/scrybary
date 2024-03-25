@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,8 +18,10 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 import kotlinx.coroutines.delay
@@ -44,13 +47,14 @@ fun SearchField(
             Box(
                 Modifier
                     .fillMaxWidth()
-                    .padding(start = 10.dp, top = 5.dp)
+                    .padding(start = 10.dp, top = 2.dp)
             ) {
                 if (viewModel.searchQuery.isEmpty()) {
                     Text(
                         text = stringResource(id = R.string.enter_card_name_here),
                         color = colorResource(id = R.color.not_legal_grey),
                         fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+                        fontSize = 18.sp,
                     )
                 }
                 it()
@@ -58,6 +62,10 @@ fun SearchField(
         },
         singleLine = true,
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
+        textStyle = LocalTextStyle.current.copy(
+            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+            fontSize = 18.sp,
+        ),
         modifier = modifier.fillMaxWidth()
     )
 

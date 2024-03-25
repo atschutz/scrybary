@@ -15,8 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.Card
 import com.alexschutz.scrybary.symbols
@@ -36,7 +40,10 @@ fun TradeSearchItem(card: Card, onSearchItemClicked: () -> Unit) {
             modifier = Modifier
                 .weight(1f),
             text = card.name,
-            color = colorResource(id = R.color.white)
+            color = colorResource(id = R.color.white),
+            fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+            fontSize = 16.sp,
+            overflow = TextOverflow.Ellipsis
         )
         Row(
             horizontalArrangement = Arrangement.End,
