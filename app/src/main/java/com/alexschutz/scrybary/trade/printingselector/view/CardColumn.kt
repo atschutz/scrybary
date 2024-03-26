@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.ComposeCompilerApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -86,7 +86,9 @@ fun CardColumn(cardSet: CardSet, isFoil: Boolean, modifier: Modifier = Modifier)
             Text(
                 modifier = Modifier.align(Alignment.Center),
                 text = with(cardSet) { "$set - $symbol" },
-                color = colorResource(id = R.color.white)
+                color = colorResource(id = R.color.white),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

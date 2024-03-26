@@ -39,39 +39,55 @@ fun TraderListItem(
                 if (isSelected) colorResource(id = R.color.dimmed_grey)
                 else Color.Transparent
             )
-            .padding(4.dp)
+            .padding(horizontal = 8.dp, vertical = 4.dp)
     ) {
         Row(modifier = Modifier
             .weight(1f)
             .padding(end = 20.dp)
         ) {
-            MiscCardInfoText(text = name, modifier = Modifier.weight(1F))
+            MiscCardInfoText(
+                text = name,
+                textAlign = TextAlign.Start,
+                modifier = Modifier.weight(1F)
+            )
             if (isFoil) {
                 Image(
                     painter = painterResource(id = R.drawable.ic_foil),
-                    contentDescription = "CMC symbol",
+                    contentDescription = "Foil indicator",
                     modifier = Modifier
-                        .padding(start = 4.dp)
+                        .padding(horizontal = 4.dp)
                         .size(16.dp)
                         .align(Alignment.CenterVertically)
 
                 )
             }
         }
-        MiscCardInfoText(text = setSymbol, modifier = Modifier.weight(0.20f))
-        MiscCardInfoText(text = price, modifier = Modifier.weight(0.30f), true)
+        MiscCardInfoText(
+            text = setSymbol,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.weight(0.20f)
+        )
+        MiscCardInfoText(
+            text = price,
+            modifier = Modifier.weight(0.30f),
+            textAlign = TextAlign.End,
+        )
     }
 }
 
 @Composable
-fun MiscCardInfoText(text: String, modifier: Modifier = Modifier, alignToEnd: Boolean = false) {
+fun MiscCardInfoText(
+    text: String,
+    textAlign: TextAlign,
+    modifier: Modifier = Modifier,
+) {
     Text(
         modifier = modifier,
         text = text,
         fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
         fontSize = 16.sp,
         color = colorResource(id = R.color.white),
-        textAlign = if (alignToEnd) TextAlign.End else TextAlign.Start,
+        textAlign = textAlign,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis,
     )

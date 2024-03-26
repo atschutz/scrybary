@@ -42,7 +42,9 @@ class TradeListViewModel @Inject constructor(
 
     fun fetchFromRemoteWithSearch(search: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            searchListCards = repository.fetchFromRemoteWithSearch(search)
+            searchListCards = repository.fetchFromRemoteWithSearch(search).filterNot {
+                it.name.startsWith(ALCHEMY_SIGNIFIER)
+            }
         }
     }
 
@@ -61,5 +63,9 @@ class TradeListViewModel @Inject constructor(
     fun clearSearch() {
         searchQuery = ""
         searchListCards = listOf()
+    }
+
+    companion object {
+        const val ALCHEMY_SIGNIFIER = "A-"
     }
 }

@@ -44,9 +44,7 @@ fun TraderGrid(
     var selectedCard by remember { mutableStateOf<CardTradeInfo?>(null) }
 
     LazyColumn(
-        modifier = modifier
-            .fillMaxHeight()
-            .padding(horizontal = 4.dp)
+        modifier = modifier.fillMaxHeight()
     ) {
         val chunks = list.chunked(ROW_SIZE)
 
@@ -77,7 +75,6 @@ fun TraderGrid(
                                 with(localDensity) { cardHeight = it.size.height.toDp() }
                             }
                         )
-
 
                         Image(
                             modifier = Modifier.height(cardHeight),

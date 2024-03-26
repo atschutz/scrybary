@@ -25,7 +25,7 @@ class MenuFragment : Fragment() {
         binding.btnLibrary.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_libraryFragment)
         }
-        binding.btnTrade?.setOnClickListener {
+        binding.btnTrade.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.action_menuFragment_to_tradeFragment)
         }
         binding.btnCounter.setOnClickListener {

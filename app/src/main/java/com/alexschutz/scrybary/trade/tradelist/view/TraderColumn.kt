@@ -30,9 +30,7 @@ fun TraderColumn(
     var selectedCard by remember { mutableStateOf<CardTradeInfo?>(null) }
 
     LazyColumn(
-        modifier = modifier
-            .fillMaxHeight()
-            .padding(horizontal = 4.dp)
+        modifier = modifier.fillMaxHeight()
     ) {
         if (!isTop) { item { Box(modifier = Modifier.height(margin)) }}
         items(list) {

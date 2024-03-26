@@ -18,12 +18,14 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.model.CardData
 import com.alexschutz.scrybary.model.CardTradeInfo
 import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorViewModel
 
 @Composable
 fun SetDetailsBar(
     viewModel: PrintingSelectorViewModel,
+    currentPrinting: CardData,
     onAddClicked: (tradeInfo: CardTradeInfo, isP1: Boolean) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -35,13 +37,12 @@ fun SetDetailsBar(
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // TODO Dry.
         AddButton(
             isTop = true,
             tradeInfo = CardTradeInfo(
                 id = viewModel.cardId,
                 name = viewModel.name,
-                cardSet = viewModel.currentPrinting.set,
+                cardSet = currentPrinting.set,
                 isFoil = viewModel.isFoil,
             ),
             onAddClicked = onAddClicked
@@ -58,7 +59,7 @@ fun SetDetailsBar(
                 .size(28.dp)
                 .align(Alignment.CenterVertically)
                 .clickable {
-                    if (viewModel.currentPrinting.canChangeFoil)
+                    if (currentPrinting.canChangeFoil)
                         viewModel.isFoil = !viewModel.isFoil
                 }
         )
@@ -68,7 +69,7 @@ fun SetDetailsBar(
             tradeInfo = CardTradeInfo(
                 id = viewModel.cardId,
                 name = viewModel.name,
-                cardSet = viewModel.currentPrinting.set,
+                cardSet = currentPrinting.set,
                 isFoil = viewModel.isFoil,
             ),
             onAddClicked = onAddClicked
