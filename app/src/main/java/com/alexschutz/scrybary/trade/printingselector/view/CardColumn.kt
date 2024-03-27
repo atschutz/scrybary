@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,15 +26,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.CardSet
 
 @Composable
-fun CardColumn(cardSet: CardSet, isFoil: Boolean, modifier: Modifier = Modifier) {
+fun CardColumn(
+    cardSet: CardSet,
+    isFoil: Boolean,
+    cardNumber: Int,
+    cardTotal: Int,
+    modifier: Modifier = Modifier,
+) {
     val localDensity = LocalDensity.current
     var cardHeight by remember { mutableStateOf(0.dp) }
     var cardWidth by remember { mutableStateOf(0.dp) }
@@ -67,14 +77,16 @@ fun CardColumn(cardSet: CardSet, isFoil: Boolean, modifier: Modifier = Modifier)
                 contentDescription = "Foil overlay",
                 alpha = if (isFoil) 1.0f else 0.0f,
                 contentScale = ContentScale.Crop,
-                modifier = androidx.compose.ui.Modifier
+                modifier = Modifier
                     .width(cardWidth)
                     .height(cardHeight)
                     .aspectRatio(0.71428573f)
                     .align(Alignment.Center),
             )
         }
-        Box(
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .background(
                     colorResource(id = R.color.deselected_purple),
@@ -84,8 +96,18 @@ fun CardColumn(cardSet: CardSet, isFoil: Boolean, modifier: Modifier = Modifier)
                 .padding(8.dp)
         ) {
             Text(
-                modifier = Modifier.align(Alignment.Center),
                 text = with(cardSet) { "$set - $symbol" },
+                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+                fontSize = 12.sp,
+                color = colorResource(id = R.color.white),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1F)
+            )
+            Text(
+                text = "$cardNumber/$cardTotal",
+                fontFamily = FontFamily(Font(R.font.montserrat_ttf)),
+                fontSize = 12.sp,
                 color = colorResource(id = R.color.white),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,

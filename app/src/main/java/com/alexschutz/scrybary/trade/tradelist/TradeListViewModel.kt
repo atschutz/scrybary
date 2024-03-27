@@ -66,6 +66,7 @@ class TradeListViewModel @Inject constructor(
     }
 
     companion object {
+        // Alchemy set cards are only on MTG Arena and thus not priced.
         const val ALCHEMY_SIGNIFIER = "A-"
     }
 }
