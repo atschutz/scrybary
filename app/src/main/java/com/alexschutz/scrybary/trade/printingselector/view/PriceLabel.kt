@@ -7,6 +7,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -21,7 +22,8 @@ fun PriceLabel(
     Box(
         modifier = modifier
             .background(
-                colorResource(id = R.color.mid_purple),
+                if (price.isNotEmpty()) colorResource(id = R.color.mid_purple)
+                else Color.Transparent,
                 RoundedCornerShape(percent = 100)
             ),
     ) {

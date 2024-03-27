@@ -52,8 +52,9 @@ fun SetDetailsBar(
             painter = painterResource(id = R.drawable.ic_foil),
             contentDescription = "Foil toggle",
             colorFilter =
-            if (viewModel.isFoil) null
-            else ColorFilter.tint(colorResource(id = R.color.deselected_purple)),
+            // TODO - Signify if foil state can't change.
+                if (viewModel.isFoil) null
+                else ColorFilter.tint(colorResource(id = R.color.deselected_purple)),
             modifier = Modifier
                 .padding(horizontal = 8.dp)
                 .size(28.dp)

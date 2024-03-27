@@ -35,8 +35,8 @@ fun TraderColumn(
         if (!isTop) { item { Box(modifier = Modifier.height(margin)) }}
         items(list) {
             val price =
-                if (it.isFoil) it.cardSet.prices?.usdFoil?.toDollars() ?: "$0.00"
-                else it.cardSet.prices?.usd?.toDollars() ?: "$0.00"
+                if (it.isFoil) it.cardSet.prices?.usdFoil?.toDollars() ?: ""
+                else it.cardSet.prices?.usd?.toDollars() ?: ""
 
             TraderListItem(
                 it.name,

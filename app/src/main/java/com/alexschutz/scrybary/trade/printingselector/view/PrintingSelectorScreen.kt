@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,7 +15,13 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -39,10 +46,24 @@ fun PrintingSelectorScreen(
     onAddClicked: (tradeInfo: CardTradeInfo, isP1: Boolean) -> Unit,
 ) {
     val viewModel: PrintingSelectorViewModel = hiltViewModel()
-    val pagerState = rememberPagerState { viewModel.printingData.size }
+    val pagerState = rememberPagerState(initialPage = Int.MAX_VALUE / 2) { Int.MAX_VALUE }
     val coroutineScope = rememberCoroutineScope()
 
+    var isLoading by remember { mutableStateOf(false) }
+
     if (viewModel.printingData.isNotEmpty()) {
+        val page = (pagerState.currentPage - pagerState.initialPage)
+            .floorMod(viewModel.printingData.size)
+
+        LaunchedEffect(
+            (pagerState.currentPage - pagerState.initialPage)
+                .floorMod(viewModel.printingData.size)
+        ) {
+            snapshotFlow { page }.collect {
+                viewModel.isFoil = viewModel.printingData[it].startFoil
+            }
+        }
+
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
                 modifier = Modifier
@@ -63,13 +84,11 @@ fun PrintingSelectorScreen(
                         with(viewModel) {
                             if (printingData.isNotEmpty()) {
                                 coroutineScope.launch {
-                                    if (pagerState.canScrollBackward) {
-                                        pagerState.animateScrollToPage(
-                                           pagerState.currentPage - 1
-                                        )
-                                    } else pagerState.scrollToPage(pagerState.pageCount - 1)
-                                    isFoil =
-                                        viewModel.printingData[pagerState.currentPage].startFoil
+                                    val nextIndex =
+                                        if (pagerState.canScrollBackward) pagerState.currentPage - 1
+                                        else pagerState.pageCount - 1
+
+                                    pagerState.animateScrollToPage(nextIndex)
                                 }
                             }
                         }
@@ -88,13 +107,11 @@ fun PrintingSelectorScreen(
                         with(viewModel) {
                             if (printingData.isNotEmpty()) {
                                 coroutineScope.launch {
-                                    if (pagerState.canScrollForward) {
-                                        pagerState.animateScrollToPage(
-                                            pagerState.currentPage + 1
-                                        )
-                                    } else pagerState.scrollToPage(pagerState.initialPage)
-                                    isFoil =
-                                        viewModel.printingData[pagerState.currentPage].startFoil
+                                    val nextIndex =
+                                        if (pagerState.canScrollForward) pagerState.currentPage + 1
+                                        else pagerState.initialPage
+
+                                    pagerState.animateScrollToPage(nextIndex)
                                 }
                             }
                         }
@@ -123,32 +140,40 @@ fun PrintingSelectorScreen(
                 )
                 PriceLabel(
                     price =
-                        with(viewModel.printingData[pagerState.currentPage].set) {
+                        with(viewModel.printingData[page].set) {
                             if (viewModel.isFoil) prices?.usdFoil?.toDollars()
                             else prices?.usd?.toDollars()
-                        } ?: "$0.00",
+                        } ?: "",
                     modifier = Modifier
                 )
+
                 HorizontalPager(
                     state = pagerState,
-                    key = { viewModel.printingData[it].index },
+                    key = {
+                        it
+                    },
                     modifier = Modifier
                         .align(Alignment.CenterHorizontally)
                         .weight(1F),
                 ) {
                     CardColumn(
-                        cardSet = viewModel.printingData[it].set,
+                        cardSet = viewModel.printingData[page].set,
                         isFoil = viewModel.isFoil,
                         modifier = Modifier
                     )
                 }
                 SetDetailsBar(
                     viewModel = viewModel,
-                    currentPrinting = viewModel.printingData[pagerState.currentPage],
+                    currentPrinting = viewModel.printingData[page],
                     onAddClicked = onAddClicked,
                 )
             }
         }
     }
+}
+
+private fun Int.floorMod(other: Int): Int = when (other) {
+    0 -> this
+    else -> this - floorDiv(other) * other
 }
 
