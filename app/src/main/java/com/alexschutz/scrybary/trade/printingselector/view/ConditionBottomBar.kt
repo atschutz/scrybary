@@ -2,7 +2,6 @@ package com.alexschutz.scrybary.trade.printingselector.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.noRippleClickable
 import com.alexschutz.scrybary.trade.printingselector.view.CardCondition.NEAR_MINT
 import com.alexschutz.scrybary.trade.printingselector.view.CardCondition.MODERATELY_PLAYED
 import com.alexschutz.scrybary.trade.printingselector.view.CardCondition.HEAVILY_PLAYED
@@ -89,7 +89,7 @@ fun ConditionBottomBar() {
                     .padding(start = 4.dp, top = 6.dp)
                     .size(28.dp)
                     .align(Alignment.CenterVertically)
-                    .clickable { isFoil = !isFoil }
+                    .noRippleClickable { isFoil = !isFoil }
             )
         }
     }
@@ -104,7 +104,7 @@ fun ConditionText(condition: CardCondition, isSelected: Boolean, onClick: () -> 
         color = colorResource(id = if (isSelected) R.color.white else R.color.deselected_purple),
         modifier = Modifier
             .padding(end = 6.dp)
-            .clickable {
+            .noRippleClickable {
                 onClick()
             }
     )

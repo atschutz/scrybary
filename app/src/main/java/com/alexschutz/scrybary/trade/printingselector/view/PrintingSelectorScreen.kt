@@ -2,7 +2,6 @@ package com.alexschutz.scrybary.trade.printingselector.view
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,11 +14,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.CardTradeInfo
+import com.alexschutz.scrybary.noRippleClickable
 import com.alexschutz.scrybary.toDollars
 import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorViewModel
 import kotlinx.coroutines.launch
@@ -68,7 +64,7 @@ fun PrintingSelectorScreen(
                 modifier = Modifier
                     .padding(6.dp)
                     .size(36.dp)
-                    .clickable { onBackClicked() },
+                    .noRippleClickable { onBackClicked() },
                 painter = painterResource(id = R.drawable.ic_arrow_back),
                 contentDescription = "Back button",
                 contentScale = ContentScale.Fit,
@@ -79,7 +75,7 @@ fun PrintingSelectorScreen(
                     .size(36.dp)
                     .align(Alignment.CenterStart)
                     .rotate(90f)
-                    .clickable {
+                    .noRippleClickable {
                         with(viewModel) {
                             if (printingData.isNotEmpty()) {
                                 coroutineScope.launch {
@@ -102,7 +98,7 @@ fun PrintingSelectorScreen(
                     .size(36.dp)
                     .align(Alignment.CenterEnd)
                     .rotate(-90f)
-                    .clickable {
+                    .noRippleClickable {
                         with(viewModel) {
                             if (printingData.isNotEmpty()) {
                                 coroutineScope.launch {
@@ -135,7 +131,7 @@ fun PrintingSelectorScreen(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
-                        .padding(vertical = 8.dp),
+                        .padding(top = 16.dp, bottom = 8.dp),
                 )
                 PriceLabel(
                     price =
@@ -166,6 +162,7 @@ fun PrintingSelectorScreen(
                     viewModel = viewModel,
                     currentPrinting = currentCard,
                     onAddClicked = onAddClicked,
+                    modifier = Modifier.padding(bottom = 16.dp)
                 )
 
                 val foilText = if (!currentCard.canChangeFoil) {

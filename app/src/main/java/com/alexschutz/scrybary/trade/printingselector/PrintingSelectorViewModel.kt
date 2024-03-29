@@ -33,7 +33,7 @@ class PrintingSelectorViewModel @Inject constructor(
     private fun fetchCardPrintings(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             printingData = repository.fetchCardSets(id)
-            isFoil = printingData.first().startFoil
+            isFoil = printingData.firstOrNull()?.startFoil ?: false
         }
     }
 }

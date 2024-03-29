@@ -2,9 +2,7 @@ package com.alexschutz.scrybary.trade.tradelist.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
+import com.alexschutz.scrybary.noRippleClickable
 import com.alexschutz.scrybary.toDollars
 import com.alexschutz.scrybary.trade.tradelist.TradeListViewModel
 import kotlin.math.abs
@@ -99,7 +98,7 @@ fun TradeListMiddleBar(
                     .padding(end = 8.dp)
                     .size(20.dp)
                     .align(Alignment.CenterVertically)
-                    .clickable {
+                    .noRippleClickable {
                         viewModel.isListView = true
                         viewModel.selectedCard = null
                     }
@@ -113,7 +112,7 @@ fun TradeListMiddleBar(
                 modifier = Modifier
                     .size(24.dp)
                     .align(Alignment.CenterVertically)
-                    .clickable {
+                    .noRippleClickable {
                         viewModel.isListView = false
                         viewModel.selectedCard = null
                     }

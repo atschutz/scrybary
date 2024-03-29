@@ -27,13 +27,9 @@ class TradeListViewModel @Inject constructor(
     var p1List: List<CardTradeInfo> by mutableStateOf(listOf())
     var p2List: List<CardTradeInfo> by mutableStateOf(listOf())
 
-    val p1Total by derivedStateOf {
-        p1List.map { it.price }.reduceOrNull {acc, price -> acc + price } ?: 0.00F
-    }
+    val p1Total by derivedStateOf { getPlayerTotal(p1List) }
 
-    val p2Total by derivedStateOf {
-        p2List.map { it.price }.reduceOrNull {acc, price -> acc + price } ?: 0.00F
-    }
+    val p2Total by derivedStateOf { getPlayerTotal(p2List) }
 
     val difference by derivedStateOf { p1Total - p2Total }
 
@@ -64,6 +60,9 @@ class TradeListViewModel @Inject constructor(
         searchQuery = ""
         searchListCards = listOf()
     }
+
+    private fun getPlayerTotal(cards: List<CardTradeInfo>): Float =
+        cards.map { it.price }.reduceOrNull {acc, price -> acc + price } ?: 0.00F
 
     companion object {
         // Alchemy set cards are only on MTG Arena and thus not priced.

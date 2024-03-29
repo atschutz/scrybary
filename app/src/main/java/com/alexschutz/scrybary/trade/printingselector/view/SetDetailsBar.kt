@@ -2,7 +2,6 @@ package com.alexschutz.scrybary.trade.printingselector.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.CardData
 import com.alexschutz.scrybary.model.CardTradeInfo
+import com.alexschutz.scrybary.noRippleClickable
 import com.alexschutz.scrybary.trade.printingselector.PrintingSelectorViewModel
 
 @Composable
@@ -58,7 +58,7 @@ fun SetDetailsBar(
                 .padding(horizontal = 8.dp)
                 .size(28.dp)
                 .align(Alignment.CenterVertically)
-                .clickable {
+                .noRippleClickable {
                     if (currentPrinting.canChangeFoil)
                         viewModel.isFoil = !viewModel.isFoil
                 }

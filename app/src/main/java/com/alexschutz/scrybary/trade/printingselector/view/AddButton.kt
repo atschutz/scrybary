@@ -1,7 +1,6 @@
 package com.alexschutz.scrybary.trade.printingselector.view
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.alexschutz.scrybary.R
 import com.alexschutz.scrybary.model.CardTradeInfo
+import com.alexschutz.scrybary.noRippleClickable
 
 @Composable
 fun AddButton(
@@ -33,7 +33,7 @@ fun AddButton(
         Row(
             modifier = Modifier
                 .align(Alignment.Center)
-                .clickable { onAddClicked(tradeInfo, isTop) },
+                .noRippleClickable { onAddClicked(tradeInfo, isTop) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
