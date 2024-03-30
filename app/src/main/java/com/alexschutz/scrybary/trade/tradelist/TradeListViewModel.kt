@@ -28,7 +28,6 @@ class TradeListViewModel @Inject constructor(
     var p2List: List<CardTradeInfo> by mutableStateOf(listOf())
 
     val p1Total by derivedStateOf { getPlayerTotal(p1List) }
-
     val p2Total by derivedStateOf { getPlayerTotal(p2List) }
 
     val difference by derivedStateOf { p1Total - p2Total }
@@ -36,11 +35,15 @@ class TradeListViewModel @Inject constructor(
     var selectedCard by mutableStateOf<CardTradeInfo?>(null)
     var isP1Selected by mutableStateOf(true)
 
+    var isSearchListLoading by mutableStateOf(false)
+
     fun fetchFromRemoteWithSearch(search: String) {
+        isSearchListLoading = true
         viewModelScope.launch(Dispatchers.IO) {
             searchListCards = repository.fetchFromRemoteWithSearch(search).filterNot {
                 it.name.startsWith(ALCHEMY_SIGNIFIER)
             }
+            isSearchListLoading = false
         }
     }
 

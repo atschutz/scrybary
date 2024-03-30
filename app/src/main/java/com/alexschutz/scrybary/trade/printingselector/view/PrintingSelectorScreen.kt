@@ -147,6 +147,7 @@ fun PrintingSelectorScreen(
                         it
                     },
                     modifier = Modifier
+                        .padding(vertical = 8.dp)
                         .align(Alignment.CenterHorizontally)
                         .weight(1F)
                 ) {
