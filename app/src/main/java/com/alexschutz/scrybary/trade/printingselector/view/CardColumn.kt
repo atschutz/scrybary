@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
@@ -44,7 +45,12 @@ fun CardColumn(
         verticalArrangement = Arrangement.Center,
         modifier = modifier
     ) {
-        Box(modifier = Modifier.weight(1F)) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1F, fill = false )
+        ) {
             AsyncImage(
                 model = ImageRequest
                     .Builder(LocalContext.current)
@@ -53,6 +59,7 @@ fun CardColumn(
                     ).build(),
                 placeholder = painterResource(id = R.drawable.card_placeholder),
                 contentDescription = "Card image",
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .aspectRatio(CARD_SIZE_RATIO)
                     .align(Alignment.Center)
@@ -67,7 +74,7 @@ fun CardColumn(
                 painter = painterResource(id = R.drawable.foil_overlay),
                 contentDescription = "Foil overlay",
                 alpha = if (isFoil) 1.0f else 0.0f,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .width(cardWidth)
                     .height(cardHeight)

@@ -148,7 +148,6 @@ fun PrintingSelectorScreen(
                     },
                     modifier = Modifier
                         .padding(vertical = 8.dp)
-                        .align(Alignment.CenterHorizontally)
                         .weight(1F)
                 ) {
                     CardColumn(
@@ -156,7 +155,7 @@ fun PrintingSelectorScreen(
                         isFoil = viewModel.isFoil,
                         cardNumber = page + 1,
                         cardTotal = viewModel.printingData.size,
-                        modifier = Modifier
+                        modifier = Modifier.weight(1F)
                     )
                 }
                 SetDetailsBar(
