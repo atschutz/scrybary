@@ -70,18 +70,18 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener, CoroutineScop
         }
 
         watcher = object : TextWatcher {
-            private var searchFor = ""
+            private var search = ""
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val searchText = s.toString().trim()
-                if (searchText == searchFor)
+                if (searchText == search)
                     return
 
-                searchFor = searchText
+                search = searchText
 
                 launch {
-                    delay(500L)  //debounce timeOut
-                    if (searchText != searchFor)
+                    delay(500L)
+                    if (searchText != search)
                         return@launch
 
                     onSearchClicked(view)
