@@ -126,22 +126,21 @@
                 android:textColorHint="@color/not_legal_grey"
                 android:textSize="@dimen/text_title_size_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_search"
+                app:layout_constraintEnd_toStartOf="@id/btn_clear"
                 app:layout_constraintStart_toEndOf="@id/btn_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/btn_search"
+                android:id="@+id/btn_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@null"
-                android:contentDescription="@string/back"
-                android:onClick="@{searchListener::onSearchClicked}"
+                android:contentDescription="@string/clear_search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_search" />
+                app:srcCompat="@drawable/ic_x" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

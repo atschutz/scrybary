@@ -3,6 +3,9 @@ package com.alexschutz.scrybary.view.library
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,9 +18,15 @@ import com.alexschutz.scrybary.*
 import com.alexschutz.scrybary.databinding.FragmentLibraryBinding
 import com.alexschutz.scrybary.view.BackButtonFragment
 import com.alexschutz.scrybary.viewmodel.LibraryViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
-class LibraryFragment : BackButtonFragment(), SearchClickListener {
+class LibraryFragment : BackButtonFragment(), SearchClickListener, CoroutineScope {
+    override val coroutineContext: CoroutineContext = Dispatchers.Main
 
     // TODO fix big margin under text when P/T or loyalty or flavor text is missing.
 
@@ -27,9 +36,11 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
     private val cardListAdapter = CardListAdapter(arrayListOf())
 
     private lateinit var preferences: SharedPreferences
+    private lateinit var watcher: TextWatcher
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
@@ -53,13 +64,43 @@ class LibraryFragment : BackButtonFragment(), SearchClickListener {
             adapter = cardListAdapter
         }
 
+        binding.btnClear.setOnClickListener {
+            viewModel.search.value = ""
+            binding.actvSearch.text.clear()
+        }
+
+        watcher = object : TextWatcher {
+            private var searchFor = ""
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString().trim()
+                if (searchText == searchFor)
+                    return
+
+                searchFor = searchText
+
+                launch {
+                    delay(500L)  //debounce timeOut
+                    if (searchText != searchFor)
+                        return@launch
+
+                    onSearchClicked(view)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) = Unit
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+        }
+
+        binding.actvSearch.addTextChangedListener(watcher)
+
         binding.actvSearch.setOnEditorActionListener { _, actionId, _ ->
 
             when (actionId) {
                 EditorInfo.IME_ACTION_DONE,
                 EditorInfo.IME_ACTION_GO,
                 EditorInfo.IME_ACTION_NEXT -> {
-                    onSearchClicked(view)
                     true
                 } else -> false
             }

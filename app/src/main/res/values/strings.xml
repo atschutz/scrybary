@@ -90,5 +90,7 @@
     <string name="this_field_is_required">This field is required.</string>
     <string name="suggestions_subject">Subject</string>
     <string name="trade">Trade</string>
+    <string name="search">Search</string>
+    <string name="clear_search">Clear search</string>
 
 </resources>
