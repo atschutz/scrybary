@@ -1,4 +1,4 @@
-# Manadork=
+# Manadork
 An all-in-one app for your Magic: the Gathering needs!
 
 ## Library
@@ -14,7 +14,7 @@ An all-in-one app for your Magic: the Gathering needs!
 - Delete unwanted cards from the trade.
 
 ## Counter
-- Keeps track of the life totals of up to four players.
+- Keep track of the life totals of up to four players.
 - Quickly add or subtract life from any player with the +1/-1 or +5/-5 buttons.
 - Flip a coin or quickly reset buttons with the center buttons.
 - Keep track of other values such as poison, storm, mana, and commander damage with the secondary value boxes.
