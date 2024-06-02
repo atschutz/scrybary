@@ -1,4 +1,4 @@
-# Manadork
+# Manadork=
 An all-in-one app for your Magic: the Gathering needs!
 
 ## Library
@@ -14,7 +14,7 @@ An all-in-one app for your Magic: the Gathering needs!
 - Delete unwanted cards from the trade.
 
 ## Counter
-- Keep track of the life totals of up to four players.
+- Keeps track of the life totals of up to four players.
 - Quickly add or subtract life from any player with the +1/-1 or +5/-5 buttons.
 - Flip a coin or quickly reset buttons with the center buttons.
 - Keep track of other values such as poison, storm, mana, and commander damage with the secondary value boxes.
@@ -22,7 +22,8 @@ An all-in-one app for your Magic: the Gathering needs!
 ## Dice
 - Roll up to 10 dice of any face value for 1 or 2 players.
 - Compare the rolls of both players.
-- Shake the phone to roll if you don't feel like pressing a button!
+- Equipped with an interactive dice-rolling element (Shake phone to complete). 
+- Users can press the "roll" button to complete the same action.
 
 ## Settings
 - Personalize each feature to meet your needs.
