@@ -23,7 +23,7 @@ An all-in-one app for your Magic: the Gathering needs!
 - Roll up to 10 dice of any face value for 1 or 2 players.
 - Compare the rolls of both players.
 - Equipped with an interactive dice-rolling element (Shake phone to complete). 
-- Users can press the "roll" button to complete the same action.
+- Press the "roll" button to complete the same action.
 
 ## Settings
 - Personalize each feature to meet your needs.
